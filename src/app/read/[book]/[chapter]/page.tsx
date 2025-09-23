@@ -2,6 +2,9 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 import { redirect } from "next/navigation";
+import LastReadSaver from "@/components/LastReadSaver";
+import PinCurrent from "@/components/PinCurrent";
+
 
 import Verse from "@/components/Verse";
 import BookChapterPicker from "@/components/BookChapterPicker";
@@ -45,6 +48,8 @@ export default async function ReaderPage({
   const verses = versesOf(normalized, ch);
 
   // ---- LAYOUT (all JSX only inside the return) ----
+  <LastReadSaver bookId={bookId} chapter={ch} />
+
   return (
     <div className="mx-auto max-w-7xl px-4">
       <div className="grid grid-cols-12 gap-6">
@@ -66,6 +71,10 @@ export default async function ReaderPage({
     <ChapterNav book={bookId} chapter={ch} total={total} />
     {/* if you had a separate Jump input, include it here too */}
   </div>
+</div>
+<div className="shrink-0 flex items-center gap-2">
+  <PinCurrent bookId={bookId} chapter={ch} />
+  <BookChapterPicker book={bookId} chapter={ch} />
 </div>
 
 
