@@ -25,3 +25,27 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+/* Brush-swipe banner behind section headings */
+.heading-swipe {
+  position: relative;
+  display: inline-block;
+  padding: 0 .2rem;            /* a little breathing room */
+}
+.heading-swipe::before {
+  content: "";
+  position: absolute;
+  left: 0; right: 0;
+  bottom: .15em;               /* sits behind the baseline of the text */
+  height: 1.4em;                /* thickness of the swipe */
+  background: linear-gradient(90deg, var(--swipe-from), var(--swipe-to));
+  opacity: .35;                /* translucent so text stays readable */
+  border-radius: .5rem;        /* soft edges */
+  transform: skewX(-12deg);    /* hand-painted vibe */
+  clip-path: polygon(0 18%, 100% 0, 100% 85%, 0 100%); /* uneven edge */
+}
+
+/* Color presets that match your aesthetic */
+.swipe-indigo-emerald { --swipe-from: #6366f1; --swipe-to: #10b981; }
+.swipe-emerald-cyan   { --swipe-from: #10b981; --swipe-to: #22d3ee; }
+.swipe-amber-pink     { --swipe-from: #f59e0b; --swipe-to: #ec4899; }
+
