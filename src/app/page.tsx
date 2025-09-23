@@ -170,7 +170,7 @@ export default function Home() {
       <article className="space-y-3">
         <div className="flex items-center justify-between">
           <h3 className="text-lg font-semibold">John 1:1–3</h3>
-          <a href="/read/john/1" className="text-sm text-white/70 hover:text-white/90">Open in reader →</a>
+          <Link href="/read/john/1" className="text-sm text-white/70 hover:text-white/90">Open in reader →</Link>
         </div>
         <div className="grid gap-4 md:grid-cols-2">
           <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-5">
@@ -194,7 +194,7 @@ export default function Home() {
       <article className="space-y-3">
         <div className="flex items-center justify-between">
           <h3 className="text-lg font-semibold">Matthew 28:19</h3>
-          <a href="/read/matthew/28" className="text-sm text-white/70 hover:text-white/90">Open in reader →</a>
+          <Link href="/read/matthew/28" className="text-sm text-white/70 hover:text-white/90">Open in reader →</Link>
         </div>
         <div className="grid gap-4 md:grid-cols-2">
           <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-5">
@@ -218,7 +218,7 @@ export default function Home() {
       <article className="space-y-3">
         <div className="flex items-center justify-between">
           <h3 className="text-lg font-semibold">John 17:5</h3>
-          <a href="/read/john/17" className="text-sm text-white/70 hover:text-white/90">Open in reader →</a>
+          <Link href="/read/john/17" className="text-sm text-white/70 hover:text-white/90">Open in reader →</Link>
         </div>
         <div className="grid gap-4 md:grid-cols-2">
           <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-5">
@@ -241,7 +241,7 @@ export default function Home() {
       <article className="space-y-3">
         <div className="flex items-center justify-between">
           <h3 className="text-lg font-semibold">Colossians 2:9</h3>
-          <a href="/read/colossians/2" className="text-sm text-white/70 hover:text-white/90">Open in reader →</a>
+          <Link href="/read/colossians/2" className="text-sm text-white/70 hover:text-white/90">Open in reader →</Link>
         </div>
         <div className="grid gap-4 md:grid-cols-2">
           <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-5">
@@ -265,8 +265,8 @@ export default function Home() {
         <div className="flex items-center justify-between">
           <h3 className="text-lg font-semibold">Deuteronomy 6:4 / Mark 12:29</h3>
           <div className="flex items-center gap-3">
-            <a href="/read/deuteronomy/6" className="text-sm text-white/70 hover:text-white/90">Open Deut →</a>
-            <a href="/read/mark/12" className="text-sm text-white/70 hover:text-white/90">Open Mark →</a>
+            <Link href="/read/deuteronomy/6" className="text-sm text-white/70 hover:text-white/90">Open Deut →</Link>
+            <Link href="/read/mark/12" className="text-sm text-white/70 hover:text-white/90">Open Mark →</Link>
           </div>
         </div>
         <div className="grid gap-4 md:grid-cols-2">
@@ -324,12 +324,12 @@ export default function Home() {
         </ul>
 
         <div className="mt-8">
-          <a
+          <Link
             href="/app"
             className="inline-flex items-center px-6 py-3 rounded-xl bg-gradient-to-tr from-indigo-500 to-emerald-500 text-black font-medium shadow-lg hover:shadow-indigo-500/25"
           >
             Launch Bible App
-          </a>
+          </Link>
         </div>
       </div>
 
@@ -355,25 +355,25 @@ export default function Home() {
 </h2>
 
     <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-      <a href="/app" className="rounded-2xl border border-white/10 bg-white/[0.04] p-6 hover:bg-white/[0.06] transition-colors block">
+      <Link href="/app" className="rounded-2xl border border-white/10 bg-white/[0.04] p-6 hover:bg-white/[0.06] transition-colors block">
         <h3 className="text-lg font-semibold">Study Notes</h3>
         <p className="mt-2 text-white/80">Living notes that grow with your study.</p>
-      </a>
+      </Link>
 
-      <a href="/app" className="rounded-2xl border border-white/10 bg-white/[0.04] p-6 hover:bg-white/[0.06] transition-colors block">
+      <Link href="/app" className="rounded-2xl border border-white/10 bg-white/[0.04] p-6 hover:bg-white/[0.06] transition-colors block">
         <h3 className="text-lg font-semibold">Sermon Notes</h3>
         <p className="mt-2 text-white/80">Drafts, outlines, and manuscripts in one place.</p>
-      </a>
+      </Link>
 
-      <a href="/app" className="rounded-2xl border border-white/10 bg-white/[0.04] p-6 hover:bg-white/[0.06] transition-colors block">
+      <Link href="/app" className="rounded-2xl border border-white/10 bg-white/[0.04] p-6 hover:bg-white/[0.06] transition-colors block">
         <h3 className="text-lg font-semibold">Teaching Guides</h3>
         <p className="mt-2 text-white/80">Lesson plans and walkthroughs for classes.</p>
-      </a>
+      </Link>
 
-      <a href="/app" className="rounded-2xl border border-white/10 bg-white/[0.04] p-6 hover:bg-white/[0.06] transition-colors block">
+      <Link href="/app" className="rounded-2xl border border-white/10 bg-white/[0.04] p-6 hover:bg-white/[0.06] transition-colors block">
         <h3 className="text-lg font-semibold">Downloads</h3>
         <p className="mt-2 text-white/80">Reference sheets and printables you can share.</p>
-      </a>
+      </Link>
     </div>
   </div>
 </section>
@@ -436,11 +436,11 @@ export default function Home() {
 
       {/* Quick links */}
       <nav className="text-sm text-white/70 flex flex-wrap items-center gap-4 md:gap-6">
-        <a href="#features" className="hover:text-white">Features</a>
-        <a href="#why" className="hover:text-white">Why</a>
-        <a href="#resources" className="hover:text-white">Resources</a>
-        <a href="#faq" className="hover:text-white">FAQ</a>
-        <a href="/app" className="text-white hover:underline">Launch App</a>
+        <Link href="#features" className="hover:text-white">Features</Link>
+        <Link href="#why" className="hover:text-white">Why</Link>
+        <Link href="#resources" className="hover:text-white">Resources</Link>
+        <Link href="#faq" className="hover:text-white">FAQ</Link>
+        <Link href="/app" className="text-white hover:underline">Launch App</Link>
       </nav>
 
       {/* Copyright */}
