@@ -1,4 +1,5 @@
 import Link from "next/link";
+import UserMenu from "./UserMenu";
 
 export default function AppHeader() {
   return (
@@ -22,21 +23,17 @@ export default function AppHeader() {
           </div>
         </div>
 
-        {/* Actions (right) — Sign in first */}
-        <nav className="ml-auto flex items-center gap-2">
-          <Link
-            href="/account"
-            className="rounded-xl px-4 py-2 text-sm font-medium bg-gradient-to-tr from-indigo-500 to-emerald-500 text-black shadow hover:shadow-indigo-500/25"
-          >
-            Sign in
-          </Link>
-          <Link
-            href="/settings"
-            className="rounded-xl px-3 py-2 text-sm bg-white/10 border border-white/10 hover:bg-white/15"
-          >
-            Settings
-          </Link>
-        </nav>
+        
+<nav className="ml-auto flex items-center gap-2">
+  <Link
+    href="/settings"
+    className="rounded-xl px-3 py-2 text-sm bg-white/10 border border-white/10 hover:bg-white/15"
+  >
+    Settings
+  </Link>
+  <UserMenu /> {/* shows “Sign in” when logged out, avatar menu when logged in */}
+</nav>
+
       </div>
     </header>
   );
