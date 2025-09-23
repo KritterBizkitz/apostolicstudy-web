@@ -1,96 +1,61 @@
-// src/app/app/page.tsx
 import Link from "next/link";
+import AppHeader from "../../components/AppHeader";
 
-export const metadata = { title: "ApostolicStudy • App" };
-
-export default function AppStart() {
+export default function AppHome() {
   return (
-    <div className="mx-auto max-w-7xl px-4 py-10">
-      <header className="mb-6">
-        <h1 className="text-3xl font-semibold">Welcome</h1>
-        <p className="text-white/70 mt-1">
-          Choose where to begin. More sections coming soon.
-        </p>
-      </header>
+    <div className="min-h-screen bg-neutral-950 text-slate-100">
+      <AppHeader />
 
-      {/* Card grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        <Card
-          title="Open the Bible"
-          desc="Read and navigate by book, chapter, and verse."
-          href="/read/john/1"
-          accent="from-emerald-500/20"
-          badge="Ready"
-        />
-        <Card
-          title="Bible Study Notes"
-          desc="A growing library of study notes."
-          href="/notes"
-          accent="from-indigo-500/20"
-          badge="New"
-        />
-        <Card
-          title="Sermon Notes"
-          desc="Drafts, outlines, and manuscripts."
-          href="/sermons"
-          accent="from-amber-500/25"
-        />
-        <Card
-          title="Commentary"
-          desc="Apostolic commentary (in progress)."
-          href={undefined} // disabled for now
-          accent="from-cyan-500/20"
-          badge="Coming soon"
-        />
-        <Card
-          title="My Account"
-          desc="Sign in and manage preferences."
-          href="/account"
-          accent="from-fuchsia-500/20"
-        />
-        <Card
-          title="Settings"
-          desc="Theme, font size, reading width."
-          href="/settings"
-          accent="from-sky-500/20"
-        />
-      </div>
+      {/* Hero strip */}
+      <section className="border-b border-white/10 bg-gradient-to-br from-slate-950 via-slate-900/60 to-slate-950">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10">
+          <div className="flex flex-col lg:flex-row items-start lg:items-center gap-6 justify-between">
+            <div>
+              <h1 className="text-2xl sm:text-3xl font-semibold">
+                Your study hub
+              </h1>
+              <p className="mt-2 text-white/80 max-w-prose">
+                Open the Word, continue where you left off, or start notes and sermons—all in one place.
+              </p>
+            </div>
+
+            <div className="flex items-center gap-3">
+              <Link
+                href="/read/john/1"
+                className="rounded-xl px-5 py-2.5 bg-white/10 border border-white/10 hover:bg-white/15"
+              >
+                Open Bible
+              </Link>
+              <Link
+                href="/account"
+                className="rounded-xl px-5 py-2.5 bg-gradient-to-tr from-indigo-500 to-emerald-500 text-black font-medium shadow hover:shadow-indigo-500/25"
+              >
+                Sign in
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Placeholder main area — we’ll fill with cards next */}
+      <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10">
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <Link href="/read/john/1" className="rounded-2xl border border-white/10 bg-white/[0.05] p-6 hover:bg-white/[0.07] transition">
+            <h2 className="text-lg font-semibold">Open the Bible</h2>
+            <p className="text-white/75 mt-2">Reader • Book → chapter → verse</p>
+          </Link>
+
+          <Link href="/notes" className="rounded-2xl border border-white/10 bg-white/[0.05] p-6 hover:bg-white/[0.07] transition">
+            <h2 className="text-lg font-semibold">Study Notes</h2>
+            <p className="text-white/75 mt-2">Capture insights as you read.</p>
+          </Link>
+
+          <Link href="/sermons" className="rounded-2xl border border-white/10 bg-white/[0.05] p-6 hover:bg-white/[0.07] transition">
+            <h2 className="text-lg font-semibold">Sermon Notes</h2>
+            <p className="text-white/75 mt-2">Outlines and manuscripts.</p>
+          </Link>
+        </div>
+      </main>
     </div>
   );
-}
-
-function Card({
-  title,
-  desc,
-  href,
-  accent,
-  badge,
-}: {
-  title: string;
-  desc: string;
-  href?: string;
-  accent: string; // tailwind gradient, e.g. "from-emerald-500/20"
-  badge?: string;
-}) {
-  const Inner = (
-    <div
-      className={[
-        "relative overflow-hidden rounded-2xl border border-white/10 p-5",
-        "bg-gradient-to-br",
-        accent,
-        "to-white/[0.02] hover:border-white/20 transition hover:-translate-y-0.5",
-        href ? "cursor-pointer" : "opacity-60 cursor-not-allowed",
-      ].join(" ")}
-    >
-      {badge ? (
-        <span className="absolute right-3 top-3 text-[10px] uppercase tracking-wider px-1.5 py-0.5 rounded bg-white/10 border border-white/10">
-          {badge}
-        </span>
-      ) : null}
-      <h3 className="text-lg font-semibold">{title}</h3>
-      <p className="mt-1 text-sm text-white/70">{desc}</p>
-    </div>
-  );
-
-  return href ? <Link href={href}>{Inner}</Link> : Inner;
 }
