@@ -1,0 +1,14 @@
+[build]
+  command = "npx prisma generate && next build"
+  publish = ".next"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
+# make sure Prisma's native engine files get bundled with functions
+[functions]
+  node_bundler = "esbuild"
+  included_files = ["node_modules/.prisma/client/**", "node_modules/@prisma/**"]
