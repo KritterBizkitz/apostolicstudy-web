@@ -1,7 +1,8 @@
 // prisma/schema.prisma
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL") // optional but nice for prisma migrate
 }
 
 generator client {
