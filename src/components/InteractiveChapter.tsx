@@ -2,6 +2,8 @@
 const NOTES_API = "/api/open/notes";
 import { useEffect, useMemo, useState } from "react";
 import Verse from "@/components/Verse";
+import { createClient } from "@supabase/supabase-js";
+
 
 type VerseDto = { v: number; t: string };
 
@@ -50,28 +52,31 @@ export default function InteractiveChapter({
     setNoteText((cur) => (cur.trim().length === 0 || cur.startsWith(preface) ? `${preface}${vt}\n\n` : cur));
   }, [notesFor, bookLabel, chapter, verseMap]);
 
+  const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+  );
  async function saveNote() {
-  const res = await fetch(NOTES_API, {
+  const { data: { session } } = await supabase.auth.getSession();
+  const token = session?.access_token; // <-- this is the user
+
+  const res = await fetch("/api/open/notes", {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      bookId,
-      chapter,
-      verse: notesFor,
-      text: noteText,
-    }),
+    headers: {
+      "Content-Type": "application/json",
+      ...(token ? { Authorization: `Bearer ${token}` } : {}),
+    },
+    body: JSON.stringify({ bookId, chapter, verse: notesFor, text: noteText }),
   });
 
   if (!res.ok) {
-    const body = await res.text().catch(() => "");
-    console.error("Failed to save note:", res.status, body);
+    console.error("Failed to save note:", res.status, await res.text());
     alert(`Save failed (${res.status}). Check server logs.`);
     return;
   }
-    // reset and close
-    setNotesFor(null);
-    setNoteText("");
-  }
+  setNotesFor(null);
+  setNoteText("");
+}
 
   return (
     <>
