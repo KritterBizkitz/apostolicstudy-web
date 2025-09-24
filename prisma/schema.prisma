@@ -6,9 +6,10 @@ datasource db {
 
 generator client {
   provider      = "prisma-client-js"
-  // add both so it works locally AND on Netlify
+  engineType    = "binary"                   // recommended on Netlify
   binaryTargets = ["native", "debian-openssl-3.0.x"]
 }
+
 
 
 model Note {
