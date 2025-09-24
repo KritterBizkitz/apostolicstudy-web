@@ -24,10 +24,16 @@ export default function AccountPage() {
   }
 
   async function signUpWithPassword() {
-    setMsg(null);
-    const { error } = await supabase.auth.signUp({ email, password: pw });
-    setMsg(error ? error.message : "Check your email to confirm your account.");
-  }
+  setMsg(null);
+  const { error } = await supabase.auth.signUp({
+    email,
+    password: pw,
+    options: {
+      emailRedirectTo: `${location.origin}/auth/callback`, // ← add this
+    },
+  });
+  setMsg(error ? error.message : "Check your email to confirm your account.");
+}
 
   async function sendMagicLink() {
     setMsg(null);

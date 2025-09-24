@@ -5,7 +5,10 @@ import PinnedPassages from "../../components/PinnedPassages";
 
 export default function AppHome() {
   return (
-    <div className="min-h-screen bg-neutral-950 text-slate-100">
+    <div className="relative min-h-screen bg-neutral-950 text-slate-100">
+  {/* soft background wash (same vibe as /notes) */}
+  <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(60%_40%_at_30%_20%,rgba(99,102,241,0.08),transparent_60%),radial-gradient(50%_35%_at_80%_10%,rgba(16,185,129,0.08),transparent_65%)]" />
+
       
       <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10">
   <div className="grid gap-8 xl:grid-cols-12">
@@ -28,35 +31,49 @@ export default function AppHome() {
 
 
       {/* Hero strip */}
-      <section className="border-b border-white/10 bg-gradient-to-br from-slate-950 via-slate-900/60 to-slate-950">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10">
-          <div className="flex flex-col lg:flex-row items-start lg:items-center gap-6 justify-between">
-            <div>
-              <h1 className="text-2xl sm:text-3xl font-semibold">
-                Your study hub
-              </h1>
-              <p className="mt-2 text-white/80 max-w-prose">
-                Open the Word, continue where you left off, or start notes and sermons—all in one place.
-              </p>
-            </div>
+      <section className="border-b border-white/10">
+  <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10">
+    <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+      {/* LEFT: title + underline + subtitle */}
+      <div className="min-w-0 flex-1">
+        <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight
+                       bg-gradient-to-r from-indigo-400 to-emerald-400 bg-clip-text text-transparent">
+          Your study hub
+        </h1>
+        <div className="mt-2 h-1.5 w-40 rounded-full
+                        bg-gradient-to-r from-indigo-500 via-sky-500 to-emerald-500
+                        shadow-[0_0_24px_rgba(16,185,129,0.35)]" />
+        <p className="mt-3 text-sm text-white/70 max-w-prose">
+          “Study to shew thyself approved unto God, a workman that needeth not to be ashamed, rightly dividing the word of truth.”----2 Timothy 2:15
+        </p>
+      </div>
 
-            <div className="flex items-center gap-3">
-              <Link
-                href="/read/john/1"
-                className="rounded-xl px-5 py-2.5 bg-white/10 border border-white/10 hover:bg-white/15"
-              >
-                Open Bible
-              </Link>
-              <Link
-                href="/account"
-                className="rounded-xl px-5 py-2.5 bg-gradient-to-tr from-indigo-500 to-emerald-500 text-black font-medium shadow hover:shadow-indigo-500/25"
-              >
-                Sign in
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* RIGHT: buttons */}
+      <div className="flex shrink-0 items-center gap-3">
+        <Link
+          href="/read/john/1"
+          className="inline-flex items-center justify-center whitespace-nowrap
+                     rounded-xl px-4 py-2.5 text-sm
+                     border border-white/15 bg-white/[0.06] hover:bg-white/[0.1] transition"
+        >
+          Open Bible
+        </Link>
+
+        <Link
+          href="/account"
+          className="inline-flex items-center justify-center whitespace-nowrap
+                     rounded-xl px-5 py-2.5 text-sm font-medium text-black
+                     bg-gradient-to-tr from-indigo-500 to-emerald-500
+                     shadow hover:opacity-95 transition"
+        >
+          Sign in
+        </Link>
+      </div>
+    </div>
+  </div>
+</section>
+
+
 
       {/* Placeholder main area — we’ll fill with cards next */}
       <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 space-y-8">
@@ -66,8 +83,12 @@ export default function AppHome() {
           {/* Sign in promo (shows even if not wired to auth yet) */}
           <Link
             href="/account"
-            className="rounded-2xl border border-white/10 bg-white/[0.05] p-6 hover:bg-white/[0.07] transition"
+            className="group rounded-2xl border border-white/10 bg-white/[0.02] p-6 backdrop-blur
+           hover:border-white/25 hover:bg-white/[0.04] transition"
           >
+            <div className="mb-3 h-1 rounded-full bg-gradient-to-r from-indigo-500/50 via-sky-500/40 to-emerald-500/50" />
+
+          
             <div className="text-xs px-2 py-0.5 inline-block rounded bg-white/10 border border-white/10">
               Sync
             </div>
@@ -79,8 +100,13 @@ export default function AppHome() {
 
           <Link
             href="/read/john/1"
-            className="rounded-2xl border border-white/10 bg-white/[0.05] p-6 hover:bg-white/[0.07] transition"
+            className="group rounded-2xl border border-white/10 bg-white/[0.02] p-6 backdrop-blur
+           hover:border-white/25 hover:bg-white/[0.04] transition"
+          
+
           >
+            <div className="mb-3 h-1 rounded-full bg-gradient-to-r from-indigo-500/50 via-sky-500/40 to-emerald-500/50" />
+
             <h2 className="text-lg font-semibold">Open the Bible</h2>
             <p className="text-white/75 mt-2">Reader · Book → chapter → verse</p>
             <div className="mt-4 text-sm text-white/70">Go to John 1 →</div>
@@ -88,59 +114,71 @@ export default function AppHome() {
 
           <Link
             href="/notes"
-            className="rounded-2xl border border-white/10 bg-white/[0.05] p-6 hover:bg-white/[0.07] transition"
-          >
+            className="group rounded-2xl border border-white/10 bg-white/[0.02] p-6 backdrop-blur
+           hover:border-white/25 hover:bg-white/[0.04] transition"
+
+          ><div className="mb-3 h-1 rounded-full bg-gradient-to-r from-indigo-500/50 via-sky-500/40 to-emerald-500/50" />
+
             <h2 className="text-lg font-semibold">Study Notes</h2>
-            <p className="text-white/75 mt-2">Capture insights as you read.</p>
+            <p className="text-white/75 mt-2">Access to study notes from Apostolic Ministers and Pastors.</p>
           </Link>
 
           <Link
             href="/sermons"
-            className="rounded-2xl border border-white/10 bg-white/[0.05] p-6 hover:bg-white/[0.07] transition"
-          >
+            className="group rounded-2xl border border-white/10 bg-white/[0.02] p-6 backdrop-blur
+           hover:border-white/25 hover:bg-white/[0.04] transition"
+
+          ><div className="mb-3 h-1 rounded-full bg-gradient-to-r from-indigo-500/50 via-sky-500/40 to-emerald-500/50" />
+
             <h2 className="text-lg font-semibold">Sermon Notes</h2>
             <p className="text-white/75 mt-2">Outlines and manuscripts.</p>
           </Link>
 
           <Link
             href="/app" // placeholder for future commentary section
-            className="rounded-2xl border border-white/10 bg-white/[0.05] p-6 hover:bg-white/[0.07] transition"
-          >
+            className="group rounded-2xl border border-white/10 bg-white/[0.02] p-6 backdrop-blur
+           hover:border-white/25 hover:bg-white/[0.04] transition"
+
+          ><div className="mb-3 h-1 rounded-full bg-gradient-to-r from-indigo-500/50 via-sky-500/40 to-emerald-500/50" />
+
             <h2 className="text-lg font-semibold">Teaching Guides</h2>
             <p className="text-white/75 mt-2">Lesson plans & walkthroughs.</p>
           </Link>
 
           <Link
             href="/app"
-            className="rounded-2xl border border-white/10 bg-white/[0.05] p-6 hover:bg-white/[0.07] transition"
-          >
+            className="group rounded-2xl border border-white/10 bg-white/[0.02] p-6 backdrop-blur
+           hover:border-white/25 hover:bg-white/[0.04] transition"
+
+          ><div className="mb-3 h-1 rounded-full bg-gradient-to-r from-indigo-500/50 via-sky-500/40 to-emerald-500/50" />
+
             <h2 className="text-lg font-semibold">Bookmarks & Highlights</h2>
             <p className="text-white/75 mt-2">Quickly return to key passages.</p>
           </Link>
 
           <Link
             href="/app"
-            className="rounded-2xl border border-white/10 bg-white/[0.05] p-6 hover:bg-white/[0.07] transition"
-          >
+            className="group rounded-2xl border border-white/10 bg-white/[0.02] p-6 backdrop-blur
+           hover:border-white/25 hover:bg-white/[0.04] transition"
+
+          ><div className="mb-3 h-1 rounded-full bg-gradient-to-r from-indigo-500/50 via-sky-500/40 to-emerald-500/50" />
+
             <h2 className="text-lg font-semibold">Reading Plans</h2>
             <p className="text-white/75 mt-2">Gospels in 60 days · Bible in a year.</p>
           </Link>
 
           <Link
             href="/app"
-            className="rounded-2xl border border-white/10 bg-white/[0.05] p-6 hover:bg-white/[0.07] transition"
-          >
+            className="group rounded-2xl border border-white/10 bg-white/[0.02] p-6 backdrop-blur
+           hover:border-white/25 hover:bg-white/[0.04] transition"
+
+          ><div className="mb-3 h-1 rounded-full bg-gradient-to-r from-indigo-500/50 via-sky-500/40 to-emerald-500/50" />
+
             <h2 className="text-lg font-semibold">Downloads</h2>
             <p className="text-white/75 mt-2">Reference sheets & printables.</p>
           </Link>
 
-          <Link
-            href="/settings"
-            className="rounded-2xl border border-white/10 bg-white/[0.05] p-6 hover:bg-white/[0.07] transition"
-          >
-            <h2 className="text-lg font-semibold">Settings</h2>
-            <p className="text-white/75 mt-2">Theme, font size, and more.</p>
-          </Link>
+          {/* add more cards as needed */}
         </div>
       </section>
     </div>

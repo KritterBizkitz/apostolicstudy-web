@@ -69,6 +69,62 @@ export const BOOKS: Book[] = [
   { id: "jude", name: "Jude", chapters: 1, file: "Jude.json" },
   { id: "revelation", name: "Revelation", chapters: 22, file: "Revelation.json" }
 ];
+// lib/books.ts
+
+// ---- helpers ----
+
+export function bookLabelFromSlug(slug: string): string {
+  const s = normalizeSlug(slug);
+
+  // Read from your existing BOOKS array, whatever its item shape is.
+  const list = (BOOKS as any[]) || [];
+
+  const hit = list.find((b: any) => {
+    const id =
+      String(b?.id ?? b?.slug ?? "")
+        .toLowerCase()
+        .replace(/^([123])(?=[a-z])/, "$1-")
+        .replace(/_/g, "-");
+
+    const abbr = String(b?.abbr ?? b?.short ?? b?.code ?? "").toLowerCase();
+
+    const aliases: string[] = Array.isArray(b?.slugs)
+      ? b.slugs.map((x: any) => String(x).toLowerCase())
+      : Array.isArray(b?.aliases)
+      ? b.aliases.map((x: any) => String(x).toLowerCase())
+      : [];
+
+    return id === s || (!!abbr && abbr === s) || aliases.includes(s);
+  });
+
+  // Prefer label-like fields; fall back to prettified slug.
+  const label =
+    hit?.label ??
+    hit?.name ??
+    hit?.title ??
+    hit?.display ??
+    hit?.book ??
+    hit?.Book;
+
+  return label ?? titleize(s.replace(/-/g, " "));
+}
+
+function normalizeSlug(s: string) {
+  s = s.toLowerCase();
+  s = s.replace(/^([123])(?=[a-z])/, "$1-"); // 1john -> 1-john
+  s = s.replace(/_/g, "-");                  // underscores -> dashes
+  return s;
+}
+
+function titleize(s: string) {
+  return s.replace(/\b\w/g, (c) => c.toUpperCase());
+}
+
+
+// If you already export `books`, keep using it. Otherwise export your map/array here.
+
+
+
 
 export function getBookById(id: string) {
   return BOOKS.find(b => b.id === id.toLowerCase());

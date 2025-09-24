@@ -4,6 +4,7 @@ import path from "node:path";
 import { redirect } from "next/navigation";
 import LastReadSaver from "@/components/LastReadSaver";
 import PinCurrent from "@/components/PinCurrent";
+import { bookLabelFromSlug } from "@/lib/books";
 
 
 import Verse from "@/components/Verse";
@@ -11,6 +12,7 @@ import BookChapterPicker from "@/components/BookChapterPicker";
 import ChapterNav from "@/components/ChapterNav";
 import { getBookById } from "@/lib/books";
 import { normalizeBibleJson, versesOf, chaptersIn } from "@/lib/normalize";
+import InteractiveChapter from "@/components/InteractiveChapter";
 
 type RouteParams = { book: string; chapter: string };
 
@@ -23,6 +25,7 @@ export default async function ReaderPage({
   const { book, chapter } = await params;
   const bookId = book.toLowerCase();
   const rawChapter = Number(chapter);
+  const bookLabel = bookLabelFromSlug(bookId);
 
   if (!Number.isFinite(rawChapter) || rawChapter < 1) {
     return redirect(`/read/${bookId}/1`);
@@ -34,6 +37,8 @@ export default async function ReaderPage({
 
   const file = path.join(process.cwd(), "src", "lib", "bible-data", meta.file);
   const raw = await fs.readFile(file, "utf8");
+
+
 
   // ---- normalize to { book, chapters: string[][] } ----
   const normalized = normalizeBibleJson(JSON.parse(raw), meta.name ?? meta.id);
@@ -79,15 +84,18 @@ export default async function ReaderPage({
 
 
           {/* scripture body */}
-          {verses.length === 0 ? (
-            <p className="text-white/70 mt-6">No verses found in this chapter.</p>
-          ) : (
-            <div className="mt-6 space-y-3 max-w-3xl mx-auto">
-              {verses.map(({ v, t }) => (
-                <Verse key={v} v={v} text={t} />
-              ))}
-            </div>
-          )}
+{verses.length === 0 ? (
+  <p className="text-white/70 mt-6">No verses found in this chapter.</p>
+) : (
+  <InteractiveChapter
+  bookId={bookId}
+  bookLabel={bookLabel}   // <-- this fixes “undefined”
+  chapter={ch}
+  verses={verses}
+/>
+)}
+
+          
         </main>
 
         {/* RIGHT SIDEBAR — ready for notes/commentary */}
