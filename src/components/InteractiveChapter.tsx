@@ -5,6 +5,17 @@ import Verse from "@/components/Verse";
 import { createClient } from "@supabase/supabase-js";
 
 
+function getAnonId() {
+  if (typeof window === "undefined") return null;
+  let id = localStorage.getItem("as:anon");
+  if (!id) {
+    id = crypto.randomUUID();
+    localStorage.setItem("as:anon", id);
+  }
+  return id;
+}
+
+
 type VerseDto = { v: number; t: string };
 
 export default function InteractiveChapter({
@@ -55,28 +66,34 @@ export default function InteractiveChapter({
   const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-  );
+);
  async function saveNote() {
-  const { data: { session } } = await supabase.auth.getSession();
-  const token = session?.access_token; // <-- this is the user
+  const anonId = getAnonId();
+// after a 201 response:
 
   const res = await fetch("/api/open/notes", {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      ...(token ? { Authorization: `Bearer ${token}` } : {}),
-    },
-    body: JSON.stringify({ bookId, chapter, verse: notesFor, text: noteText }),
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      userId: anonId,           // <-- NEW
+      bookId,
+      chapter,
+      verse: notesFor,
+      text: noteText,
+    }),
+    
   });
+  window.dispatchEvent(new Event("as:notes:changed"));
 
   if (!res.ok) {
-    console.error("Failed to save note:", res.status, await res.text());
+    console.error("Failed to save note:", res.status, await res.text().catch(() => ""));
     alert(`Save failed (${res.status}). Check server logs.`);
     return;
   }
   setNotesFor(null);
   setNoteText("");
 }
+
 
   return (
     <>

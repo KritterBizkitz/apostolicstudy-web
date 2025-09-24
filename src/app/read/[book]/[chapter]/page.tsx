@@ -2,29 +2,25 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 import { redirect } from "next/navigation";
+import Link from "next/link";
+
 import LastReadSaver from "@/components/LastReadSaver";
 import PinCurrent from "@/components/PinCurrent";
-import { bookLabelFromSlug } from "@/lib/books";
-
-
-import Verse from "@/components/Verse";
 import BookChapterPicker from "@/components/BookChapterPicker";
 import ChapterNav from "@/components/ChapterNav";
-import { getBookById } from "@/lib/books";
-import { normalizeBibleJson, versesOf, chaptersIn } from "@/lib/normalize";
 import InteractiveChapter from "@/components/InteractiveChapter";
+import NotesPanel from "@/components/NotesPanel";
+import NotesDrawerClient from "@/components/NotesDrawerClient";
+
+import { bookLabelFromSlug, getBookById } from "@/lib/books";
+import { normalizeBibleJson, versesOf, chaptersIn } from "@/lib/normalize";
 
 type RouteParams = { book: string; chapter: string };
 
-export default async function ReaderPage({
-  params,
-}: {
-  params: Promise<RouteParams>;
-}) {
-  // ---- route params (must await in App Router) ----
-  const { book, chapter } = await params;
-  const bookId = book.toLowerCase();
-  const rawChapter = Number(chapter);
+export default async function ReaderPage({ params }: { params: RouteParams }) {
+  // ---- route params ----
+  const bookId = params.book.toLowerCase();
+  const rawChapter = Number(params.chapter);
   const bookLabel = bookLabelFromSlug(bookId);
 
   if (!Number.isFinite(rawChapter) || rawChapter < 1) {
@@ -38,80 +34,64 @@ export default async function ReaderPage({
   const file = path.join(process.cwd(), "src", "lib", "bible-data", meta.file);
   const raw = await fs.readFile(file, "utf8");
 
-
-
-  // ---- normalize to { book, chapters: string[][] } ----
+  // ---- normalize to { book, chapters } ----
   const normalized = normalizeBibleJson(JSON.parse(raw), meta.name ?? meta.id);
 
-  // ---- clamp chapter and canonicalize URL if needed ----
+  // ---- clamp + canonicalize ----
   const total = Math.max(1, chaptersIn(normalized));
   const ch = Math.min(Math.max(1, rawChapter), total);
-  if (ch !== rawChapter) {
-    return redirect(`/read/${bookId}/${ch}`);
-  }
+  if (ch !== rawChapter) return redirect(`/read/${bookId}/${ch}`);
 
   const verses = versesOf(normalized, ch);
 
-  // ---- LAYOUT (all JSX only inside the return) ----
-  <LastReadSaver bookId={bookId} chapter={ch} />
-
+  // ---- render ----
   return (
     <div className="mx-auto max-w-7xl px-4">
+      <div className="flex items-center justify-between mb-3">
+        <h1 className="text-2xl font-semibold">{bookLabel} {ch}</h1>
+        <Link href="/app" className="px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20">
+          ← Back to Hub
+        </Link>
+      </div>
+
+      {/* Save last read location (client component) */}
+      <LastReadSaver bookId={bookId} chapter={ch} />
+
       <div className="grid grid-cols-12 gap-6">
-        {/* optional left gutter / future toc */}
-        <aside className="hidden xl:block xl:col-span-2" />
-
-        {/* MAIN READER — centered */}
-        <main className="col-span-12 lg:col-span-8 xl:col-span-7">
-          {/* Title (non-sticky) */}
-<h1 className="text-2xl font-semibold mb-2">
-  {normalized.book} {ch}
-</h1>
-
-{/* Single sticky NAV — use your nicer “bottom” controls here */}
-<div className="sticky top-0 z-10 -mx-4 px-4 py-3 bg-black/70 backdrop-blur">
-  <div className="flex flex-wrap items-end gap-3">
-    {/* keep these as you had in the bottom bar */}
-    <BookChapterPicker book={bookId} chapter={ch} />
-    <ChapterNav book={bookId} chapter={ch} total={total} />
-    {/* if you had a separate Jump input, include it here too */}
-  </div>
-</div>
-<div className="shrink-0 flex items-center gap-2">
-  <PinCurrent bookId={bookId} chapter={ch} />
-  <BookChapterPicker book={bookId} chapter={ch} />
-</div>
-
+        {/* MAIN */}
+        <main className="col-span-12 lg:col-span-8 xl:col-span-9">
+          {/* sticky nav */}
+          <div className="sticky top-0 z-10 -mx-4 px-4 py-3 bg-black/70 backdrop-blur">
+            <div className="flex flex-wrap items-end gap-3">
+              <PinCurrent bookId={bookId} chapter={ch} />
+              <BookChapterPicker book={bookId} chapter={ch} />
+              <ChapterNav book={bookId} chapter={ch} total={total} />
+            </div>
+          </div>
 
           {/* scripture body */}
-{verses.length === 0 ? (
-  <p className="text-white/70 mt-6">No verses found in this chapter.</p>
-) : (
-  <InteractiveChapter
-  bookId={bookId}
-  bookLabel={bookLabel}   // <-- this fixes “undefined”
-  chapter={ch}
-  verses={verses}
-/>
-)}
-
-          
+          {verses.length === 0 ? (
+            <p className="text-white/70 mt-6">No verses found in this chapter.</p>
+          ) : (
+            <InteractiveChapter
+              bookId={bookId}
+              bookLabel={bookLabel}
+              chapter={ch}
+              verses={verses}
+            />
+          )}
         </main>
 
-        {/* RIGHT SIDEBAR — ready for notes/commentary */}
+        {/* DESKTOP NOTES SIDEBAR */}
         <aside className="hidden lg:block lg:col-span-4 xl:col-span-3">
-          <div className="sticky top-16 space-y-4">
-            <div className="rounded-2xl border border-white/10 bg-black/30 p-4 shadow">
-              <h2 className="text-xs uppercase text-white/60 mb-2">Notes</h2>
-              <p className="text-white/70 text-sm">Coming soon.</p>
-            </div>
-            <div className="rounded-2xl border border-white/10 bg-black/30 p-4 shadow">
-              <h2 className="text-xs uppercase text-white/60 mb-2">Commentary</h2>
-              <p className="text-white/70 text-sm">Coming soon.</p>
-            </div>
+          <div className="sticky top-20">
+            <NotesPanel bookId={bookId} chapter={ch} />
           </div>
         </aside>
       </div>
+
+      {/* MOBILE NOTES DRAWER BUTTON */}
+      <NotesDrawerClient bookId={bookId} chapter={ch} />
     </div>
   );
 }

@@ -1,19 +1,11 @@
-generator client {
-  provider = "prisma-client-js"
-}
-
+// prisma/schema.prisma
 datasource db {
-  provider = "sqlite"
+  provider = "sqlite"         // keep sqlite for now; switch later if you want
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id         String      @id @default(cuid())
-  email      String?     @unique
-  name       String?
-  image      String?
-  notes      Note[]
-  highlights Highlight[]
+generator client {
+  provider = "prisma-client-js"
 }
 
 model Note {
@@ -25,20 +17,4 @@ model Note {
   text      String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  @@index([userId, bookId, chapter])
-}
-
-model Highlight {
-  id        String   @id @default(cuid())
-  userId    String
-  bookId    String
-  chapter   Int
-  verse     Int
-  color     String
-  createdAt DateTime @default(now())
-
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  @@unique([userId, bookId, chapter, verse])
 }
