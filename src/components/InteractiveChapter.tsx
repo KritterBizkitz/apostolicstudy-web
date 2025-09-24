@@ -83,7 +83,7 @@ export default function InteractiveChapter({
     }),
     
   });
-  window.dispatchEvent(new Event("as:notes:changed"));
+   if (res.ok) window.dispatchEvent(new Event("as:notes:changed"));
 
   if (!res.ok) {
     console.error("Failed to save note:", res.status, await res.text().catch(() => ""));

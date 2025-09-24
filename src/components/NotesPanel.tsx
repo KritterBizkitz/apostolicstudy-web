@@ -23,17 +23,27 @@ export default function NotesPanel({
 
   // --- load notes for this chapter ---
   async function load() {
-    const userId = getAnonId();
-    if (!userId) return;
-    setLoading(true);
-    const res = await fetch(
-      `/api/open/notes?userId=${userId}&bookId=${bookId}&chapter=${chapter}`,
-      { cache: "no-store" }
-    );
-    const data = (await res.json()) as Note[];
-    setItems(data);
-    setLoading(false);
+  const userId = getAnonId();
+  if (!userId) return;
+
+  const qs = new URLSearchParams({
+    userId,                 // <-- exact casing
+    bookId,                 // <-- passed via prop
+    chapter: String(chapter) // <-- numeric, not "1:1"
+  }).toString();
+
+  const res = await fetch(`/api/open/notes?${qs}`, { cache: "no-store" });
+
+  if (!res.ok) {
+    console.error("notes GET failed", res.status, await res.text().catch(() => ""));
+    setItems([]);           // avoid .map crash
+    return;
   }
+
+  const data = await res.json();
+  setItems(Array.isArray(data) ? data : []); // defensive
+}
+
 
   // --- delete a single note by id ---
   async function handleDelete(id: string) {

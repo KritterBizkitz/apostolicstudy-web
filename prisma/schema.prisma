@@ -1,6 +1,6 @@
 // prisma/schema.prisma
 datasource db {
-  provider = "sqlite"         // keep sqlite for now; switch later if you want
+  provider = "sqlite"
   url      = env("DATABASE_URL")
 }
 
