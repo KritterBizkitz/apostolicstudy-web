@@ -16,8 +16,22 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "ApostolicStudy",
-  description: "Bible study you can trust.",
+  metadataBase: new URL('https://apostolicstudy.org'),
+  title: 'ApostolicStudy',
+  description: 'KJV study tools, notes, and resources.',
+  openGraph: {
+    type: 'website',
+    url: 'https://apostolicstudy.org',
+    title: 'ApostolicStudy',
+    description: 'KJV study tools, notes, and resources.',
+    images: ['/og.png'],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'ApostolicStudy',
+    description: 'KJV study tools, notes, and resources.',
+    images: ['/og.png'],
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
