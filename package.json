@@ -9,7 +9,6 @@
     "start": "next start",
     "lint": "eslint",
     "postbuild": "next-sitemap"
-
   },
   "dependencies": {
     "@prisma/client": "6.16.2",
