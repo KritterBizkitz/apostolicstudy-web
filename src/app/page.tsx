@@ -1,102 +1,86 @@
 // src/app/page.tsx
 import Link from "next/link";
+import { AnimatedFeatureCard } from "@/components/AnimatedFeatureCard";
+import { RevealBox } from "@/components/RevealBox";
 
 export default function Home() {
   return (
     <main className="min-h-screen text-slate-100 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950">
       {/* HERO */}
       <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
-        <div className="grid gap-12 lg:grid-cols-2 items-center">
-          {/* Left: headline + pitch + buttons */}
-          <div>
-            <p className="inline-flex items-center gap-2 text-xs uppercase tracking-wider text-white/70 bg-white/10 border border-white/10 rounded-full px-3 py-1">
-              <span className="inline-flex h-2 w-2 rounded-full bg-emerald-400" />
-              Doctrinally Apostolic • Trust the Word, not the world
-            </p>
+          <div className="grid gap-12 lg:grid-cols-2 items-center">
+            {/* Left: headline + pitch + buttons */}
+            <RevealBox>
+              <div>
+                <p className="inline-flex items-center gap-2 text-xs uppercase tracking-wider text-white/70 bg-white/10 border border-white/10 rounded-full px-3 py-1">
+                  <span className="inline-flex h-2 w-2 rounded-full bg-emerald-400" />
+                  Doctrinally Apostolic • Trust the Word, not the world
+                </p>
 
-            <h1 className="mt-4 text-4xl sm:text-5xl font-semibold leading-tight">
-              Study the Word.{" "}
-              <span className="bg-gradient-to-tr from-indigo-400 to-emerald-300 bg-clip-text text-transparent">
-                Teach with clarity.
-              </span>
-            </h1>
+                <h1 className="mt-4 text-4xl sm:text-5xl font-semibold leading-tight">
+                  Study the Word.{' '}
+                  <span className="bg-gradient-to-tr from-indigo-400 to-emerald-300 bg-clip-text text-transparent">
+                    Teach with clarity.
+                  </span>
+                </h1>
 
-            <p className="mt-5 text-lg text-white/85 max-w-xl">
-              Built for proper exegesis—historical context, authorial intent,
-              and the whole counsel of Scripture—putting context before commentary 
-              and Scripture interpreting Scripture, without the noise.
-            </p>
+                <p className="mt-5 text-lg text-white/85 max-w-xl">
+                  Built for proper exegesis—historical context, authorial intent, and the whole counsel of Scripture—putting context before commentary and Scripture interpreting Scripture, without the noise.
+                </p>
 
-            <div className="mt-8 flex flex-wrap gap-3">
-              <Link
-                href="/app"
-                className="px-6 py-3 rounded-xl bg-gradient-to-tr from-indigo-500 to-emerald-500 text-black font-medium shadow-lg hover:shadow-indigo-500/25"
-              >
-                Launch Bible App
-              </Link>
+                <div className="mt-8 flex items-center gap-3">
+                  <Link href="/app" className="inline-flex items-center rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-sm hover:bg-white/10">Open Bible</Link>
+                  <Link href="/signin" className="inline-flex items-center rounded-xl bg-gradient-to-tr from-indigo-500 to-emerald-500 px-4 py-2 text-sm font-semibold text-black shadow-md hover:opacity-95">Sign in</Link>
+                </div>
+              </div>
+            </RevealBox>
 
-              <Link
-                href="/read/john/1"
-                className="px-6 py-3 rounded-xl bg-white/10 text-white border border-white/10 hover:bg-white/15"
-              >
-                Jump to John 1
-              </Link>
-            </div>
+            {/* Right: decorative reader preview */}
+            <RevealBox delay={0.05}>
+              <div className="relative group">
+                {/* Subtle static gradient frame */}
+                <div
+                  className="pointer-events-none absolute -inset-[2px] rounded-3xl opacity-60 blur-[1.5px]"
+                  style={{
+                    background:
+                      "conic-gradient(from 0deg, var(--tw-gradient-from,#6366f1), #06b6d4, var(--tw-gradient-to,#10b981), var(--tw-gradient-from,#6366f1))",
+                  }}
+                />
 
-            <div className="mt-6 text-sm text-white/70 flex items-center gap-4">
-              <span className="inline-flex items-center gap-2">
-                <span className="h-2 w-2 rounded-full bg-emerald-400 inline-block" />
-                No sign-in required to read
-              </span>
-              <span className="inline-flex items-center gap-2">
-                <span className="h-2 w-2 rounded-full bg-indigo-400 inline-block" />
-                Distraction-free
-              </span>
-            </div>
-          </div>
+                {/* Hover shine sweep */}
+                <div className="pointer-events-none absolute inset-0 overflow-hidden rounded-3xl">
+                  <div className="absolute -left-1/3 top-0 h-full w-1/3 rotate-12 bg-gradient-to-r from-white/0 via-white/12 to-white/0 transition-transform duration-1000 ease-out group-hover:translate-x-[250%]" />
+                </div>
 
-          {/* Right: decorative reader preview */}
-          <div className="relative">
-            <div className="rounded-2xl border border-white/10 bg-white/[0.04] backdrop-blur p-4 shadow-2xl">
-              <div className="rounded-xl border border-white/10 bg-black/40 p-4">
-                <div className="flex items-center justify-between text-xs text-white/60 mb-3">
-                  <span>John 1</span>
-                  <div className="flex items-center gap-1">
-                    <span className="inline-block h-2 w-2 rounded-full bg-rose-400" />
-                    <span className="inline-block h-2 w-2 rounded-full bg-amber-400" />
-                    <span className="inline-block h-2 w-2 rounded-full bg-emerald-400" />
+                {/* Window body */}
+                <div className="relative rounded-3xl border border-white/10 bg-white/[0.04] backdrop-blur overflow-hidden shadow-2xl">
+                  {/* macOS-style title bar */}
+                  <div className="flex items-center gap-2 px-4 py-2 border-b border-white/10 bg-black/30">
+                    <span className="h-3 w-3 rounded-full bg-[#ff5f57]" />
+                    <span className="h-3 w-3 rounded-full bg-[#febc2e]" />
+                    <span className="h-3 w-3 rounded-full bg-[#28c840]" />
+                    <span className="ml-2 text-xs text-white/60">John 1</span>
+                  </div>
+
+                  {/* Reader content */}
+                  <div className="p-5">
+                    <div className="space-y-1 leading-relaxed">
+                      <p><span className="text-white/60 mr-2">1</span>In the beginning was the Word, and the Word was with God, and the Word was God.</p>
+                      <p><span className="text-white/60 mr-2">2</span>The same was in the beginning with God.</p>
+                      <p><span className="text-white/60 mr-2">3</span>All things were made by him; and without him was not any thing made that was made.</p>
+                      <p><span className="text-white/60 mr-2">4</span>In him was life; and the life was the light of men.</p>
+                      <p><span className="text-white/60 mr-2">5</span>And the light shineth in darkness; and the darkness comprehended it not.</p>
+                    </div>
                   </div>
                 </div>
 
-                <div className="space-y-3 leading-relaxed">
-                  <p>
-                    <span className="text-white/60 mr-2">1</span>
-                    <span className="font-serif">
-                      In the beginning was the Word, and the Word was with God, and the Word was God.
-                    </span>
-                  </p>
-                  <p>
-                    <span className="text-white/60 mr-2">2</span>
-                    <span className="font-serif">The same was in the beginning with God.</span>
-                  </p>
-                  <p>
-                    <span className="text-white/60 mr-2">3</span>
-                    <span className="font-serif">
-                      All things were made by him; and without him was not any thing made that was made.
-                    </span>
-                  </p>
-                </div>
+                {/* ambient glow */}
+                <div className="pointer-events-none absolute -z-10 -top-10 -left-10 h-56 w-56 rounded-full bg-emerald-500/20 blur-3xl" />
+                <div className="pointer-events-none absolute -z-10 -bottom-10 -right-10 h-56 w-56 rounded-full bg-indigo-500/20 blur-3xl" />
               </div>
-            </div>
-
-            {/* soft ambient glow behind the card */}
-            <div
-              aria-hidden
-              className="pointer-events-none absolute -z-10 inset-0 blur-3xl bg-gradient-to-tr from-indigo-500/20 via-emerald-400/10 to-transparent"
-            />
+            </RevealBox>
           </div>
-        </div>
-      </section>
+        </section>
       {/* VALUE CARDS / FEATURES */}
 <section id="features" className="py-16 border-t border-white/10">
   <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -107,40 +91,40 @@ export default function Home() {
 
     <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
       {/* Card 1 */}
-      <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-6 hover:bg-white/[0.06] transition-colors">
+      <AnimatedFeatureCard>
         <div className="h-10 w-10 rounded-lg bg-gradient-to-tr from-indigo-500 to-emerald-500 mb-4" />
         <h3 className="text-lg font-semibold">Fast reader</h3>
         <p className="mt-2 text-white/80">
           Book → chapter → verse. Clean typography and instant navigation.
         </p>
-      </div>
+      </AnimatedFeatureCard>
 
       {/* Card 2 */}
-      <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-6 hover:bg-white/[0.06] transition-colors">
+      <AnimatedFeatureCard>
         <div className="h-10 w-10 rounded-lg bg-gradient-to-tr from-emerald-500 to-cyan-500 mb-4" />
         <h3 className="text-lg font-semibold">Distraction-free</h3>
         <p className="mt-2 text-white/80">
           A focused canvas so the Word—not the UI—gets your attention.
         </p>
-      </div>
+      </AnimatedFeatureCard>
 
       {/* Card 3 */}
-      <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-6 hover:bg-white/[0.06] transition-colors">
+      <AnimatedFeatureCard>
         <div className="h-10 w-10 rounded-lg bg-gradient-to-tr from-violet-500 to-fuchsia-500 mb-4" />
         <h3 className="text-lg font-semibold">Notes that grow</h3>
         <p className="mt-2 text-white/80">
           Keep living study notes and sermon drafts—organized, searchable.
         </p>
-      </div>
+      </AnimatedFeatureCard>
 
       {/* Card 4 */}
-      <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-6 hover:bg-white/[0.06] transition-colors">
+      <AnimatedFeatureCard>
         <div className="h-10 w-10 rounded-lg bg-gradient-to-tr from-amber-500 to-pink-500 mb-4" />
         <h3 className="text-lg font-semibold">Grounded in Doctrine</h3>
         <p className="mt-2 text-white/80">
           Designed around Apostolic doctrine—tools that help you study, teach, and stay anchored to the Word.
         </p>
-      </div>
+      </AnimatedFeatureCard>
     </div>
   </div>
 </section>
@@ -173,20 +157,24 @@ export default function Home() {
           <Link href="/read/john/1" className="text-sm text-white/70 hover:text-white/90">Open in reader →</Link>
         </div>
         <div className="grid gap-4 md:grid-cols-2">
-          <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-5">
-            <div className="text-xs mb-2 px-2 py-0.5 inline-block rounded bg-white/10 border border-white/10">Popular Commentary (Trinitarian)</div>
-            <p className="text-white/85">
-              “The Word” is the eternal second Person, personally distinct from the Father yet fully divine.
-              Creation is through the Son as a co-eternal person.
-            </p>
-          </div>
-          <div className="rounded-2xl border border-emerald-400/30 bg-emerald-500/10 p-5">
-            <div className="text-xs mb-2 px-2 py-0.5 inline-block rounded bg-emerald-500/20 border border-emerald-400/30">ApostolicStudy Exegesis</div>
-            <p className="text-white/90">
-              “Word” (Logos) is God’s own self-expression—God Himself in self-revelation. The one God later became flesh as Jesus Christ.
-              Distinction is functional/relational, not a second divine person.
-            </p>
-          </div>
+          <RevealBox>
+            <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-5">
+              <div className="text-xs mb-2 px-2 py-0.5 inline-block rounded bg-white/10 border border-white/10">Popular Commentary (Trinitarian)</div>
+              <p className="text-white/85">
+                “The Word” is the eternal second Person, personally distinct from the Father yet fully divine.
+                Creation is through the Son as a co-eternal person.
+              </p>
+            </div>
+          </RevealBox>
+          <RevealBox delay={0.06}>
+            <div className="rounded-2xl border border-emerald-400/30 bg-emerald-500/10 p-5">
+              <div className="text-xs mb-2 px-2 py-0.5 inline-block rounded bg-emerald-500/20 border border-emerald-400/30">ApostolicStudy Exegesis</div>
+              <p className="text-white/90">
+                “Word” (Logos) is God’s own self-expression—God Himself in self-revelation. The one God later became flesh as Jesus Christ.
+                Distinction is functional/relational, not a second divine person.
+              </p>
+            </div>
+          </RevealBox>
         </div>
       </article>
 
@@ -197,20 +185,24 @@ export default function Home() {
           <Link href="/read/matthew/28" className="text-sm text-white/70 hover:text-white/90">Open in reader →</Link>
         </div>
         <div className="grid gap-4 md:grid-cols-2">
-          <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-5">
-            <div className="text-xs mb-2 px-2 py-0.5 inline-block rounded bg-white/10 border border-white/10">Popular Commentary (Trinitarian)</div>
-            <p className="text-white/85">
-              Baptism “in the name of the Father, and of the Son, and of the Holy Spirit” affirms three co-equal, co-eternal persons.
-              Acts baptisms in Jesus’ name are treated as shorthand, not the formula.
-            </p>
-          </div>
-          <div className="rounded-2xl border border-emerald-400/30 bg-emerald-500/10 p-5">
-            <div className="text-xs mb-2 px-2 py-0.5 inline-block rounded bg-emerald-500/20 border border-emerald-400/30">ApostolicStudy Exegesis</div>
-            <p className="text-white/90">
-              “Name” is singular and fulfilled in Jesus. The apostles consistently baptize <em>in the name of Jesus</em>
-              (Acts 2:38; 8:16; 10:48; 19:5) as the intended application of Christ’s words.
-            </p>
-          </div>
+          <RevealBox>
+            <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-5">
+              <div className="text-xs mb-2 px-2 py-0.5 inline-block rounded bg-white/10 border border-white/10">Popular Commentary (Trinitarian)</div>
+              <p className="text-white/85">
+                Baptism “in the name of the Father, and of the Son, and of the Holy Spirit” affirms three co-equal, co-eternal persons.
+                Acts baptisms in Jesus’ name are treated as shorthand, not the formula.
+              </p>
+            </div>
+          </RevealBox>
+          <RevealBox delay={0.06}>
+            <div className="rounded-2xl border border-emerald-400/30 bg-emerald-500/10 p-5">
+              <div className="text-xs mb-2 px-2 py-0.5 inline-block rounded bg-emerald-500/20 border border-emerald-400/30">ApostolicStudy Exegesis</div>
+              <p className="text-white/90">
+                “Name” is singular and fulfilled in Jesus. The apostles consistently baptize <em>in the name of Jesus</em>
+                (Acts 2:38; 8:16; 10:48; 19:5) as the intended application of Christ’s words.
+              </p>
+            </div>
+          </RevealBox>
         </div>
       </article>
 
@@ -221,19 +213,23 @@ export default function Home() {
           <Link href="/read/john/17" className="text-sm text-white/70 hover:text-white/90">Open in reader →</Link>
         </div>
         <div className="grid gap-4 md:grid-cols-2">
-          <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-5">
-            <div className="text-xs mb-2 px-2 py-0.5 inline-block rounded bg-white/10 border border-white/10">Popular Commentary (Trinitarian)</div>
-            <p className="text-white/85">
-              The Son, as a distinct person, shared personal pre-existence and glory alongside the Father before creation.
-            </p>
-          </div>
-          <div className="rounded-2xl border border-emerald-400/30 bg-emerald-500/10 p-5">
-            <div className="text-xs mb-2 px-2 py-0.5 inline-block rounded bg-emerald-500/20 border border-emerald-400/30">ApostolicStudy Exegesis</div>
-            <p className="text-white/90">
-              The glory belongs to God alone and is manifested/planned “with” God. Jesus speaks from the incarnational role about the
-              glory that existed in God (the Logos) and is now revealed in the man Christ Jesus.
-            </p>
-          </div>
+          <RevealBox>
+            <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-5">
+              <div className="text-xs mb-2 px-2 py-0.5 inline-block rounded bg-white/10 border border-white/10">Popular Commentary (Trinitarian)</div>
+              <p className="text-white/85">
+                The Son, as a distinct person, shared personal pre-existence and glory alongside the Father before creation.
+              </p>
+            </div>
+          </RevealBox>
+          <RevealBox delay={0.06}>
+            <div className="rounded-2xl border border-emerald-400/30 bg-emerald-500/10 p-5">
+              <div className="text-xs mb-2 px-2 py-0.5 inline-block rounded bg-emerald-500/20 border border-emerald-400/30">ApostolicStudy Exegesis</div>
+              <p className="text-white/90">
+                The glory belongs to God alone and is manifested/planned “with” God. Jesus speaks from the incarnational role about the
+                glory that existed in God (the Logos) and is now revealed in the man Christ Jesus.
+              </p>
+            </div>
+          </RevealBox>
         </div>
       </article>
 
@@ -244,19 +240,23 @@ export default function Home() {
           <Link href="/read/colossians/2" className="text-sm text-white/70 hover:text-white/90">Open in reader →</Link>
         </div>
         <div className="grid gap-4 md:grid-cols-2">
-          <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-5">
-            <div className="text-xs mb-2 px-2 py-0.5 inline-block rounded bg-white/10 border border-white/10">Popular Commentary (Trinitarian)</div>
-            <p className="text-white/85">
-              The fullness of deity dwells bodily in Christ, the second person incarnate; the Father remains a distinct person.
-            </p>
-          </div>
-          <div className="rounded-2xl border border-emerald-400/30 bg-emerald-500/10 p-5">
-            <div className="text-xs mb-2 px-2 py-0.5 inline-block rounded bg-emerald-500/20 border border-emerald-400/30">ApostolicStudy Exegesis</div>
-            <p className="text-white/90">
-              <strong>All</strong> the fullness of the Godhead dwells in Jesus bodily—God is fully and uniquely revealed in Christ,
-              not divided among multiple divine persons.
-            </p>
-          </div>
+          <RevealBox>
+            <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-5">
+              <div className="text-xs mb-2 px-2 py-0.5 inline-block rounded bg-white/10 border border-white/10">Popular Commentary (Trinitarian)</div>
+              <p className="text-white/85">
+                The fullness of deity dwells bodily in Christ, the second person incarnate; the Father remains a distinct person.
+              </p>
+            </div>
+          </RevealBox>
+          <RevealBox delay={0.06}>
+            <div className="rounded-2xl border border-emerald-400/30 bg-emerald-500/10 p-5">
+              <div className="text-xs mb-2 px-2 py-0.5 inline-block rounded bg-emerald-500/20 border border-emerald-400/30">ApostolicStudy Exegesis</div>
+              <p className="text-white/90">
+                <strong>All</strong> the fullness of the Godhead dwells in Jesus bodily—God is fully and uniquely revealed in Christ,
+                not divided among multiple divine persons.
+              </p>
+            </div>
+          </RevealBox>
         </div>
       </article>
 
@@ -270,18 +270,22 @@ export default function Home() {
           </div>
         </div>
         <div className="grid gap-4 md:grid-cols-2">
-          <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-5">
-            <div className="text-xs mb-2 px-2 py-0.5 inline-block rounded bg-white/10 border border-white/10">Popular Commentary (Trinitarian)</div>
-            <p className="text-white/85">
-              “One” means unity of essence shared by three persons.
-            </p>
-          </div>
-          <div className="rounded-2xl border border-emerald-400/30 bg-emerald-500/10 p-5">
-            <div className="text-xs mb-2 px-2 py-0.5 inline-block rounded bg-emerald-500/20 border border-emerald-400/30">ApostolicStudy Exegesis</div>
-            <p className="text-white/90">
-              “One” is numerically one—<strong>a single, indivisible God</strong> who has now made Himself known in the man Christ Jesus and by His Spirit.
-            </p>
-          </div>
+          <RevealBox>
+            <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-5">
+              <div className="text-xs mb-2 px-2 py-0.5 inline-block rounded bg-white/10 border border-white/10">Popular Commentary (Trinitarian)</div>
+              <p className="text-white/85">
+                “One” means unity of essence shared by three persons.
+              </p>
+            </div>
+          </RevealBox>
+          <RevealBox delay={0.06}>
+            <div className="rounded-2xl border border-emerald-400/30 bg-emerald-500/10 p-5">
+              <div className="text-xs mb-2 px-2 py-0.5 inline-block rounded bg-emerald-500/20 border border-emerald-400/30">ApostolicStudy Exegesis</div>
+              <p className="text-white/90">
+                “One” is numerically one—<strong>a single, indivisible God</strong> who has now made Himself known in the man Christ Jesus and by His Spirit.
+              </p>
+            </div>
+          </RevealBox>
         </div>
       </article>
     </div>

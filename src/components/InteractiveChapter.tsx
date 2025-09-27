@@ -1,20 +1,58 @@
 "use client";
-const NOTES_API = "/api/open/notes";
 import { useEffect, useMemo, useState } from "react";
 import Verse from "@/components/Verse";
-import { createClient } from "@supabase/supabase-js";
 
-
-function getAnonId() {
-  if (typeof window === "undefined") return null;
-  let id = localStorage.getItem("as:anon");
-  if (!id) {
-    id = crypto.randomUUID();
-    localStorage.setItem("as:anon", id);
-  }
-  return id;
+// Safe ID generator that works in all environments
+function genId() {
+  try {
+    if (typeof self !== 'undefined' && (self as any).crypto?.randomUUID) {
+      return (self as any).crypto.randomUUID();
+    }
+  } catch {}
+  return `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
 }
 
+// --- Guest Notes (localStorage) helpers ---
+type GuestNote = {
+  id: string;
+  verse?: number | null;
+  text: string;
+  created_at: string; // ISO
+  updated_at: string; // ISO
+};
+
+const notesKey = (bookId: string, chapter: number) => `notes:v1:${bookId}:${chapter}`;
+
+const safeParse = (raw: string | null): GuestNote[] => {
+  if (!raw) return [];
+  try { return JSON.parse(raw) as GuestNote[]; } catch { return []; }
+};
+
+function readNotesLocal(bookId: string, chapter: number): GuestNote[] {
+  if (typeof window === 'undefined') return [];
+  return safeParse(localStorage.getItem(notesKey(bookId, chapter)));
+}
+
+function writeNotesLocal(bookId: string, chapter: number, list: GuestNote[]) {
+  if (typeof window === 'undefined') return;
+  localStorage.setItem(notesKey(bookId, chapter), JSON.stringify(list));
+}
+
+function addNoteLocal(bookId: string, chapter: number, input: { text: string; verse?: number | null }) {
+  const now = new Date().toISOString();
+  const note: GuestNote = {
+    id: genId(),
+    text: input.text.trim(),
+    verse: input.verse ?? null,
+    created_at: now,
+    updated_at: now,
+  };
+  const list = readNotesLocal(bookId, chapter);
+  list.unshift(note);
+  writeNotesLocal(bookId, chapter, list);
+  return note;
+}
+// --- end guest helpers ---
 
 type VerseDto = { v: number; t: string };
 
@@ -33,7 +71,7 @@ export default function InteractiveChapter({
 
   function addHl(v: number) {
     setHl((m) => ({ ...m, [v]: true }));
-    // TODO: persist highlight via /api/highlights
+    // TODO: persist highlight via local storage similar to notes
   }
   function removeHl(v: number) {
     setHl((m) => {
@@ -41,7 +79,7 @@ export default function InteractiveChapter({
       delete n[v];
       return n;
     });
-    // TODO: remove highlight via /api/highlights
+    // TODO: remove highlight via local storage
   }
 
   // quick lookup table: verse number -> text
@@ -63,36 +101,18 @@ export default function InteractiveChapter({
     setNoteText((cur) => (cur.trim().length === 0 || cur.startsWith(preface) ? `${preface}${vt}\n\n` : cur));
   }, [notesFor, bookLabel, chapter, verseMap]);
 
-  const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-);
- async function saveNote() {
-  const anonId = getAnonId();
-// after a 201 response:
+  async function saveNote() {
+    const text = noteText.trim();
+    if (!text) return;
 
-  const res = await fetch("/api/open/notes", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      userId: anonId,           // <-- NEW
-      bookId,
-      chapter,
-      verse: notesFor,
-      text: noteText,
-    }),
-    
-  });
-   if (res.ok) window.dispatchEvent(new Event("as:notes:changed"));
+    addNoteLocal(bookId, chapter, { text, verse: notesFor });
 
-  if (!res.ok) {
-    console.error("Failed to save note:", res.status, await res.text().catch(() => ""));
-    alert(`Save failed (${res.status}). Check server logs.`);
-    return;
+    // notify other components (e.g., NotesPanel) to reload
+    window.dispatchEvent(new Event('as:notes:changed'));
+
+    setNotesFor(null);
+    setNoteText('');
   }
-  setNotesFor(null);
-  setNoteText("");
-}
 
 
   return (

@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import { useEffect, useState } from "react";
-import { supabase } from "../../lib/supabaseClient";
+import { useEffect, useState } from 'react';
+import { supabase } from '../../lib/supabaseClient';
 
 export default function AccountPage() {
-  const [email, setEmail] = useState("");
-  const [pw, setPw] = useState("");
+  const [email, setEmail] = useState('');
+  const [pw, setPw] = useState('');
   const [me, setMe] = useState<string | null>(null);
   const [msg, setMsg] = useState<string | null>(null);
 
@@ -20,20 +20,20 @@ export default function AccountPage() {
   async function signInWithPassword() {
     setMsg(null);
     const { error } = await supabase.auth.signInWithPassword({ email, password: pw });
-    setMsg(error ? error.message : "Signed in.");
+    setMsg(error ? error.message : 'Signed in.');
   }
 
   async function signUpWithPassword() {
-  setMsg(null);
-  const { error } = await supabase.auth.signUp({
-    email,
-    password: pw,
-    options: {
-      emailRedirectTo: `${location.origin}/auth/callback`, // ← add this
-    },
-  });
-  setMsg(error ? error.message : "Check your email to confirm your account.");
-}
+    setMsg(null);
+    const { error } = await supabase.auth.signUp({
+      email,
+      password: pw,
+      options: {
+        emailRedirectTo: `${location.origin}/auth/callback`,
+      },
+    });
+    setMsg(error ? error.message : 'Check your email to confirm your account.');
+  }
 
   async function sendMagicLink() {
     setMsg(null);
@@ -41,10 +41,10 @@ export default function AccountPage() {
       email,
       options: { emailRedirectTo: `${location.origin}/auth/callback` },
     });
-    setMsg(error ? error.message : "Magic link sent. Check your inbox.");
+    setMsg(error ? error.message : 'Magic link sent. Check your inbox.');
   }
 
-  async function signInWithProvider(p: "google" | "facebook") {
+  async function signInWithProvider(p: 'google' | 'github') {
     setMsg(null);
     const { error } = await supabase.auth.signInWithOAuth({
       provider: p,
@@ -55,7 +55,7 @@ export default function AccountPage() {
 
   async function signOut() {
     await supabase.auth.signOut();
-    setMsg("Signed out.");
+    setMsg('Signed out.');
   }
 
   return (
@@ -103,13 +103,13 @@ export default function AccountPage() {
                 className="rounded-xl px-4 py-2 bg-white/10 border border-white/10 hover:bg-white/15">
                 Email me a magic link
               </button>
-              <button onClick={() => signInWithProvider("google")}
+              <button onClick={() => signInWithProvider('google')}
                 className="rounded-xl px-4 py-2 bg-white/10 border border-white/10 hover:bg-white/15">
                 Continue with Google
               </button>
-              <button onClick={() => signInWithProvider("facebook")}
+              <button onClick={() => signInWithProvider('github')}
                 className="rounded-xl px-4 py-2 bg-white/10 border border-white/10 hover:bg-white/15">
-                Continue with Facebook
+                Continue with GitHub
               </button>
             </div>
           </div>
