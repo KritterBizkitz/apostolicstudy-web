@@ -1,15 +1,55 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { getAnonId } from "@/lib/anon";
 
-type Note = {
+// --- Guest Notes (localStorage) helpers ---
+type GuestNote = {
   id: string;
-  chapter: number;
-  verse: number | null;
+  verse?: number | null;
   text: string;
-  createdAt: string;
+  created_at: string; // ISO
+  updated_at: string; // ISO
 };
+
+const notesKey = (bookId: string, chapter: number) => `notes:v1:${bookId}:${chapter}`;
+
+const safeParse = (raw: string | null): GuestNote[] => {
+  if (!raw) return [];
+  try { return JSON.parse(raw) as GuestNote[]; } catch { return []; }
+};
+
+function readNotesLocal(bookId: string, chapter: number): GuestNote[] {
+  if (typeof window === 'undefined') return [];
+  return safeParse(localStorage.getItem(notesKey(bookId, chapter)));
+}
+
+function writeNotesLocal(bookId: string, chapter: number, arr: GuestNote[]) {
+  if (typeof window === 'undefined') return;
+  localStorage.setItem(notesKey(bookId, chapter), JSON.stringify(arr));
+}
+
+function addNoteLocal(bookId: string, chapter: number, input: { text: string; verse?: number | null }): GuestNote {
+  const now = new Date().toISOString();
+  const note: GuestNote = {
+    id: (typeof crypto !== 'undefined' && 'randomUUID' in crypto) ? crypto.randomUUID() : `${Date.now()}`,
+    text: input.text,
+    verse: input.verse ?? null,
+    created_at: now,
+    updated_at: now,
+  };
+  const list = readNotesLocal(bookId, chapter);
+  list.unshift(note);
+  writeNotesLocal(bookId, chapter, list);
+  return note;
+}
+
+function deleteNoteLocal(bookId: string, chapter: number, id: string) {
+  const next = readNotesLocal(bookId, chapter).filter(n => n.id !== id);
+  writeNotesLocal(bookId, chapter, next);
+  return next;
+}
+// --- end helpers ---
+
 
 export default function NotesPanel({
   bookId,
@@ -18,56 +58,17 @@ export default function NotesPanel({
   bookId: string;
   chapter: number;
 }) {
-  const [items, setItems] = useState<Note[]>([]);
+  const [items, setItems] = useState<GuestNote[]>([]);
   const [loading, setLoading] = useState(true);
 
   // --- load notes for this chapter ---
   async function load() {
-  const userId = getAnonId();
-  if (!userId) return;
-
-  const qs = new URLSearchParams({
-    userId,                 // <-- exact casing
-    bookId,                 // <-- passed via prop
-    chapter: String(chapter) // <-- numeric, not "1:1"
-  }).toString();
-
-  const res = await fetch(`/api/open/notes?${qs}`, { cache: "no-store" });
-
-  if (!res.ok) {
-    console.error("notes GET failed", res.status, await res.text().catch(() => ""));
-    setItems([]);           // avoid .map crash
-    return;
-  }
-
-  const data = await res.json();
-  setItems(Array.isArray(data) ? data : []); // defensive
-}
-
-
-  // --- delete a single note by id ---
-  async function handleDelete(id: string) {
-    const userId = getAnonId();
-    if (!userId) return;
-    // optional safety
-    const ok = window.confirm("Delete this note?");
-    if (!ok) return;
-
-    const res = await fetch(`/api/open/notes/${id}`, {
-      method: "DELETE",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ userId }),
-    });
-
-    if (!res.ok) {
-      console.error("Delete failed:", res.status, await res.text().catch(() => ""));
-      alert("Could not delete note.");
-      return;
+    setLoading(true);
+    try {
+      setItems(readNotesLocal(bookId, chapter));
+    } finally {
+      setLoading(false);
     }
-
-    // refresh list + notify any listeners (e.g., other panels)
-    await load();
-    window.dispatchEvent(new Event("as:notes:changed"));
   }
 
   // load when bookId/chapter changes
@@ -83,6 +84,15 @@ export default function NotesPanel({
     return () => window.removeEventListener("as:notes:changed", onChanged);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [bookId, chapter]);
+
+  // --- delete a single note by id ---
+  async function handleDelete(id: string) {
+    const ok = window.confirm("Delete this note?");
+    if (!ok) return;
+    const next = deleteNoteLocal(bookId, chapter, id);
+    setItems(next);
+    window.dispatchEvent(new Event("as:notes:changed"));
+  }
 
   return (
     <div className="space-y-3">
@@ -109,7 +119,7 @@ export default function NotesPanel({
             >
               <div className="text-xs text-white/60 mb-1">
                 {n.verse ? `v${n.verse}` : "General"} ·{" "}
-                {new Date(n.createdAt).toLocaleString()}
+                {new Date(n.created_at).toLocaleString()}
               </div>
 
               {/* Add padding-right so text doesn't sit under the X button */}
