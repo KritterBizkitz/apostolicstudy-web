@@ -1,15 +1,23 @@
 import Link from "next/link";
 import { AnimatedFeatureCard } from "@/components/AnimatedFeatureCard";
 import { RevealBox } from "@/components/RevealBox";
+import FeaturedStudies from "@/components/FeaturedStudies";
 
 export default function Home() {
   return (
     <main className="relative min-h-screen overflow-hidden bg-slate-950 text-slate-100">
+      {/* background blobs */}
       <div className="pointer-events-none absolute inset-0">
-        <div className="absolute -top-40 -right-24 h-[22rem] w-[22rem] rounded-full bg-emerald-500/20 blur-[160px]" />
+        <div className="absolute -top-40 right-24 h-[22rem] w-[22rem] rounded-full bg-emerald-500/20 blur-[160px]" />
         <div className="absolute top-1/4 -left-32 h-[24rem] w-[24rem] rounded-full bg-indigo-500/20 blur-[180px]" />
         <div className="absolute bottom-[-12rem] left-1/2 h-[26rem] w-[26rem] -translate-x-1/2 rounded-full bg-sky-500/20 blur-[200px]" />
       </div>
+
+      {/* small spacer under the navbar */}
+      <div className="pt-4" />
+
+      {/* Featured strip */}
+      <FeaturedStudies />
 
       {/* HERO */}
       <section className="relative mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-32">
@@ -531,15 +539,15 @@ export default function Home() {
                 <div className="absolute -top-10 left-12 h-32 w-32 rounded-full bg-emerald-500/20 blur-3xl" />
                 <p className="text-xs uppercase tracking-[0.35em] text-white/60">Minister insight</p>
                 <p className="mt-4 text-xl leading-relaxed text-white/90">
-                  "ApostolicStudy gave me a platform to get answers to my questions without having to search several resources. And I can trust the information."
+                  "To study Scripture rightly, you must let the Bible interpret itself, comparing line upon line, precept upon precept, and always keeping the context before the commentary."
                 </p>
                 <footer className="mt-6 flex items-center gap-4 text-sm text-white/70">
                   <span className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-tr from-indigo-500 to-emerald-500 text-xs font-semibold text-slate-900">
                     AP
                   </span>
                   <div>
-                    <div className="font-semibold text-white">Minister</div>
-                    <div>Apostolic Church</div>
+                    <div className="font-semibold text-white">Assistant Pastor</div>
+                    <div>Revival Church</div>
                   </div>
                 </footer>
               </blockquote>
@@ -547,18 +555,18 @@ export default function Home() {
             <RevealBox delay={0.08}>
               <div className="grid gap-4 sm:grid-cols-2">
                 <div className="rounded-3xl border border-white/10 bg-white/[0.04] p-6">
-                  <div className="text-3xl font-semibold text-white">92%</div>
-                  <p className="mt-2 text-sm text-white/70">of beta readers spend longer in Scripture each session.</p>
+                  <div className="text-3xl font-semibold text-white">Thy word is truth</div>
+                  <p className="mt-2 text-sm text-white/70">Ground every lesson and sermon in the unchanging Word of God.</p>
                 </div>
                 <div className="rounded-3xl border border-white/10 bg-white/[0.04] p-6">
-                  <div className="text-3xl font-semibold text-white">100's</div>
-                  <p className="mt-2 text-sm text-white/70">of study and sermon notes provided for clear direction and understanding.</p>
+                  <div className="text-3xl font-semibold text-white">Line upon line</div>
+                  <p className="mt-2 text-sm text-white/70">Organized notes and resources to help build understanding step by step.</p>
                 </div>
                 <div className="rounded-3xl border border-white/10 bg-white/[0.04] p-6 sm:col-span-2">
                   <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
                     <div>
                       <p className="text-xs uppercase tracking-[0.35em] text-white/60">Focus tip</p>
-                      <h3 className="text-lg font-semibold text-white">Weekly teaching rhythm</h3>
+                      <h3 className="text-lg font-semibold text-white">Rightly dividing the word of truth</h3>
                     </div>
                     <Link
                       href="#resources"
@@ -568,7 +576,7 @@ export default function Home() {
                     </Link>
                   </div>
                   <p className="mt-3 text-sm leading-relaxed text-white/70">
-                    Start in the passage, capture insights in living notes, then share outlines with your team. ApostolicStudy keeps everyone aligned with Scripture.
+                    ApostolicStudy helps you handle the Scriptures faithfully, keeping every lesson in context.
                   </p>
                 </div>
               </div>
