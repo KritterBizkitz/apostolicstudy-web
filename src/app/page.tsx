@@ -199,6 +199,87 @@ export default function Home() {
                 </div>
                 <div className="pointer-events-none absolute -z-30 -top-8 right-6 h-48 w-48 rounded-full bg-sky-500/15 blur-3xl" />
               </div>
+              {/* Apostolic Truth Timeline */}
+<div className="mt-10 rounded-3xl border border-white/10 bg-white/[0.03] shadow-[0_35px_90px_-65px_rgba(15,23,42,0.85)]">
+  <div className="relative overflow-hidden rounded-3xl p-6">
+    {/* soft gradient wash to differentiate from other cards */}
+    <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-emerald-400/10 via-transparent to-indigo-400/10" />
+
+    {/* header */}
+    <div className="relative z-10 flex items-center gap-2 text-xs uppercase tracking-[0.35em] text-white/70">
+      <span className="inline-flex h-2 w-2 rounded-full bg-indigo-400" />
+      Apostolic Truth Timeline
+    </div>
+
+    {/* subhead */}
+    <p className="relative z-10 mt-2 text-sm text-white/80">
+      From Pentecost to the present, one message continues unchanged.
+    </p>
+
+    {/* timeline */}
+    <div className="relative z-10 mt-6">
+      <ol className="relative space-y-5">
+  {/* vertical line */}
+  <span className="absolute left-3 top-0 h-full w-px bg-white/10" aria-hidden="true" />
+
+  <li className="relative pl-6">
+    <span className="absolute left-0 top-1.5 h-2.5 w-2.5 rounded-full bg-emerald-400 ring-4 ring-emerald-400/15" />
+    <h4 className="text-white/90 text-sm font-medium">AD 33 — The Day of Pentecost</h4>
+    <p className="mt-1 text-sm leading-relaxed text-white/80">
+      The Church is born in Jerusalem as the Spirit is poured out and three thousand are baptized in Jesus’ name.
+    </p>
+  </li>
+
+  <li className="relative pl-6">
+    <span className="absolute left-0 top-1.5 h-2.5 w-2.5 rounded-full bg-emerald-400 ring-4 ring-emerald-400/15" />
+    <h4 className="text-white/90 text-sm font-medium">1st Century — The Apostles’ Doctrine</h4>
+    <p className="mt-1 text-sm leading-relaxed text-white/80">
+      The gospel spreads through preaching, signs, and letters that become our New Testament.
+    </p>
+  </li>
+
+  <li className="relative pl-6">
+    <span className="absolute left-0 top-1.5 h-2.5 w-2.5 rounded-full bg-emerald-400 ring-4 ring-emerald-400/15" />
+    <h4 className="text-white/90 text-sm font-medium">4th Century — The Rise of Creeds</h4>
+    <p className="mt-1 text-sm leading-relaxed text-white/80">
+      Human tradition begins to overshadow the simplicity of One God and baptism in Jesus’ name.
+    </p>
+  </li>
+
+  <li className="relative pl-6">
+    <span className="absolute left-0 top-1.5 h-2.5 w-2.5 rounded-full bg-emerald-400 ring-4 ring-emerald-400/15" />
+    <h4 className="text-white/90 text-sm font-medium">Early 1900s — Apostolic Restoration</h4>
+    <p className="mt-1 text-sm leading-relaxed text-white/80">
+      The Holy Ghost is poured out worldwide, confirming the same Acts 2 message with tongues and Jesus-name baptism.
+    </p>
+  </li>
+
+  <li className="relative pl-6">
+    <span className="absolute left-0 top-1.5 h-2.5 w-2.5 rounded-full bg-emerald-400 ring-4 ring-emerald-400/15" />
+    <h4 className="text-white/90 text-sm font-medium">Today — The Same Truth</h4>
+    <p className="mt-1 text-sm leading-relaxed text-white/80">
+      Repentance, baptism in Jesus’ name, and the infilling of the Holy Ghost continue to transform lives across the world.
+    </p>
+  </li>
+</ol>
+
+    </div>
+
+    {/* optional footer link */}
+    <div className="relative z-10 mt-6">
+      <a
+        href="/timeline"
+        className="inline-flex items-center gap-2 rounded-xl border border-white/10 bg-white/[0.04] px-3 py-2 text-xs font-medium text-white/85 hover:bg-white/[0.06] hover:border-white/15 transition"
+      >
+        View full timeline
+        <svg className="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+          <path d="M12.293 3.293a1 1 0 0 1 1.414 0l4 4a1 1 0 0 1-1.414 1.414L14 6.414V16a1 1 0 1 1-2 0V6.414l-2.293 2.293A1 1 0 0 1 8.293 7.293l4-4z" />
+        </svg>
+      </a>
+    </div>
+  </div>
+</div>
+
             </div>
           </RevealBox>
         </div>
@@ -457,8 +538,8 @@ export default function Home() {
                     AP
                   </span>
                   <div>
-                    <div className="font-semibold text-white">Assistant Pastor</div>
-                    <div>Revival Church</div>
+                    <div className="font-semibold text-white">Minister</div>
+                    <div>Apostolic Church</div>
                   </div>
                 </footer>
               </blockquote>
