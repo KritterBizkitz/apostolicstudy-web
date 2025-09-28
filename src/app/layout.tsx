@@ -17,19 +17,19 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://apostolicstudy.org'),
-  title: 'ApostolicStudy',
-  description: 'KJV study tools, notes, and resources.',
+  title: 'ApostolicStudy — Study the Word. Teach with clarity.',
+  description: 'ApostolicStudy keeps context before commentary with tools, timelines, and study notes grounded in scriptural truth.',
   openGraph: {
     type: 'website',
     url: 'https://apostolicstudy.org',
-    title: 'ApostolicStudy',
-    description: 'KJV study tools, notes, and resources.',
+    title: 'ApostolicStudy — Study the Word. Teach with clarity.',
+    description: 'ApostolicStudy keeps context before commentary with tools, timelines, and study notes grounded in scriptural truth.',
     images: ['/og.png'],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'ApostolicStudy',
-    description: 'KJV study tools, notes, and resources.',
+    title: 'ApostolicStudy — Study the Word. Teach with clarity.',
+    description: 'ApostolicStudy keeps context before commentary with tools, timelines, and study notes grounded in scriptural truth.',
     images: ['/og.png'],
   },
 };
