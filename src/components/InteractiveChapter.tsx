@@ -72,11 +72,11 @@ export default function InteractiveChapter({
 
   const saveNote = useCallback(async () => {
     const text = noteText.trim();
-    if (!text || !userId) return;
+    if (!text || !userId || notesFor == null) return;
 
     setIsSaving(true);
     try {
-      const { error } = await supabase.from("notes").insert({
+      const { error } = await supabase.from("user_notes").insert({
         user_id: userId,
         book_id: bookId,
         chapter: chapter,

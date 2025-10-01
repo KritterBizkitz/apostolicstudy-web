@@ -5,7 +5,7 @@ import type { Session, AuthChangeEvent } from "@supabase/supabase-js";
 import { supabase } from "@/lib/supabaseClient";
 
 type Note = {
-  id: number;
+  id: string;
   verse?: number | null;
   text: string;
   created_at: string;
@@ -52,7 +52,7 @@ export default function NotesPanel({
     setLoading(true);
     try {
       const { data, error } = await supabase
-        .from("notes")
+        .from("user_notes")
         .select("id, verse, text, created_at")
         .eq("user_id", userId)
         .eq("book_id", bookId)
@@ -83,7 +83,7 @@ export default function NotesPanel({
         {
           event: "*",
           schema: "public",
-          table: "notes",
+          table: "user_notes",
           filter: `user_id=eq.${userId}`,
         },
         () => fetchNotes()
@@ -97,13 +97,13 @@ export default function NotesPanel({
 
 
   // 4. Delete a note
-  const handleDelete = useCallback(async (id: number) => {
+  const handleDelete = useCallback(async (id: string) => {
     // We can use a custom modal here later instead of confirm
     const ok = window.confirm("Are you sure you want to delete this note?");
     if (!ok) return;
 
     try {
-      const { error } = await supabase.from("notes").delete().eq("id", id);
+      const { error } = await supabase.from("user_notes").delete().eq("id", id);
       if (error) throw error;
       // Realtime listener will handle the UI update
     } catch (err) {
@@ -113,10 +113,10 @@ export default function NotesPanel({
 
   if (!userId) {
     return (
-       <div className="rounded-xl border border-white/10 bg-white/[0.05] p-4 text-center">
-         <p className="text-sm text-white/70">Please sign in to view and save notes.</p>
-       </div>
-    )
+      <div className="rounded-xl border border-white/10 bg-white/[0.05] p-4 text-center">
+        <p className="text-sm text-white/70">Please sign in to view and save notes.</p>
+      </div>
+    );
   }
 
   return (
