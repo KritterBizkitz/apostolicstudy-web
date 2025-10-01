@@ -57,7 +57,7 @@ export default function Home() {
                   Launch the reader
                 </Link>
                 <Link
-                  href="/signin"
+                  href="/account"
                   className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-indigo-500 via-sky-500 to-emerald-500 px-5 py-2 text-sm font-semibold text-black shadow-[0_20px_60px_-20px_rgba(16,185,129,0.65)] transition hover:opacity-95"
                 >
                   Join the early access
@@ -555,11 +555,11 @@ export default function Home() {
             <RevealBox delay={0.08}>
               <div className="grid gap-4 sm:grid-cols-2">
                 <div className="rounded-3xl border border-white/10 bg-white/[0.04] p-6">
-                  <div className="text-3xl font-semibold text-white">Thy word is truth</div>
+                  <div className="text-sm uppercase tracking-[0.35em] text-white/60">Thy word is truth</div>
                   <p className="mt-2 text-sm text-white/70">Ground every lesson and sermon in the unchanging Word of God.</p>
                 </div>
                 <div className="rounded-3xl border border-white/10 bg-white/[0.04] p-6">
-                  <div className="text-3xl font-semibold text-white">Line upon line</div>
+                  <div className="text-sm uppercase tracking-[0.35em] text-white/60">Line upon line</div>
                   <p className="mt-2 text-sm text-white/70">Organized notes and resources to help build understanding step by step.</p>
                 </div>
                 <div className="rounded-3xl border border-white/10 bg-white/[0.04] p-6 sm:col-span-2">

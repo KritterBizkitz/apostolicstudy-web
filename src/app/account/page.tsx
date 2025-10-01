@@ -44,15 +44,6 @@ export default function AccountPage() {
     setMsg(error ? error.message : 'Magic link sent. Check your inbox.');
   }
 
-  async function signInWithProvider(p: 'google' | 'github') {
-    setMsg(null);
-    const { error } = await supabase.auth.signInWithOAuth({
-      provider: p,
-      options: { redirectTo: `${location.origin}/auth/callback` },
-    });
-    if (error) setMsg(error.message);
-  }
-
   async function signOut() {
     await supabase.auth.signOut();
     setMsg('Signed out.');
@@ -88,7 +79,7 @@ export default function AccountPage() {
               value={pw}
               onChange={(e) => setPw(e.target.value)}
               className="w-full rounded-xl bg-white/5 border border-white/10 px-3 py-2 outline-none"
-              placeholder="••••••••"
+              placeholder="********"
             />
             <div className="flex flex-wrap gap-2 pt-2">
               <button onClick={signInWithPassword}
@@ -102,14 +93,6 @@ export default function AccountPage() {
               <button onClick={sendMagicLink}
                 className="rounded-xl px-4 py-2 bg-white/10 border border-white/10 hover:bg-white/15">
                 Email me a magic link
-              </button>
-              <button onClick={() => signInWithProvider('google')}
-                className="rounded-xl px-4 py-2 bg-white/10 border border-white/10 hover:bg-white/15">
-                Continue with Google
-              </button>
-              <button onClick={() => signInWithProvider('github')}
-                className="rounded-xl px-4 py-2 bg-white/10 border border-white/10 hover:bg-white/15">
-                Continue with GitHub
               </button>
             </div>
           </div>
