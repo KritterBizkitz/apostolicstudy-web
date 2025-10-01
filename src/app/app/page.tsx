@@ -1,5 +1,4 @@
 import Link from "next/link";
-import AppHeader from "../../components/AppHeader";
 import ContinueReading from "../../components/ContinueReading";
 import PinnedPassages from "../../components/PinnedPassages";
 

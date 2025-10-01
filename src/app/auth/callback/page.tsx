@@ -18,8 +18,12 @@ export default function AuthCallback() {
           return;
         }
         setMsg("Signed in. Redirecting…");
-      } catch (e: any) {
-        setMsg(e?.message ?? "There was a problem signing you in.");
+      } catch (error: unknown) {
+        if (error instanceof Error) {
+          setMsg(error.message);
+        } else {
+          setMsg("There was a problem signing you in.");
+        }
       } finally {
         setTimeout(() => router.replace("/app"), 600);
       }
