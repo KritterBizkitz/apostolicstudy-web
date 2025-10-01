@@ -1,55 +1,15 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
+import type { Session, AuthChangeEvent } from "@supabase/supabase-js";
+import { supabase } from "@/lib/supabaseClient";
 
-// --- Guest Notes (localStorage) helpers ---
-type GuestNote = {
-  id: string;
+type Note = {
+  id: number;
   verse?: number | null;
   text: string;
-  created_at: string; // ISO
-  updated_at: string; // ISO
+  created_at: string;
 };
-
-const notesKey = (bookId: string, chapter: number) => `notes:v1:${bookId}:${chapter}`;
-
-const safeParse = (raw: string | null): GuestNote[] => {
-  if (!raw) return [];
-  try { return JSON.parse(raw) as GuestNote[]; } catch { return []; }
-};
-
-function readNotesLocal(bookId: string, chapter: number): GuestNote[] {
-  if (typeof window === 'undefined') return [];
-  return safeParse(localStorage.getItem(notesKey(bookId, chapter)));
-}
-
-function writeNotesLocal(bookId: string, chapter: number, arr: GuestNote[]) {
-  if (typeof window === 'undefined') return;
-  localStorage.setItem(notesKey(bookId, chapter), JSON.stringify(arr));
-}
-
-function addNoteLocal(bookId: string, chapter: number, input: { text: string; verse?: number | null }): GuestNote {
-  const now = new Date().toISOString();
-  const note: GuestNote = {
-    id: (typeof crypto !== 'undefined' && 'randomUUID' in crypto) ? crypto.randomUUID() : `${Date.now()}`,
-    text: input.text,
-    verse: input.verse ?? null,
-    created_at: now,
-    updated_at: now,
-  };
-  const list = readNotesLocal(bookId, chapter);
-  list.unshift(note);
-  writeNotesLocal(bookId, chapter, list);
-  return note;
-}
-
-function deleteNoteLocal(bookId: string, chapter: number, id: string) {
-  const next = readNotesLocal(bookId, chapter).filter(n => n.id !== id);
-  writeNotesLocal(bookId, chapter, next);
-  return next;
-}
-// --- end helpers ---
-
 
 export default function NotesPanel({
   bookId,
@@ -58,52 +18,111 @@ export default function NotesPanel({
   bookId: string;
   chapter: number;
 }) {
-  const [items, setItems] = useState<GuestNote[]>([]);
+  const [items, setItems] = useState<Note[]>([]);
   const [loading, setLoading] = useState(true);
+  const [userId, setUserId] = useState<string | null>(null);
 
-  // --- load notes for this chapter ---
-  async function load() {
+  // 1. Track user session
+  useEffect(() => {
+    let isMounted = true;
+    const init = async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (isMounted) setUserId(session?.user?.id ?? null);
+    };
+    init();
+
+    const { data: listener } = supabase.auth.onAuthStateChange(
+      (_event: AuthChangeEvent, session: Session | null) => {
+        if (isMounted) setUserId(session?.user?.id ?? null);
+      }
+    );
+    return () => {
+      isMounted = false;
+      listener?.subscription?.unsubscribe();
+    };
+  }, []);
+
+  // 2. Fetch notes when userId or chapter changes
+  const fetchNotes = useCallback(async () => {
+    if (!userId) {
+      setItems([]);
+      setLoading(false);
+      return;
+    }
     setLoading(true);
     try {
-      setItems(readNotesLocal(bookId, chapter));
+      const { data, error } = await supabase
+        .from("notes")
+        .select("id, verse, text, created_at")
+        .eq("user_id", userId)
+        .eq("book_id", bookId)
+        .eq("chapter", chapter)
+        .order("verse", { ascending: true, nullsFirst: true });
+
+      if (error) throw error;
+      setItems(data ?? []);
+    } catch (err) {
+      console.error("Error fetching notes:", err);
     } finally {
       setLoading(false);
     }
-  }
+  }, [userId, bookId, chapter]);
 
-  // load when bookId/chapter changes
   useEffect(() => {
-    load();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [bookId, chapter]);
+    fetchNotes();
+  }, [fetchNotes]);
 
-  // reload when someone elsewhere saves/changes notes
+  // 3. Add realtime listener for this user's notes in this chapter
   useEffect(() => {
-    const onChanged = () => load();
-    window.addEventListener("as:notes:changed", onChanged);
-    return () => window.removeEventListener("as:notes:changed", onChanged);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [bookId, chapter]);
+    if (!userId) return;
 
-  // --- delete a single note by id ---
-  async function handleDelete(id: string) {
-    const ok = window.confirm("Delete this note?");
+    const channel = supabase
+      .channel(`notes-${userId}-${bookId}-${chapter}`)
+      .on(
+        "postgres_changes",
+        {
+          event: "*",
+          schema: "public",
+          table: "notes",
+          filter: `user_id=eq.${userId}`,
+        },
+        () => fetchNotes()
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, [userId, bookId, chapter, fetchNotes]);
+
+
+  // 4. Delete a note
+  const handleDelete = useCallback(async (id: number) => {
+    // We can use a custom modal here later instead of confirm
+    const ok = window.confirm("Are you sure you want to delete this note?");
     if (!ok) return;
-    const next = deleteNoteLocal(bookId, chapter, id);
-    setItems(next);
-    window.dispatchEvent(new Event("as:notes:changed"));
+
+    try {
+      const { error } = await supabase.from("notes").delete().eq("id", id);
+      if (error) throw error;
+      // Realtime listener will handle the UI update
+    } catch (err) {
+      console.error("Error deleting note:", err);
+    }
+  }, []);
+
+  if (!userId) {
+    return (
+       <div className="rounded-xl border border-white/10 bg-white/[0.05] p-4 text-center">
+         <p className="text-sm text-white/70">Please sign in to view and save notes.</p>
+       </div>
+    )
   }
 
   return (
     <div className="space-y-3">
       <div className="flex items-center justify-between">
-        <h2 className="text-xs uppercase text-white/60">Notes</h2>
-        <button
-          onClick={load}
-          className="text-xs px-2 py-1 rounded bg-white/10 hover:bg-white/15"
-        >
-          Refresh
-        </button>
+        <h2 className="text-xs uppercase text-white/60">Notes for this chapter</h2>
       </div>
 
       {loading ? (
@@ -118,19 +137,15 @@ export default function NotesPanel({
               className="relative rounded-xl border border-white/10 bg-white/5 p-3"
             >
               <div className="text-xs text-white/60 mb-1">
-                {n.verse ? `v${n.verse}` : "General"} ·{" "}
-                {new Date(n.created_at).toLocaleString()}
+                {n.verse ? `Verse ${n.verse}` : "General Note"} ·{" "}
+                {new Date(n.created_at).toLocaleDateString()}
               </div>
-
-              {/* Add padding-right so text doesn't sit under the X button */}
               <p className="whitespace-pre-wrap text-sm pr-8">{n.text}</p>
-
-              {/* tiny delete button, bottom-right of the card */}
               <button
                 onClick={() => handleDelete(n.id)}
                 title="Delete note"
                 aria-label="Delete note"
-                className="absolute -bottom-2 -right-2 h-7 w-7 rounded-full bg-red-500/80 hover:bg-red-500 text-white text-sm leading-7 text-center shadow"
+                className="absolute top-2 right-2 h-6 w-6 rounded-full bg-red-500/80 hover:bg-red-500 text-white text-sm leading-6 text-center shadow"
               >
                 ×
               </button>
@@ -141,3 +156,4 @@ export default function NotesPanel({
     </div>
   );
 }
+
