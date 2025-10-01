@@ -82,10 +82,11 @@ export default async function ReaderPage({ params }: { params: RouteParams }) {
           )}
         </main>
 
-        {/* DESKTOP NOTES SIDEBAR */}
+        {/* DESKTOP NOTES + COMMENTARY SIDEBAR */}
         <aside className="hidden lg:block lg:col-span-4 xl:col-span-3">
-          <div className="sticky top-20">
+          <div className="sticky top-20 space-y-6">
             <NotesPanel bookId={bookId} chapter={ch} />
+            <div id="commentary-sidebar-anchor" className="space-y-4" />
           </div>
         </aside>
       </div>

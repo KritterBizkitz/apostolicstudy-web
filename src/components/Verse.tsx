@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { type MouseEvent as ReactMouseEvent, useEffect, useRef, useState } from "react";
 
 type Props = {
   v: number;
@@ -8,24 +8,41 @@ type Props = {
 
   // optional UI/data hooks from the parent:
   isHighlighted?: boolean;                           // parent tells us if this verse is highlighted
+  isActive?: boolean;                                // parent indicates the currently active verse
   onHighlight?: (v: number, color?: string) => void; // parent persists highlight
   onRemoveHighlight?: (v: number) => void;
-  onAddNote?: (v: number) => void;                   // parent opens notes drawer for this verse
+  onAddNote?: (v: number) => void;                   // parent instantly adds verse to notes
+  onComposeNote?: (v: number) => void;               // parent opens compose drawer for this verse
+  onOpenCommentary?: (v: number) => void;            // parent opens commentary tab for this verse
+  onActivate?: (v: number) => void;                  // parent marks this verse as the active selection
 };
 
 export default function Verse({
   v,
   text,
   isHighlighted,
+  isActive,
   onHighlight,
   onRemoveHighlight,
   onAddNote,
+  onComposeNote,
+  onOpenCommentary,
+  onActivate,
 }: Props) {
   const id = `v${v}`;
 
-  const [selected, setSelected] = useState(false);
   const [menuPos, setMenuPos] = useState<{ x: number; y: number } | null>(null);
+  const [hovered, setHovered] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
+
+  function runMenuAction(handler?: () => void) {
+    return (event: ReactMouseEvent<HTMLButtonElement>) => {
+      event.preventDefault();
+      event.stopPropagation();
+      setMenuPos(null);
+      handler?.();
+    };
+  }
 
   // Close context menu on outside click / Escape
   useEffect(() => {
@@ -47,18 +64,24 @@ export default function Verse({
 
   // Base + dynamic styles
   const rowClasses =
-    "leading-relaxed text-lg scroll-mt-24 rounded-lg px-3 py-2 hover:bg-white/5";
-  const selectedClasses = selected ? " ring-1 ring-emerald-400/30 bg-emerald-500/10" : "";
+    "leading-relaxed text-lg scroll-mt-24 rounded-lg px-3 py-2 transition-all duration-150 ease-out cursor-pointer hover:bg-white/5 active:scale-[0.99]";
+  const hoverClasses = hovered ? " bg-emerald-500/5" : "";
+  const activeClasses = isActive ? " ring-1 ring-emerald-400/60 bg-emerald-500/15 shadow-lg" : "";
   const highlightedClasses = isHighlighted ? " bg-yellow-500/10" : "";
 
   return (
     <div
       id={id}
-      className={rowClasses + selectedClasses + highlightedClasses}
-      onClick={() => setSelected((s) => !s)}
+      className={rowClasses + hoverClasses + activeClasses + highlightedClasses}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      onClick={() => {
+        onActivate?.(v);
+        onOpenCommentary?.(v);
+      }}
       onContextMenu={(e) => {
         e.preventDefault();
-        setSelected(true);
+        onActivate?.(v);
         setMenuPos({ x: e.clientX, y: e.clientY });
       }}
     >
@@ -79,20 +102,14 @@ export default function Verse({
           {!isHighlighted ? (
             <button
               className="w-full text-left px-3 py-2 rounded-lg hover:bg-white/10"
-              onClick={() => {
-                setMenuPos(null);
-                onHighlight?.(v, "yellow");
-              }}
+              onMouseDown={runMenuAction(() => onHighlight?.(v, "yellow"))}
             >
               Highlight verse
             </button>
           ) : (
             <button
               className="w-full text-left px-3 py-2 rounded-lg hover:bg-white/10"
-              onClick={() => {
-                setMenuPos(null);
-                onRemoveHighlight?.(v);
-              }}
+              onMouseDown={runMenuAction(() => onRemoveHighlight?.(v))}
             >
               Remove highlight
             </button>
@@ -100,18 +117,32 @@ export default function Verse({
 
           <button
             className="w-full text-left px-3 py-2 rounded-lg hover:bg-white/10"
-            onClick={() => {
-              setMenuPos(null);
-              onAddNote?.(v);
-            }}
+            onMouseDown={runMenuAction(() => onAddNote?.(v))}
           >
             Add to notes
+          </button>
+
+          <button
+            className="w-full text-left px-3 py-2 rounded-lg hover:bg-white/10"
+            onMouseDown={runMenuAction(() => onComposeNote?.(v))}
+          >
+            Write note…
+          </button>
+
+          <button
+            className="w-full text-left px-3 py-2 rounded-lg hover:bg-white/10"
+            onMouseDown={runMenuAction(() => {
+              onActivate?.(v);
+              onOpenCommentary?.(v);
+            })}
+          >
+            Open commentary
           </button>
 
           <div className="h-px my-1 bg-white/10" />
           <button
             className="w-full text-left px-3 py-2 rounded-lg hover:bg-white/10"
-            onClick={() => setMenuPos(null)}
+            onMouseDown={runMenuAction()}
           >
             Cancel
           </button>
