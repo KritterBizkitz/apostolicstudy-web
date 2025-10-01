@@ -97,23 +97,23 @@ export default function Home() {
   </div>
   <div className="mt-5 space-y-4 text-sm leading-relaxed text-white/85">
     <blockquote className="rounded-2xl border border-white/10 bg-white/[0.04] p-4">
-      <p className="text-white/90">"The worst thing can happen is for you and I to live not knowing God not seeking to please God not satisfied serving God."</p>
+      <p className="text-white/90">“The worst thing can happen is for you and I to live not knowing God not seeking to please God not satisfied serving God.”</p>
       <footer className="mt-2 text-xs uppercase tracking-[0.3em] text-white/55">Bishop Clifton Jones</footer>
     </blockquote>
     <blockquote className="rounded-2xl border border-white/10 bg-white/[0.04] p-4">
-      <p className="text-white/90">"Nobody is Pentecostal who rejects the water baptism in Jesus name."</p>
+      <p className="text-white/90">“Nobody is Pentecostal who rejects the water baptism in Jesus name.”</p>
       <footer className="mt-2 text-xs uppercase tracking-[0.3em] text-white/55">Dr. Johnny James</footer>
     </blockquote>
     <blockquote className="rounded-2xl border border-white/10 bg-white/[0.04] p-4">
-      <p className="text-white/90">"He should so thoroughly know what he believes that he believes his beliefs and doubts his doubts. He does not doubt his beliefs and believe his doubts."</p>
+      <p className="text-white/90">“He should so thoroughly know what he believes that he believes his beliefs and doubts his doubts. He does not doubt his beliefs and believe his doubts.”</p>
       <footer className="mt-2 text-xs uppercase tracking-[0.3em] text-white/55">Bishop Morris E. Golder</footer>
     </blockquote>
     <blockquote className="rounded-2xl border border-white/10 bg-white/[0.04] p-4">
-      <p className="text-white/90">"We are not Pentecostal because we shout. We are Apostolic because we believe and teach what the apostles taught. Doctrine is not a footnote. It is the headline."</p>
+      <p className="text-white/90">“We are not Pentecostal because we shout. We are Apostolic because we believe and teach what the apostles taught. Doctrine is not a footnote. It is the headline.”</p>
       <footer className="mt-2 text-xs uppercase tracking-[0.3em] text-white/55">Pastor Jack Cunningham</footer>
     </blockquote>
     <blockquote className="rounded-2xl border border-white/10 bg-white/[0.04] p-4">
-      <p className="text-white/90">"The Word of God is not to be lightly handled or casually quoted. It is the sword of the Spirit, and it must be studied, rightly divided, and reverently obeyed."</p>
+      <p className="text-white/90">“The Word of God is not to be lightly handled or casually quoted. It is the sword of the Spirit, and it must be studied, rightly divided, and reverently obeyed.”</p>
       <footer className="mt-2 text-xs uppercase tracking-[0.3em] text-white/55">Superintendent David K. Bernard</footer>
     </blockquote>
   </div>
@@ -192,16 +192,16 @@ export default function Home() {
                   </div>
                   <div className="space-y-3 p-5 text-sm leading-relaxed text-white/85">
                     <p>
-                      The gospel cuts to the heart. Peter's message of Jesus crucified brings conviction that demands a response. The people cry out, "What shall we do?"--the same question every honest heart must ask when confronted with truth.
+                      The gospel cuts to the heart. Peter’s message of Jesus crucified brings conviction that demands a response. The people cry out, “What shall we do?”—the same question every honest heart must ask when confronted with truth.
                     </p>
                     <p>
-                      Verse 38 gives God's answer. Repentance turns us from sin, baptism in Jesus' name washes those sins away, and the gift of the Holy Ghost fills us with God's Spirit. This is not optional or symbolic--it is the pattern of salvation given by the apostles themselves.
+                      Verse 38 gives God’s answer. Repentance turns us from sin, baptism in Jesus’ name washes those sins away, and the gift of the Holy Ghost fills us with God’s Spirit. This is not optional or symbolic—it is the pattern of salvation given by the apostles themselves.
                     </p>
                     <p>
-                      The promise is generational. Peter declares it is for "you, your children, and all that are afar off." That means this new birth experience stretches across time and culture. What was poured out on Pentecost is still available today.
+                      The promise is generational. Peter declares it is for “you, your children, and all that are afar off.” That means this new birth experience stretches across time and culture. What was poured out on Pentecost is still available today.
                     </p>
                     <p>
-                      The result is transformation. Three thousand souls were added in one day because they obeyed the Word. The same obedience brings the same results now--repentance, baptism in Jesus' name, and the infilling of the Holy Ghost remain the foundation of the Apostolic church.
+                      The result is transformation. Three thousand souls were added in one day because they obeyed the Word. The same obedience brings the same results now—repentance, baptism in Jesus’ name, and the infilling of the Holy Ghost remain the foundation of the Apostolic church.
                     </p>
                   </div>
                 </div>
@@ -393,7 +393,7 @@ export default function Home() {
                   <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-5">
                     <div className="mb-2 inline-block rounded bg-white/10 px-2 py-0.5 text-xs text-white/70">Popular Commentary (Trinitarian)</div>
                     <p className="text-white/85">
-                      "The Word" is the eternal second Person, personally distinct from the Father yet fully divine. Creation is through the Son as a co-eternal person.
+                      “The Word” is the eternal second Person, personally distinct from the Father yet fully divine. Creation is through the Son as a co-eternal person.
                     </p>
                   </div>
           </RevealBox>
@@ -401,7 +401,7 @@ export default function Home() {
                   <div className="rounded-2xl border border-emerald-400/30 bg-emerald-500/10 p-5">
                     <div className="mb-2 inline-block rounded bg-emerald-500/20 px-2 py-0.5 text-xs text-emerald-100">ApostolicStudy Exegesis</div>
                     <p className="text-white/90">
-                      "Word" (Logos) is God's own self-expression&mdash;God Himself in revelation. The one God later became flesh as Jesus Christ. Distinction is functional, not a second divine person.
+                      “Word” (Logos) is God’s own self-expression&mdash;God Himself in revelation. The one God later became flesh as Jesus Christ. Distinction is functional, not a second divine person.
                     </p>
                   </div>
           </RevealBox>
@@ -421,7 +421,7 @@ export default function Home() {
                   <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-5">
                     <div className="mb-2 inline-block rounded bg-white/10 px-2 py-0.5 text-xs text-white/70">Popular Commentary (Trinitarian)</div>
                     <p className="text-white/85">
-                      Baptism "in the name of the Father, and of the Son, and of the Holy Spirit" affirms three co-equal, co-eternal persons. Acts baptisms in Jesus' name are treated as shorthand.
+                      Baptism “in the name of the Father, and of the Son, and of the Holy Spirit” affirms three co-equal, co-eternal persons. Acts baptisms in Jesus’ name are treated as shorthand.
                     </p>
                   </div>
           </RevealBox>
@@ -429,7 +429,7 @@ export default function Home() {
                   <div className="rounded-2xl border border-emerald-400/30 bg-emerald-500/10 p-5">
                     <div className="mb-2 inline-block rounded bg-emerald-500/20 px-2 py-0.5 text-xs text-emerald-100">ApostolicStudy Exegesis</div>
                     <p className="text-white/90">
-                      "Name" is singular and fulfilled in Jesus. The apostles consistently baptize in the name of Jesus (Acts 2:38; 8:16; 10:48; 19:5) as the faithful application of Christ's words.
+                      “Name” is singular and fulfilled in Jesus. The apostles consistently baptize in the name of Jesus (Acts 2:38; 8:16; 10:48; 19:5) as the faithful application of Christ’s words.
                     </p>
                   </div>
           </RevealBox>
@@ -457,7 +457,7 @@ export default function Home() {
                   <div className="rounded-2xl border border-emerald-400/30 bg-emerald-500/10 p-5">
                     <div className="mb-2 inline-block rounded bg-emerald-500/20 px-2 py-0.5 text-xs text-emerald-100">ApostolicStudy Exegesis</div>
                     <p className="text-white/90">
-                      The glory belongs to God alone and was purposed "with" God. Jesus prays from the incarnational role about the glory that existed in God and is now revealed in the man Christ Jesus.
+                      The glory belongs to God alone and was purposed “with” God. Jesus prays from the incarnational role about the glory that existed in God and is now revealed in the man Christ Jesus.
                     </p>
                   </div>
           </RevealBox>
@@ -509,14 +509,14 @@ export default function Home() {
                 <RevealBox>
                   <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-5">
                     <div className="mb-2 inline-block rounded bg-white/10 px-2 py-0.5 text-xs text-white/70">Popular Commentary (Trinitarian)</div>
-                    <p className="text-white/85">"One" means unity of essence shared by three persons.</p>
+                    <p className="text-white/85">“One” means unity of essence shared by three persons.</p>
                   </div>
           </RevealBox>
                 <RevealBox delay={0.06}>
                   <div className="rounded-2xl border border-emerald-400/30 bg-emerald-500/10 p-5">
                     <div className="mb-2 inline-block rounded bg-emerald-500/20 px-2 py-0.5 text-xs text-emerald-100">ApostolicStudy Exegesis</div>
                     <p className="text-white/90">
-                      "One" is numerically one&mdash;a single, indivisible God who has now made Himself known in the man Christ Jesus and by His Spirit.
+                      “One” is numerically one&mdash;a single, indivisible God who has now made Himself known in the man Christ Jesus and by His Spirit.
                     </p>
                   </div>
           </RevealBox>
@@ -525,7 +525,7 @@ export default function Home() {
           </div>
 
           <p className="mt-8 text-xs text-white/60">
-            Notes: "Popular Commentary (Trinitarian)" summaries are paraphrased general viewpoints, not quotations.
+            Notes: “Popular Commentary (Trinitarian)” summaries are paraphrased general viewpoints, not quotations.
           </p>
         </div>
       </section>
@@ -539,7 +539,7 @@ export default function Home() {
                 <div className="absolute -top-10 left-12 h-32 w-32 rounded-full bg-emerald-500/20 blur-3xl" />
                 <p className="text-xs uppercase tracking-[0.35em] text-white/60">Minister insight</p>
                 <p className="mt-4 text-xl leading-relaxed text-white/90">
-                  "To study Scripture rightly, you must let the Bible interpret itself, comparing line upon line, precept upon precept, and always keeping the context before the commentary."
+                  “To study Scripture rightly, you must let the Bible interpret itself, comparing line upon line, precept upon precept, and always keeping the context before the commentary.”
                 </p>
                 <footer className="mt-6 flex items-center gap-4 text-sm text-white/70">
                   <span className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-tr from-indigo-500 to-emerald-500 text-xs font-semibold text-slate-900">
@@ -643,7 +643,7 @@ export default function Home() {
               <div className="mt-6 space-y-3 leading-relaxed">
                 <p>
                   <span className="mr-2 text-white/60">Acts 2:42</span>
-                  <span className="font-serif">And they continued steadfastly in the apostles' doctrine and fellowship...</span>
+                  <span className="font-serif">And they continued steadfastly in the apostles’ doctrine and fellowship...</span>
                 </p>
                 <p>
                   <span className="mr-2 text-white/60">2 Tim 2:15</span>
