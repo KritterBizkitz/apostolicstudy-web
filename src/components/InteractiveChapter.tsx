@@ -2,6 +2,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import Verse from "@/components/Verse";
+import { supabase } from "@/lib/supabaseClient";
 
 // Safe ID generator that works in all environments
 function genId() {
@@ -59,7 +60,9 @@ type VerseDto = { v: number; t: string };
 
 type CommentaryTab = {
   verse: number;
-  text: string;
+  content: string | null;
+  loading: boolean;
+  error: string | null;
 };
 
 type CommentaryPanelProps = {
@@ -81,8 +84,10 @@ function CommentaryPanel({
   onClose,
   verseMap,
 }: CommentaryPanelProps) {
-  const activeTab = activeVerse != null ? tabs.find((tab) => tab.verse === activeVerse) ?? null : null;
-  const verseText = activeTab?.text ?? (activeVerse != null ? verseMap[activeVerse] ?? "" : "");
+  const activeTab =
+    activeVerse != null ? tabs.find((tab) => tab.verse === activeVerse) ?? null : null;
+  const verseText = activeVerse != null ? verseMap[activeVerse] ?? "" : "";
+  const commentaryText = activeTab?.content ?? null;
 
   return (
     <div className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur">
@@ -127,9 +132,9 @@ function CommentaryPanel({
           <p className="text-white/60 text-sm leading-relaxed">
             Click any verse in the chapter to open a commentary tab. Your notes will stay pinned here while you scroll.
           </p>
-        ) : activeVerse == null ? (
-          <p className="text-white/60 text-sm">
-            Select a verse tab to view its commentary placeholder.
+        ) : activeTab == null ? (
+          <p className="text-white/60 text-sm leading-relaxed">
+            Select a verse tab above to view its commentary.
           </p>
         ) : (
           <div className="space-y-3">
@@ -142,9 +147,19 @@ function CommentaryPanel({
             <blockquote className="rounded-xl border border-white/10 bg-black/30 p-4 text-sm text-white/80">
               {verseText}
             </blockquote>
-            <p className="text-white/70 text-sm leading-relaxed">
-              Commentary for this verse has not been written yet.
-            </p>
+            {activeTab.loading ? (
+              <p className="text-white/70 text-sm">Loading commentary...</p>
+            ) : activeTab.error ? (
+              <p className="text-sm text-red-300">{activeTab.error}</p>
+            ) : commentaryText ? (
+              <div className="whitespace-pre-wrap text-sm leading-relaxed text-white/80">
+                {commentaryText}
+              </div>
+            ) : (
+              <p className="text-white/70 text-sm leading-relaxed">
+                Commentary for this verse has not been written yet.
+              </p>
+            )}
           </div>
         )}
       </div>
@@ -225,17 +240,60 @@ export default function InteractiveChapter({
     setNoteText('');
   }
 
+  const formatReference = useCallback(
+    (verse: number) => `${bookLabel} ${chapter}:${verse}`,
+    [bookLabel, chapter]
+  );
+
+  const fetchCommentary = useCallback(async (verse: number) => {
+    const reference = formatReference(verse);
+
+    try {
+      const { data, error } = await supabase
+        .from("commentary")
+        .select("content")
+        .eq("reference", reference)
+        .maybeSingle();
+
+      if (error) {
+        throw error;
+      }
+
+      setCommentaryTabs((prev) =>
+        prev.map((tab) =>
+          tab.verse === verse
+            ? { ...tab, loading: false, content: data?.content ?? null, error: null }
+            : tab
+        )
+      );
+    } catch (err) {
+      console.error("[commentary] fetch failed", err);
+      const message =
+        err instanceof Error ? err.message : "Unable to load commentary.";
+      setCommentaryTabs((prev) =>
+        prev.map((tab) =>
+          tab.verse === verse
+            ? { ...tab, loading: false, error: message }
+            : tab
+        )
+      );
+    }
+  }, [formatReference]);
+
   const openCommentary = useCallback((verse: number) => {
     setCommentaryTabs((prev) => {
-      if (prev.some((tab) => tab.verse === verse)) {
-        return prev;
+      const exists = prev.some((tab) => tab.verse === verse);
+      if (exists) {
+        return prev.map((tab) =>
+          tab.verse === verse ? { ...tab, loading: true, error: null } : tab
+        );
       }
-      const next = [...prev, { verse, text: verseMap[verse] ?? "" }];
-      return next;
+      return [...prev, { verse, content: null, loading: true, error: null }];
     });
     setActiveCommentary(verse);
     setActiveVerse(verse);
-  }, [verseMap]);
+    fetchCommentary(verse);
+  }, [fetchCommentary]);
 
   const closeCommentary = useCallback((verse: number) => {
     setCommentaryTabs((prev) => {
