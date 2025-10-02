@@ -30,7 +30,7 @@ export default function Home() {
           }}
         />
         <div className="grid items-start gap-16 lg:grid-cols-[1.05fr_1fr]">
-          <RevealBox>
+          <RevealBox immediate>
             <div className="max-w-2xl">
               <p className="inline-flex flex-wrap items-center gap-3 text-[0.65rem] uppercase tracking-[0.35em] text-white/60">
                 <span className="inline-flex h-2 w-2 rounded-full bg-emerald-400" />
@@ -122,7 +122,7 @@ export default function Home() {
 
           </RevealBox>
 
-          <RevealBox delay={0.05}>
+          <RevealBox delay={0.05} immediate>
             <div className="relative mx-auto w-full max-w-xl space-y-10 group">
               <div className="relative group">
                 <div
@@ -288,6 +288,46 @@ export default function Home() {
   </div>
 </div>
 
+            </div>
+          </RevealBox>
+        </div>
+      </section>
+
+      {/* SUPPORT CALL OUT */}
+      <section id="support" className="relative border-t border-white/10 py-16 sm:py-20">
+        <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_center,_rgba(16,185,129,0.12),_transparent_70%)]" />
+        <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+          <RevealBox immediate>
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.05] p-[1.5px] shadow-[0_35px_90px_-65px_rgba(15,23,42,0.85)]">
+              <div
+                className="pointer-events-none absolute inset-0 rounded-3xl opacity-80 blur-md"
+                style={{
+                  background: "linear-gradient(135deg, rgba(99,102,241,0.35), rgba(6,182,212,0.35), rgba(16,185,129,0.35))",
+                }}
+              />
+              <div className="relative rounded-[calc(1.5rem-1.5px)] border border-white/10 bg-black/70 px-8 py-10 backdrop-blur">
+                <div className="pointer-events-none absolute -top-24 right-10 h-56 w-56 rounded-full bg-emerald-500/25 blur-3xl" />
+                <div className="pointer-events-none absolute -bottom-28 left-8 h-60 w-60 rounded-full bg-indigo-500/25 blur-[120px]" />
+                <h2 className="text-xl font-semibold text-white">Keep ApostolicStudy Free</h2>
+                <p className="mt-3 text-white/75">
+                  It is our sincere desire to make sure every resource here is completely free and open for everyone. Please consider donating to help us maintain that.
+                </p>
+                <form
+                action="https://www.paypal.com/donate"
+                method="post"
+                target="_top"
+                  className="mt-6 flex flex-wrap items-center gap-3"
+                >
+                  <input type="hidden" name="hosted_button_id" value="DWYX85RH9PJKW" />
+                  <button
+                    type="submit"
+                  className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-indigo-500 via-sky-500 to-emerald-500 px-5 py-2 text-sm font-semibold text-black shadow-[0_20px_60px_-20px_rgba(16,185,129,0.65)] transition hover:opacity-95"
+                >
+                  Donate with PayPal
+                  </button>
+                  <p className="text-xs text-white/50">Secure checkout handled by PayPal.</p>
+                </form>
+              </div>
             </div>
           </RevealBox>
         </div>
@@ -820,11 +860,6 @@ export default function Home() {
     </main>
   );
 }
-
-
-
-
-
 
 
 
