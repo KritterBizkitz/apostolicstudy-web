@@ -19,7 +19,116 @@ export default function Home() {
       {/* Featured strip */}
       <FeaturedStudies />
 
-      {/* HERO */}
+      <div className="mx-auto mt-10 flex max-w-2xl flex-col items-center gap-4 px-4 text-center">
+        <div className="inline-flex items-center gap-2 rounded-full border border-emerald-400/40 bg-emerald-500/10 px-4 py-1 text-xs font-semibold uppercase tracking-[0.35em] text-emerald-100">
+          Get started
+        </div>
+        <div className="flex flex-wrap justify-center gap-4">
+          <Link
+            href="/app"
+            className="group relative inline-flex items-center justify-center rounded-2xl px-6 py-3 text-base font-semibold text-white transition [shadow:0_25px_70px_-30px_rgba(16,185,129,0.9)]"
+          >
+            <span className="absolute inset-0 rounded-2xl bg-gradient-to-r from-emerald-400 via-sky-400 to-indigo-500 opacity-90 transition group-hover:opacity-100" />
+            <span className="absolute inset-[2px] rounded-2xl border border-white/15 bg-slate-950/60" />
+            <span className="relative flex items-center gap-2">
+              Launch the reader
+              <svg className="h-4 w-4 transition group-hover:translate-x-0.5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                <path d="M12.293 4.293a1 1 0 0 1 1.414 0l4 4a1 1 0 0 1-.284 1.65l-.13.064-4 2a1 1 0 0 1-1.3-1.3l.044-.11L13.586 9H4a1 1 0 0 1-.117-1.993L4 7h9.586l-1.293-1.293a1 1 0 0 1-.083-1.32l.083-.094Z" />
+              </svg>
+            </span>
+          </Link>
+
+          <Link
+            href="/early-access"
+            className="group relative inline-flex items-center justify-center rounded-2xl px-6 py-3 text-base font-semibold text-white transition"
+          >
+            <span className="absolute inset-0 rounded-2xl bg-gradient-to-r from-indigo-500 via-sky-500 to-emerald-500 opacity-90 transition group-hover:opacity-100" />
+            <span className="absolute inset-[2px] rounded-2xl border border-white/15 bg-slate-950/60" />
+            <span className="relative flex items-center gap-2">
+              Join early access
+              <span className="inline-flex h-2 w-2 animate-pulse rounded-full bg-emerald-300" />
+            </span>
+          </Link>
+        </div>
+      </div>
+
+      <section className="relative mx-auto max-w-4xl px-4 py-16 sm:py-20">
+        <RevealBox immediate>
+          <div className="relative overflow-hidden rounded-[3rem] border border-white/15 bg-white/[0.04] p-[1.5px] shadow-[0_45px_120px_-80px_rgba(15,23,42,0.9)]">
+            <div
+              className="pointer-events-none absolute inset-0 rounded-[3rem] opacity-80 blur-xl"
+              style={{
+                background:
+                  "linear-gradient(140deg, rgba(99,102,241,0.45), rgba(6,182,212,0.32), rgba(16,185,129,0.42))",
+              }}
+            />
+            <div className="relative rounded-[calc(3rem-1.5px)] border border-white/10 bg-slate-950/75 px-8 py-12 text-center sm:px-12">
+              <p className="inline-flex flex-wrap items-center justify-center gap-3 text-[0.7rem] uppercase tracking-[0.4em] text-white/60">
+                <span className="inline-flex h-2 w-2 rounded-full bg-emerald-400" />
+                Doctrinally Apostolic
+                <span className="hidden h-px w-8 bg-white/30 sm:inline-flex" />
+                Trust the Word, not the world
+              </p>
+              <h1 className="mt-5 text-4xl font-semibold leading-tight sm:text-5xl lg:text-6xl">
+                Study the Word.
+                <span className="block bg-gradient-to-r from-indigo-400 via-sky-400 to-emerald-300 bg-clip-text text-transparent">
+                  Teach with clarity.
+                </span>
+              </h1>
+              <div className="mt-6 space-y-4 text-base text-white/75 sm:text-lg">
+                <p>
+                  ApostolicStudy keeps context before commentary, giving you space to trace authorial intent, historical setting,
+                  and the full counsel of Scripture without the distraction of noise.
+                </p>
+                <p>
+                  Truth should not be hard to find. Stop chasing down six different resources for one question—let Scripture interpret
+                  Scripture while tools stay quiet until you need them.
+                </p>
+              </div>
+            </div>
+          </div>
+        </RevealBox>
+      </section>
+
+      <section className="relative mx-auto max-w-4xl px-4 pb-16 sm:pb-20">
+        <RevealBox immediate>
+          <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.05] p-[1.5px] shadow-[0_35px_90px_-65px_rgba(15,23,42,0.85)]">
+            <div
+              className="pointer-events-none absolute inset-0 rounded-3xl opacity-80 blur-md"
+              style={{
+                background:
+                  "linear-gradient(135deg, rgba(99,102,241,0.35), rgba(6,182,212,0.35), rgba(16,185,129,0.35))",
+              }}
+            />
+            <div className="relative rounded-[calc(3rem-1.5px)] border border-white/10 bg-black/70 px-8 py-10 text-center backdrop-blur">
+              <div className="inline-flex items-center justify-center gap-2 text-xs uppercase tracking-[0.35em] text-white/60">
+                <span className="inline-flex h-2 w-2 rounded-full bg-emerald-400" />
+                Keep ApostolicStudy Free
+              </div>
+              <p className="mt-3 text-sm leading-relaxed text-white/75">
+                It is our sincere desire to make sure every resource here is completely free and open for everyone. Please consider donating to help us maintain that.
+              </p>
+              <form
+                action="https://www.paypal.com/donate"
+                method="post"
+                target="_top"
+                className="mt-6 flex flex-wrap items-center justify-center gap-3"
+              >
+                <input type="hidden" name="hosted_button_id" value="DWYX85RH9PJKW" />
+                <button
+                  type="submit"
+                  className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-indigo-500 via-sky-500 to-emerald-500 px-5 py-2 text-sm font-semibold text-black shadow-[0_20px_60px_-20px_rgba(16,185,129,0.65)] transition hover:opacity-95"
+                >
+                  Donate with PayPal
+                </button>
+                <p className="text-xs text-white/50">Secure checkout handled by PayPal.</p>
+              </form>
+            </div>
+          </div>
+        </RevealBox>
+      </section>
+
+      {/* HERO GRID */}
       <section className="relative mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-32">
         <div className="absolute inset-0 -z-10 rounded-[3rem] border border-white/10 bg-white/[0.02] backdrop-blur-2xl" />
         <div
@@ -31,95 +140,33 @@ export default function Home() {
         />
         <div className="grid items-start gap-16 lg:grid-cols-[1.05fr_1fr]">
           <RevealBox immediate>
-            <div className="max-w-2xl">
-              <p className="inline-flex flex-wrap items-center gap-3 text-[0.65rem] uppercase tracking-[0.35em] text-white/60">
-                <span className="inline-flex h-2 w-2 rounded-full bg-emerald-400" />
-                Doctrinally Apostolic
-                <span className="hidden h-px w-8 bg-white/30 sm:inline-flex" />
-                Trust the Word, not the world
-              </p>
-              <h1 className="mt-6 text-4xl font-semibold leading-tight sm:text-5xl lg:text-6xl">
-                Study the Word.
-                <span className="block bg-gradient-to-r from-indigo-400 via-sky-400 to-emerald-300 bg-clip-text text-transparent">
-                  Teach with clarity.
-                </span>
-              </h1>
+            <div className="space-y-8">
+              <div className="grid gap-5 sm:grid-cols-2">
+                {[
+                  {
+                    title: "Context anchored",
+                    body: "Parallel passages, timelines, and historical notes stay tethered to the verses you are studying—no tab hopping required.",
+                  },
+                  {
+                    title: "Collaborative study",
+                    body: "Share outlines and highlights with ministry teams while keeping doctrine aligned to Apostolic truth.",
+                  },
+                  {
+                    title: "Living library",
+                    body: "Community-contributed commentary, study notes, and reading plans grow a trusted, Apostolic archive.",
+                  },
+                  {
+                    title: "Designed for focus",
+                    body: "Typography, spacing, and keyboard shortcuts are tuned for long-form preparation and teaching.",
+                  },
+                ].map(({ title, body }) => (
+                  <div key={title} className="rounded-3xl border border-white/10 bg-white/[0.05] p-5 shadow-[0_30px_90px_-65px_rgba(15,23,42,0.8)] backdrop-blur">
+                    <p className="text-sm font-semibold text-white">{title}</p>
+                    <p className="mt-2 text-sm text-white/70">{body}</p>
+                  </div>
+                ))}
               </div>
-              <p className="mt-6 text-lg leading-relaxed text-white/80">
-                ApostolicStudy keeps context before commentary, giving you space to trace authorial intent, historical setting, and the full counsel of Scripture without the distraction of noise.
-              </p>
-              <div className="mt-8 flex flex-wrap items-center gap-3">
-                <Link
-                  href="/app"
-                  className="inline-flex items-center gap-2 rounded-xl border border-white/20 bg-white/10 px-5 py-2 text-sm font-medium text-white transition hover:border-white/30 hover:bg-white/15"
-                >
-                  <span className="inline-flex h-2 w-2 rounded-full bg-emerald-400" />
-                  Launch the reader
-                </Link>
-                <Link
-                  href="/account"
-                  className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-indigo-500 via-sky-500 to-emerald-500 px-5 py-2 text-sm font-semibold text-black shadow-[0_20px_60px_-20px_rgba(16,185,129,0.65)] transition hover:opacity-95"
-                >
-                  Join the early access
-                </Link>
-              </div>
-              <div className="mt-10 grid gap-4 sm:grid-cols-2">
-                <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-4">
-                  <p className="text-sm font-semibold text-white">Context first</p>
-                  <p className="mt-1 text-sm text-white/70">
-                    Link passages, cross references, and language insights without leaving the reader view.
-                  </p>
-                </div>
-                <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-4">
-                  <p className="text-sm font-semibold text-white">Living notes</p>
-                  <p className="mt-1 text-sm text-white/70">
-                    Carry sermon outlines, class plans, and study trails everywhere you teach.
-                  </p>
-                </div>
-                <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-4">
-                  <p className="text-sm font-semibold text-white">Teacher-ready</p>
-                  <p className="mt-1 text-sm text-white/70">
-                    Share preparation with ministry teams while staying anchored to Apostolic doctrine.
-                  </p>
-                </div>
-                <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-4">
-                  <p className="text-sm font-semibold text-white">Built for focus</p>
-                  <p className="mt-1 text-sm text-white/70">
-                    Typography, spacing, and shortcuts tuned for long-form study sessions.
-                  </p>
-                </div>
-              </div>
-
-              <div className="mt-10 rounded-3xl border border-white/10 bg-white/[0.05] p-6 shadow-[0_35px_90px_-65px_rgba(15,23,42,0.85)] backdrop-blur">
-  <div className="flex items-center gap-2 text-xs uppercase tracking-[0.35em] text-white/60">
-    <span className="inline-flex h-2 w-2 rounded-full bg-emerald-400" />
-    Voices we trust
-  </div>
-  <div className="mt-5 space-y-4 text-sm leading-relaxed text-white/85">
-    <blockquote className="rounded-2xl border border-white/10 bg-white/[0.04] p-4">
-      <p className="text-white/90">"The worst thing can happen is for you and I to live not knowing God not seeking to please God not satisfied serving God."</p>
-      <footer className="mt-2 text-xs uppercase tracking-[0.3em] text-white/55">Bishop Clifton Jones</footer>
-    </blockquote>
-    <blockquote className="rounded-2xl border border-white/10 bg-white/[0.04] p-4">
-      <p className="text-white/90">"Nobody is Pentecostal who rejects the water baptism in Jesus name."</p>
-      <footer className="mt-2 text-xs uppercase tracking-[0.3em] text-white/55">Dr. Johnny James</footer>
-    </blockquote>
-    <blockquote className="rounded-2xl border border-white/10 bg-white/[0.04] p-4">
-      <p className="text-white/90">"He should so thoroughly know what he believes that he believes his beliefs and doubts his doubts. He does not doubt his beliefs and believe his doubts."</p>
-      <footer className="mt-2 text-xs uppercase tracking-[0.3em] text-white/55">Bishop Morris E. Golder</footer>
-    </blockquote>
-    <blockquote className="rounded-2xl border border-white/10 bg-white/[0.04] p-4">
-      <p className="text-white/90">"We are not Pentecostal because we shout. We are Apostolic because we believe and teach what the apostles taught. Doctrine is not a footnote. It is the headline."</p>
-      <footer className="mt-2 text-xs uppercase tracking-[0.3em] text-white/55">Pastor Jack Cunningham</footer>
-    </blockquote>
-    <blockquote className="rounded-2xl border border-white/10 bg-white/[0.04] p-4">
-      <p className="text-white/90">"The Word of God is not to be lightly handled or casually quoted. It is the sword of the Spirit, and it must be studied, rightly divided, and reverently obeyed."</p>
-      <footer className="mt-2 text-xs uppercase tracking-[0.3em] text-white/55">Superintendent David K. Bernard</footer>
-    </blockquote>
-  </div>
-</div>
-
-
+            </div>
           </RevealBox>
 
           <RevealBox delay={0.05} immediate>
@@ -860,15 +907,3 @@ export default function Home() {
     </main>
   );
 }
-
-
-
-
-
-
-
-
-
-
-
-
