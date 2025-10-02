@@ -1,9 +1,9 @@
-import { NextResponse } from 'next/server';
+﻿import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { createServerClient } from '@supabase/ssr';
 
 export async function middleware(req: NextRequest) {
-  const res = NextResponse.next({ request: { headers: req.headers } });
+  const res = NextResponse.next();
 
   const supabase = createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -11,18 +11,10 @@ export async function middleware(req: NextRequest) {
     {
       cookies: {
         getAll() {
-          return req.cookies.getAll().map(({ name, value }) => ({
-            name,
-            value,
-          }));
+          return req.cookies.getAll();
         },
         setAll(cookies) {
           cookies.forEach(({ name, value, options }) => {
-            if (value === '') {
-              req.cookies.delete(name);
-            } else {
-              req.cookies.set(name, value);
-            }
             res.cookies.set(name, value, options);
           });
         },
@@ -30,7 +22,6 @@ export async function middleware(req: NextRequest) {
     }
   );
 
-  // touch auth so cookies refresh
   await supabase.auth.getUser();
 
   return res;
