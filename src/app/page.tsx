@@ -125,6 +125,7 @@ export default function Home() {
               </form>
             </div>
           </div>
+          
         </RevealBox>
       </section>
 
@@ -144,20 +145,20 @@ export default function Home() {
               <div className="grid gap-5 sm:grid-cols-2">
                 {[
                   {
-                    title: "Context anchored",
-                    body: "Parallel passages, timelines, and historical notes stay tethered to the verses you are studying—no tab hopping required.",
+                    title: "Context is King",
+                    body: "A verse without context becomes a weapon in the wrong hands. Every passage must be read within its chapter, its book, and the grand narrative of Scripture. Truth doesn’t contradict itself, it builds line upon line. Let the Bible speak before we do.",
                   },
                   {
-                    title: "Collaborative study",
-                    body: "Share outlines and highlights with ministry teams while keeping doctrine aligned to Apostolic truth.",
+                    title: "Rightly Divide the Word",
+                    body: "2 Timothy 2:15 commands us to rightly divide. That’s not suggestion, it’s mandate. Proper interpretation isn’t optional. Exegesis, not assumption. Study, not surface. This platform equips you to dig deeper and teach sound doctrine with clarity and boldness.",
                   },
                   {
-                    title: "Living library",
-                    body: "Community-contributed commentary, study notes, and reading plans grow a trusted, Apostolic archive.",
+                    title: "Scripture Interprets Scripture",
+                    body: "God never needed a second opinion. The Word confirms itself from Genesis to Revelation. The shadows of the Old Testament find their fulfillment in the New. Don’t just study verses, study connections. Revelation is often found in the repetition.",
                   },
                   {
-                    title: "Designed for focus",
-                    body: "Typography, spacing, and keyboard shortcuts are tuned for long-form preparation and teaching.",
+                    title: "Built for Bible Teachers",
+                    body: "This isn’t just a reading tool, it’s a preparation powerhouse. Verse by verse layouts, study note syncing, cross-referencing tools, and Apostolic resources all exist for one purpose: to help you teach truth without compromise and preach it with fire.",
                   },
                 ].map(({ title, body }) => (
                   <div key={title} className="rounded-3xl border border-white/10 bg-white/[0.05] p-5 shadow-[0_30px_90px_-65px_rgba(15,23,42,0.8)] backdrop-blur">
@@ -167,6 +168,34 @@ export default function Home() {
                 ))}
               </div>
             </div>
+             <div className="mt-10 rounded-3xl border border-white/10 bg-white/[0.05] p-6 shadow-[0_35px_90px_-65px_rgba(15,23,42,0.85)] backdrop-blur">
+  <div className="flex items-center gap-2 text-xs uppercase tracking-[0.35em] text-white/60">
+    <span className="inline-flex h-2 w-2 rounded-full bg-emerald-400" />
+    Voices we trust
+  </div>
+  <div className="mt-5 space-y-4 text-sm leading-relaxed text-white/85">
+    <blockquote className="rounded-2xl border border-white/10 bg-white/[0.04] p-4">
+      <p className="text-white/90">"The worst thing can happen is for you and I to live not knowing God not seeking to please God not satisfied serving God."</p>
+      <footer className="mt-2 text-xs uppercase tracking-[0.3em] text-white/55">Bishop Clifton Jones</footer>
+    </blockquote>
+    <blockquote className="rounded-2xl border border-white/10 bg-white/[0.04] p-4">
+      <p className="text-white/90">"Nobody is Pentecostal who rejects the water baptism in Jesus name."</p>
+      <footer className="mt-2 text-xs uppercase tracking-[0.3em] text-white/55">Dr. Johnny James</footer>
+    </blockquote>
+    <blockquote className="rounded-2xl border border-white/10 bg-white/[0.04] p-4">
+      <p className="text-white/90">"He should so thoroughly know what he believes that he believes his beliefs and doubts his doubts. He does not doubt his beliefs and believe his doubts."</p>
+      <footer className="mt-2 text-xs uppercase tracking-[0.3em] text-white/55">Bishop Morris E. Golder</footer>
+    </blockquote>
+    <blockquote className="rounded-2xl border border-white/10 bg-white/[0.04] p-4">
+      <p className="text-white/90">"We are not Pentecostal because we shout. We are Apostolic because we believe and teach what the apostles taught. Doctrine is not a footnote. It is the headline."</p>
+      <footer className="mt-2 text-xs uppercase tracking-[0.3em] text-white/55">Pastor Jack Cunningham</footer>
+    </blockquote>
+    <blockquote className="rounded-2xl border border-white/10 bg-white/[0.04] p-4">
+      <p className="text-white/90">"The Word of God is not to be lightly handled or casually quoted. It is the sword of the Spirit, and it must be studied, rightly divided, and reverently obeyed."</p>
+      <footer className="mt-2 text-xs uppercase tracking-[0.3em] text-white/55">Superintendent David K. Bernard</footer>
+    </blockquote>
+  </div>
+</div>
           </RevealBox>
 
           <RevealBox delay={0.05} immediate>
@@ -254,131 +283,15 @@ export default function Home() {
                 </div>
                 <div className="pointer-events-none absolute -z-30 -top-8 right-6 h-48 w-48 rounded-full bg-sky-500/15 blur-3xl" />
               </div>
-              {/* Apostolic Truth Timeline */}
-<div className="mt-10 rounded-3xl border border-white/10 bg-white/[0.03] shadow-[0_35px_90px_-65px_rgba(15,23,42,0.85)]">
-  <div className="relative overflow-hidden rounded-3xl p-6">
-    {/* soft gradient wash to differentiate from other cards */}
-    <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-emerald-400/10 via-transparent to-indigo-400/10" />
-
-    {/* header */}
-    <div className="relative z-10 flex items-center gap-2 text-xs uppercase tracking-[0.35em] text-white/70">
-      <span className="inline-flex h-2 w-2 rounded-full bg-indigo-400" />
-      Apostolic Truth Timeline
-    </div>
-
-    {/* subhead */}
-    <p className="relative z-10 mt-2 text-sm text-white/80">
-      From Pentecost to the present, one message continues unchanged.
-    </p>
-
-    {/* timeline */}
-    <div className="relative z-10 mt-6">
-      <ol className="relative space-y-5">
-  {/* vertical line */}
-  <span className="absolute left-3 top-0 h-full w-px bg-white/10" aria-hidden="true" />
-
-  <li className="relative pl-6">
-    <span className="absolute left-0 top-1.5 h-2.5 w-2.5 rounded-full bg-emerald-400 ring-4 ring-emerald-400/15" />
-    <h4 className="text-white/90 text-sm font-medium">AD 33 — The Day of Pentecost</h4>
-    <p className="mt-1 text-sm leading-relaxed text-white/80">
-      The Church is born in Jerusalem as the Spirit is poured out and three thousand are baptized in Jesus’ name.
-    </p>
-  </li>
-
-  <li className="relative pl-6">
-    <span className="absolute left-0 top-1.5 h-2.5 w-2.5 rounded-full bg-emerald-400 ring-4 ring-emerald-400/15" />
-    <h4 className="text-white/90 text-sm font-medium">1st Century — The Apostles’ Doctrine</h4>
-    <p className="mt-1 text-sm leading-relaxed text-white/80">
-      The gospel spreads through preaching, signs, and letters that become our New Testament.
-    </p>
-  </li>
-
-  <li className="relative pl-6">
-    <span className="absolute left-0 top-1.5 h-2.5 w-2.5 rounded-full bg-emerald-400 ring-4 ring-emerald-400/15" />
-    <h4 className="text-white/90 text-sm font-medium">4th Century — The Rise of Creeds</h4>
-    <p className="mt-1 text-sm leading-relaxed text-white/80">
-      Human tradition begins to overshadow the simplicity of One God and baptism in Jesus’ name.
-    </p>
-  </li>
-
-  <li className="relative pl-6">
-    <span className="absolute left-0 top-1.5 h-2.5 w-2.5 rounded-full bg-emerald-400 ring-4 ring-emerald-400/15" />
-    <h4 className="text-white/90 text-sm font-medium">Early 1900s — Apostolic Restoration</h4>
-    <p className="mt-1 text-sm leading-relaxed text-white/80">
-      The Holy Ghost is poured out worldwide, confirming the same Acts 2 message with tongues and Jesus-name baptism.
-    </p>
-  </li>
-
-  <li className="relative pl-6">
-    <span className="absolute left-0 top-1.5 h-2.5 w-2.5 rounded-full bg-emerald-400 ring-4 ring-emerald-400/15" />
-    <h4 className="text-white/90 text-sm font-medium">Today — The Same Truth</h4>
-    <p className="mt-1 text-sm leading-relaxed text-white/80">
-      Repentance, baptism in Jesus’ name, and the infilling of the Holy Ghost continue to transform lives across the world.
-    </p>
-  </li>
-</ol>
-
-    </div>
-
-    {/* optional footer link */}
-    <div className="relative z-10 mt-6">
-      <a
-        href="/timeline"
-        className="inline-flex items-center gap-2 rounded-xl border border-white/10 bg-white/[0.04] px-3 py-2 text-xs font-medium text-white/85 hover:bg-white/[0.06] hover:border-white/15 transition"
-      >
-        View full timeline
-        <svg className="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-          <path d="M12.293 3.293a1 1 0 0 1 1.414 0l4 4a1 1 0 0 1-1.414 1.414L14 6.414V16a1 1 0 1 1-2 0V6.414l-2.293 2.293A1 1 0 0 1 8.293 7.293l4-4z" />
-        </svg>
-      </a>
-    </div>
-  </div>
-</div>
+              
 
             </div>
           </RevealBox>
         </div>
       </section>
 
-      {/* SUPPORT CALL OUT */}
-      <section id="support" className="relative border-t border-white/10 py-16 sm:py-20">
-        <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_center,_rgba(16,185,129,0.12),_transparent_70%)]" />
-        <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-          <RevealBox immediate>
-            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.05] p-[1.5px] shadow-[0_35px_90px_-65px_rgba(15,23,42,0.85)]">
-              <div
-                className="pointer-events-none absolute inset-0 rounded-3xl opacity-80 blur-md"
-                style={{
-                  background: "linear-gradient(135deg, rgba(99,102,241,0.35), rgba(6,182,212,0.35), rgba(16,185,129,0.35))",
-                }}
-              />
-              <div className="relative rounded-[calc(1.5rem-1.5px)] border border-white/10 bg-black/70 px-8 py-10 backdrop-blur">
-                <div className="pointer-events-none absolute -top-24 right-10 h-56 w-56 rounded-full bg-emerald-500/25 blur-3xl" />
-                <div className="pointer-events-none absolute -bottom-28 left-8 h-60 w-60 rounded-full bg-indigo-500/25 blur-[120px]" />
-                <h2 className="text-xl font-semibold text-white">Keep ApostolicStudy Free</h2>
-                <p className="mt-3 text-white/75">
-                  It is our sincere desire to make sure every resource here is completely free and open for everyone. Please consider donating to help us maintain that.
-                </p>
-                <form
-                action="https://www.paypal.com/donate"
-                method="post"
-                target="_top"
-                  className="mt-6 flex flex-wrap items-center gap-3"
-                >
-                  <input type="hidden" name="hosted_button_id" value="DWYX85RH9PJKW" />
-                  <button
-                    type="submit"
-                  className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-indigo-500 via-sky-500 to-emerald-500 px-5 py-2 text-sm font-semibold text-black shadow-[0_20px_60px_-20px_rgba(16,185,129,0.65)] transition hover:opacity-95"
-                >
-                  Donate with PayPal
-                  </button>
-                  <p className="text-xs text-white/50">Secure checkout handled by PayPal.</p>
-                </form>
-              </div>
-            </div>
-          </RevealBox>
-        </div>
-      </section>
+      
+
       {/* VALUE CARDS / FEATURES */}
       <section id="features" className="relative py-20 lg:py-28">
         <div className="absolute inset-0 -z-10 overflow-hidden">
@@ -774,6 +687,89 @@ export default function Home() {
             </Link>
           </div>
         </div>
+        <div className="flex justify-center">
+
+  {/* Apostolic Truth Timeline (Your original code goes here) */}
+  <div className="w-fit mt-10 rounded-3xl border border-white/10 bg-white/[0.03] shadow-[0_35px_90px_-65px_rgba(15,23,42,0.85)]">
+    <div className="relative overflow-hidden rounded-3xl p-6">
+      {/* soft gradient wash to differentiate from other cards */}
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-emerald-400/10 via-transparent to-indigo-400/10" />
+
+      {/* header */}
+      <div className="relative z-10 flex items-center gap-2 text-xs uppercase tracking-[0.35em] text-white/70">
+        <span className="inline-flex h-2 w-2 rounded-full bg-indigo-400" />
+        Apostolic Truth Timeline
+      </div>
+
+      {/* subhead */}
+      <p className="relative z-10 mt-2 text-sm text-white/80">
+        From Pentecost to the present, one message continues unchanged.
+      </p>
+
+      {/* timeline */}
+      <div className="relative z-10 mt-6">
+        <ol className="relative space-y-5">
+          {/* vertical line */}
+          <span className="absolute left-3 top-0 h-full w-px bg-white/10" aria-hidden="true" />
+
+          <li className="relative pl-6">
+            <span className="absolute left-0 top-1.5 h-2.5 w-2.5 rounded-full bg-emerald-400 ring-4 ring-emerald-400/15" />
+            <h4 className="text-sm font-medium text-white/90">AD 33 — The Day of Pentecost</h4>
+            <p className="mt-1 text-sm leading-relaxed text-white/80">
+              The Church is born in Jerusalem as the Spirit is poured out and three thousand are baptized in Jesus’ name.
+            </p>
+          </li>
+
+          <li className="relative pl-6">
+            <span className="absolute left-0 top-1.5 h-2.5 w-2.5 rounded-full bg-emerald-400 ring-4 ring-emerald-400/15" />
+            <h4 className="text-sm font-medium text-white/90">1st Century — The Apostles’ Doctrine</h4>
+            <p className="mt-1 text-sm leading-relaxed text-white/80">
+              The gospel spreads through preaching, signs, and letters that become our New Testament.
+            </p>
+          </li>
+
+          <li className="relative pl-6">
+            <span className="absolute left-0 top-1.5 h-2.5 w-2.5 rounded-full bg-emerald-400 ring-4 ring-emerald-400/15" />
+            <h4 className="text-sm font-medium text-white/90">4th Century — The Rise of Creeds</h4>
+            <p className="mt-1 text-sm leading-relaxed text-white/80">
+              Human tradition begins to overshadow the simplicity of One God and baptism in Jesus’ name.
+            </p>
+          </li>
+
+          <li className="relative pl-6">
+            <span className="absolute left-0 top-1.5 h-2.5 w-2.5 rounded-full bg-emerald-400 ring-4 ring-emerald-400/15" />
+            <h4 className="text-sm font-medium text-white/90">Early 1900s — Apostolic Restoration</h4>
+            <p className="mt-1 text-sm leading-relaxed text-white/80">
+              The Holy Ghost is poured out worldwide, confirming the same Acts 2 message with tongues and Jesus-name baptism.
+            </p>
+          </li>
+
+          <li className="relative pl-6">
+            <span className="absolute left-0 top-1.5 h-2.5 w-2.5 rounded-full bg-emerald-400 ring-4 ring-emerald-400/15" />
+            <h4 className="text-sm font-medium text-white/90">Today — The Same Truth</h4>
+            <p className="mt-1 text-sm leading-relaxed text-white/80">
+              Repentance, baptism in Jesus’ name, and the infilling of the Holy Ghost continue to transform lives across the world.
+            </p>
+          </li>
+        </ol>
+      </div>
+
+      {/* optional footer link */}
+      <div className="relative z-10 mt-6">
+        <a
+          href="/timeline"
+          className="inline-flex items-center gap-2 rounded-xl border border-white/10 bg-white/[0.04] px-3 py-2 text-xs font-medium text-white/85 transition hover:border-white/15 hover:bg-white/[0.06]"
+        >
+          View full timeline
+          <svg className="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+            <path d="M12.293 3.293a1 1 0 0 1 1.414 0l4 4a1 1 0 0 1-1.414 1.414L14 6.414V16a1 1 0 1 1-2 0V6.414l-2.293 2.293A1 1 0 0 1 8.293 7.293l4-4z" />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+  
+</div> 
       </section>
       {/* FAQ */}
       <section id="faq" className="relative border-t border-white/10 py-20 lg:py-24">
