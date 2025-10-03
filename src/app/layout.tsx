@@ -70,9 +70,10 @@ const orgLd = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
+    
     <html lang="en">
       <head>
-        {/* Put JSON-LD in <head>. Use __html with two underscores. */}
+        
         <Script
           id="ld-json-website"
           type="application/ld+json"
@@ -86,7 +87,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           dangerouslySetInnerHTML={{ __html: JSON.stringify(orgLd) }}
         />
       </head>
-      <body>{children}</body>
+      <body className="min-h-screen bg-neutral-950 text-slate-100 antialiased">
+        <AppHeader />
+        {children}
+      </body>
     </html>
+    
   );
+  
 }

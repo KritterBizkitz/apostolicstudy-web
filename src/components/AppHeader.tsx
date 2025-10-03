@@ -34,6 +34,12 @@ export default function AppHeader() {
         {/* Right side */}
         <nav className="ml-auto flex items-center gap-2">
           <Link
+            href="/resources"
+            className="rounded-xl px-3 py-2 text-sm bg-white/10 border border-white/10 hover:bg-white/15"
+          >
+            Resources
+          </Link>
+          <Link
             href="/settings"
             className="rounded-xl px-3 py-2 text-sm bg-white/10 border border-white/10 hover:bg-white/15"
           >
