@@ -161,13 +161,13 @@ export default function AppHome() {
           </Link>
 
           <Link
-            href="/app"
+            href="/reading-plans"
             className="group rounded-2xl border border-white/10 bg-white/[0.02] p-6 backdrop-blur
            hover:border-white/25 hover:bg-white/[0.04] transition"
 
           ><div className="mb-3 h-1 rounded-full bg-gradient-to-r from-indigo-500/50 via-sky-500/40 to-emerald-500/50" />
             <div className="text-xs px-2 py-0.5 inline-block rounded bg-white/10 border border-white/10">
-              Coming Soon
+              BETA
             </div>
             <h2 className="text-lg font-semibold">Reading Plans</h2>
             <p className="text-white/75 mt-2">Gospels in 60 days · Bible in a year.</p>

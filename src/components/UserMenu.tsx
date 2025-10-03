@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { supabase } from "@/lib/supabaseClient";
+import { createBrowserSupabase } from '@/lib/supabaseClient';
 
 function initialsFromEmail(email?: string) {
   if (!email) return "U";
@@ -14,16 +14,32 @@ function initialsFromEmail(email?: string) {
 }
 
 export default function UserMenu() {
+  const supabase = createBrowserSupabase();
   const [email, setEmail] = useState<string | null>(null);
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    supabase.auth.getUser().then(({ data }) => setEmail(data.user?.email ?? null));
-    const { data: sub } = supabase.auth.onAuthStateChange((_e, session) =>
-      setEmail(session?.user?.email ?? null)
-    );
-    return () => sub.subscription.unsubscribe();
-  }, []);
+  let mounted = true;
+
+  // Authoritative user fetch
+  supabase.auth.getUser().then(({ data }) => {
+    if (!mounted) return;
+    setEmail(data.user?.email ?? null);
+  });
+
+  // Keep header in sync on auth changes (re-fetch the user)
+  const { data: sub } = supabase.auth.onAuthStateChange(async () => {
+    const { data } = await supabase.auth.getUser();
+    if (!mounted) return;
+    setEmail(data.user?.email ?? null);
+  });
+
+  return () => {
+    mounted = false;
+    sub?.subscription?.unsubscribe?.();
+  };
+}, [supabase]);
+
 
   if (!email) {
     return (

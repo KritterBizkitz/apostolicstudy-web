@@ -62,7 +62,8 @@ type Props = {
 };
 
 export default function NotesPanel({ bookId, chapter }: Props) {
-  const { user, loading: authLoading } = useSupabaseUser();
+  const user = useSupabaseUser();
+
   const [items, setItems] = useState<NoteItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -108,12 +109,7 @@ export default function NotesPanel({ bookId, chapter }: Props) {
     }
   }, [bookId, chapter, isCloud]);
 
-  useEffect(() => {
-    if (authLoading) return;
-    loadNotes();
-  }, [authLoading, loadNotes]);
-
-  useEffect(() => {
+    useEffect(() => {
     const onChanged = () => loadNotes();
     window.addEventListener("as:notes:changed", onChanged);
     return () => window.removeEventListener("as:notes:changed", onChanged);

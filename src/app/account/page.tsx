@@ -1,61 +1,85 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { supabase } from '../../lib/supabaseClient';
+import type { AuthChangeEvent, Session } from '@supabase/supabase-js';
+import { createBrowserSupabase } from '@/lib/supabaseClient';
 
 export default function AccountPage() {
+  // ✅ create a browser client for this page
+  const supabase = createBrowserSupabase();
+
   const [email, setEmail] = useState('');
   const [pw, setPw] = useState('');
   const [me, setMe] = useState<string | null>(null);
   const [msg, setMsg] = useState<string | null>(null);
 
+  // Keep "me" in sync with Supabase auth
   useEffect(() => {
-    supabase.auth.getUser().then(({ data }) => setMe(data.user?.email ?? null));
-    const { data: sub } = supabase.auth.onAuthStateChange((_e, session) =>
-      setMe(session?.user?.email ?? null)
+    let active = true;
+
+    supabase.auth.getUser().then(({ data }) => {
+      if (!active) return;
+      setMe(data.user?.email ?? null);
+    });
+
+    const { data: sub } = supabase.auth.onAuthStateChange(
+      (_event: AuthChangeEvent, session: Session | null) => {
+        if (!active) return;
+        setMe(session?.user?.email ?? null);
+      }
     );
-    return () => sub.subscription.unsubscribe();
-  }, []);
 
-  async function signInWithPassword() {
+    return () => {
+      active = false;
+      sub?.subscription?.unsubscribe?.();
+    };
+  }, [supabase]);
+
+  // ---- actions ----
+  const signInWithPassword = async () => {
     setMsg(null);
-    const { error } = await supabase.auth.signInWithPassword({ email, password: pw });
+    const { error } = await supabase.auth.signInWithPassword({
+      email,
+      password: pw,
+    });
     setMsg(error ? error.message : 'Signed in.');
-  }
+  };
 
-  async function signUpWithPassword() {
+  const signUpWithPassword = async () => {
     setMsg(null);
     const { error } = await supabase.auth.signUp({
       email,
       password: pw,
-      options: {
-        emailRedirectTo: `${location.origin}/auth/callback`,
-      },
+      options: { emailRedirectTo: `${location.origin}/auth/callback` },
     });
-    setMsg(error ? error.message : 'Check your email to confirm your account.');
-  }
+    setMsg(error ? error.message : 'Check your email to confirm.');
+  };
 
-  async function sendMagicLink() {
+  const sendMagicLink = async () => {
     setMsg(null);
     const { error } = await supabase.auth.signInWithOtp({
       email,
       options: { emailRedirectTo: `${location.origin}/auth/callback` },
     });
     setMsg(error ? error.message : 'Magic link sent. Check your inbox.');
-  }
+  };
 
-  async function signOut() {
+  const signOut = async () => {
     await supabase.auth.signOut();
     setMsg('Signed out.');
-  }
+    setMe(null);
+  };
 
+  // ---- UI ----
   return (
     <main className="mx-auto max-w-lg px-4 py-10">
       <h1 className="text-2xl font-semibold">My Account</h1>
 
       {me ? (
         <div className="mt-4 space-y-3 rounded-2xl border border-white/10 bg-white/[0.05] p-5">
-          <div className="text-white/80">Signed in as <strong>{me}</strong></div>
+          <div className="text-white/80">
+            Signed in as <strong>{me}</strong>
+          </div>
           <button
             onClick={signOut}
             className="rounded-xl px-4 py-2 bg-white/10 border border-white/10 hover:bg-white/15"
@@ -73,6 +97,7 @@ export default function AccountPage() {
               className="w-full rounded-xl bg-white/5 border border-white/10 px-3 py-2 outline-none"
               placeholder="you@example.com"
             />
+
             <label className="block text-sm mt-2">Password</label>
             <input
               type="password"
@@ -81,17 +106,26 @@ export default function AccountPage() {
               className="w-full rounded-xl bg-white/5 border border-white/10 px-3 py-2 outline-none"
               placeholder="********"
             />
+
             <div className="flex flex-wrap gap-2 pt-2">
-              <button onClick={signInWithPassword}
-                className="rounded-xl px-4 py-2 bg-gradient-to-tr from-indigo-500 to-emerald-500 text-black">
+              <button
+                onClick={signInWithPassword}
+                className="rounded-xl px-4 py-2 bg-gradient-to-tr from-indigo-500 to-emerald-500 text-black"
+              >
                 Sign in
               </button>
-              <button onClick={signUpWithPassword}
-                className="rounded-xl px-4 py-2 bg-white/10 border border-white/10 hover:bg-white/15">
+
+              <button
+                onClick={signUpWithPassword}
+                className="rounded-xl px-4 py-2 bg-white/10 border border-white/10 hover:bg-white/15"
+              >
                 Create account
               </button>
-              <button onClick={sendMagicLink}
-                className="rounded-xl px-4 py-2 bg-white/10 border border-white/10 hover:bg-white/15">
+
+              <button
+                onClick={sendMagicLink}
+                className="rounded-xl px-4 py-2 bg-white/10 border border-white/10 hover:bg-white/15"
+              >
                 Email me a magic link
               </button>
             </div>

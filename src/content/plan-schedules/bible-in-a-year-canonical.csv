@@ -1,0 +1,228 @@
+# day,title,summary,refs(semicolon-separated)
+1,In the beginning,Creation to the fall,Genesis 1–3
+2,Early world,From Cain to the Flood,Genesis 4–7
+3,After the waters,Covenant with Noah,Genesis 8–11
+4,Promise to Abram,,Genesis 12–14
+5,Covenant cut,,Genesis 15–17
+6,Laughter promised,,Genesis 18–19
+7,Nations and heirs,,Genesis 20–22
+8,Isaac born,Conflict and covenant,Genesis 21–23
+9,A bride for Isaac,,Genesis 24–25
+10,Jacob’s struggle,Birthright and blessing,Genesis 26–28
+11,Jacob in exile,,Genesis 29–31
+12,Return and wrestling,Reconciliation with Esau,Genesis 32–34
+13,God of Bethel,Jacob’s family and faith,Genesis 35–37
+14,Joseph in Egypt,Providence through trials,Genesis 38–40
+15,Dreams fulfilled,Joseph exalted,Genesis 41–42
+16,Family reunion,Joseph reveals himself,Genesis 43–45
+17,Israel to Egypt,Blessings and burials,Genesis 46–50
+18,The cry of Israel,God raises a deliverer,Exodus 1–4
+19,Signs and wonders,The plagues of Egypt,Exodus 5–10
+20,The Passover,Exodus from bondage,Exodus 11–13
+21,Through the sea,Provision in the wilderness,Exodus 14–18
+22,Covenant at Sinai,The Ten Commandments,Exodus 19–24
+23,The tabernacle pattern,God’s dwelling with Israel,Exodus 25–31
+24,The golden calf,Covenant renewed,Exodus 32–34
+25,The tabernacle built,The glory fills the house,Exodus 35–40
+26,Laws for living,Offerings and priests,Leviticus 1–7
+27,Ordination of Aaron,God’s holiness,Leviticus 8–10
+28,Laws of purity,Clean and unclean,Leviticus 11–15
+29,The Day of Atonement,Holiness code,Leviticus 16–20
+30,Feasts and sabbaths,Year of Jubilee,Leviticus 21–25
+31,Blessings and curses,Vows to the Lord,Leviticus 26–27
+32,Numbering the tribes,Camp and journey,Numbers 1–4
+33,Offerings and duties,Purification and blessing,Numbers 5–8
+34,Passover and journey,Complaints and quail,Numbers 9–12
+35,Spies and rebellion,Wandering decreed,Numbers 13–16
+36,Aaron’s rod and laws,Water from the rock,Numbers 17–20
+37,Edom denied,Balaam’s prophecies,Numbers 21–24
+38,Baal worship,New generation numbered,Numbers 25–27
+39,Laws and vows,Victory over Midian,Numbers 28–31
+40,Division of land,Refuge and inheritance,Numbers 32–36
+41,Moses’ first speech,Obedience and covenant,Deuteronomy 1–4
+42,Hear O Israel,Love and obedience,Deuteronomy 5–8
+43,Choose life,Blessings and curses,Deuteronomy 9–11
+44,Worship and justice,False prophets warned,Deuteronomy 12–16
+45,Leadership and laws,Future hope,Deuteronomy 17–20
+46,Blessings and curses,Covenant renewed,Deuteronomy 21–26
+47,Life and death,Moses’ final charge,Deuteronomy 27–30
+48,Song of Moses,Blessings and death,Deuteronomy 31–34
+49,Joshua commissioned,Entering the land,Joshua 1–4
+50,The fall of Jericho,Victory and defeat,Joshua 5–8
+51,The sun stands still,Conquest in Canaan,Joshua 9–12
+52,Division of the land,Inheritance given,Joshua 13–17
+53,Rest in the land,Cities of refuge,Joshua 18–22
+54,Choose whom you serve,Joshua’s farewell,Joshua 23–24
+55,Israel after Joshua,A generation forgot God,Judges 1–3
+56,Deborah and Barak,Victory through a prophetess,Judges 4–5
+57,Gideon called,God’s unlikely deliverer,Judges 6–8
+58,Abimelech and judges,Decline continues,Judges 9–12
+59,Samson’s strength,God’s flawed judge,Judges 13–16
+60,Idolatry and chaos,Israel without a king,Judges 17–21
+61,Ruth’s loyalty,From famine to favor,Ruth 1–4
+62,Hannah’s prayer,Samuel the prophet,1 Samuel 1–3
+63,Israel demands a king,Saul anointed,1 Samuel 4–10
+64,Saul’s victories and failures,The rejected king,1 Samuel 11–15
+65,David anointed,David and Goliath,1 Samuel 16–18
+66,David pursued,Saul hunts him down,1 Samuel 19–23
+67,David spares Saul,Saul acknowledges David,1 Samuel 24–28
+68,The death of Saul,David rises,1 Samuel 29–31
+69,David made king,The throne established,2 Samuel 1–5
+70,God’s covenant with David,The ark in Jerusalem,2 Samuel 6–10
+71,David’s sin with Bathsheba,The sword in his house,2 Samuel 11–14
+72,Absalom’s rebellion,David’s grief,2 Samuel 15–18
+73,David restored,The kingdom secured,2 Samuel 19–22
+74,David’s last words,The king’s final days,2 Samuel 23–24
+75,Solomon anointed,David’s charge,1 Kings 1–2
+76,Solomon’s wisdom,Temple preparations,1 Kings 3–5
+77,The temple built,God’s glory fills the house,1 Kings 6–8
+78,Solomon’s splendor,His fame and riches,1 Kings 9–10
+79,Solomon’s downfall,Division foretold,1 Kings 11
+80,Division of the kingdom,Jeroboam and Rehoboam,1 Kings 12–14
+81,Kings of Israel and Judah,Prophets and power,1 Kings 15–16
+82,Elijah the prophet,Mount Carmel,1 Kings 17–18
+83,God speaks in a whisper,Judgment on Ahab,1 Kings 19–22
+84,Elijah taken up,Elisha succeeds him,2 Kings 1–2
+85,Elisha’s miracles,Provision and power,2 Kings 3–5
+86,Chariots of fire,Deliverance for Israel,2 Kings 6–8
+87,Jehu’s rise,Judgment on Ahab’s house,2 Kings 9–10
+88,Joash and prophets,Repairing the temple,2 Kings 11–14
+89,Azariah to Ahaz,Decline of Judah,2 Kings 15–16
+90,Israel falls,Samaria destroyed,2 Kings 17
+91,Hezekiah’s reforms,God delivers Jerusalem,2 Kings 18–20
+92,Manasseh’s sin,Josiah’s revival,2 Kings 21–23
+93,Judah falls,Jerusalem destroyed,2 Kings 24–25
+94,Genealogies of Israel,The reign of David begins,1 Chronicles 1–11
+95,David’s mighty men,The ark brought up,1 Chronicles 12–16
+96,Covenant with David,Plans for the temple,1 Chronicles 17–22
+97,Temple duties assigned,David’s final charge,1 Chronicles 23–29
+98,Solomon’s reign,Temple completed,2 Chronicles 1–7
+99,Solomon’s wealth and fall,Division of the kingdom,2 Chronicles 8–12
+100,Kings of Judah,Asa to Jehoshaphat,2 Chronicles 13–20
+101,Judah’s decline,Joash to Ahaz,2 Chronicles 21–28
+102,Hezekiah’s reforms,Deliverance from Assyria,2 Chronicles 29–32
+103,Manasseh to Josiah,The book of the law,2 Chronicles 33–35
+104,The fall of Judah,Exile to Babylon,2 Chronicles 36
+105,Return from exile,Temple foundations laid,Ezra 1–6
+106,Ezra’s mission,Restoring the law,Ezra 7–10
+107,Rebuilding Jerusalem,Opposition and perseverance,Nehemiah 1–7
+108,The law restored,Covenant renewed,Nehemiah 8–13
+109,Esther’s courage,For such a time as this,Esther 1–10
+110,Job’s trials,Suffering of the righteous,Job 1–5
+111,Job’s lament,Debate begins,Job 6–10
+112,Arguments with friends,Job defends himself,Job 11–20
+113,Job’s final plea,The mystery of suffering,Job 21–31
+114,God speaks,Job humbled and restored,Job 32–42
+115,Blessed is the man,The Lord is my shepherd,Psalms 1–23
+116,The Lord reigns,The King of glory,Psalms 24–41
+117,My soul thirsts for God,Hope in despair,Psalms 42–72
+118,Teach us to number our days,The Lord our dwelling place,Psalms 73–90
+119,Psalms of praise and trust,The Lord reigns forever,Psalms 91–106
+120,Give thanks to the Lord,His mercy endures forever,Psalms 107–119
+121,Psalms of ascent,The Lord keeps Israel,Psalms 120–134
+122,Great is the Lord,Let everything praise Him,Psalms 135–150
+123,The way of wisdom,Fear of the Lord,Proverbs 1–9
+124,Proverbs of Solomon,Wisdom in daily life,Proverbs 10–22
+125,Words of the wise,Life and death in the tongue,Proverbs 23–31
+126,Life under the sun,Everything has its time,Ecclesiastes 1–6
+127,Fear God and keep His commands,The end of the matter,Ecclesiastes 7–12
+128,The song of songs,Love’s strong flame,Song of Solomon 1–8
+129,The vision of Isaiah,The holy God,Isaiah 1–12
+130,Judgment on the nations,The Lord of hosts reigns,Isaiah 13–27
+131,Trust in God alone,Deliverance from Assyria,Isaiah 28–39
+132,Comfort ye my people,The suffering servant,Isaiah 40–53
+133,Arise, shine,Future glory for Zion,Isaiah 54–66
+134,Jeremiah called,The weeping prophet,Jeremiah 1–6
+135,Judgment on Judah,False prophets and broken covenant,Jeremiah 7–20
+136,Plots and persecution,The new covenant promised,Jeremiah 21–33
+137,The fall of Jerusalem,Hope in exile,Jeremiah 34–39
+138,In Egypt,God’s word stands,Jeremiah 40–45
+139,Judgment on the nations,Babylon’s doom,Jeremiah 46–52
+140,Tears for Jerusalem,The Lord is my portion,Lamentations 1–5
+141,Visions of God,The prophet commissioned,Ezekiel 1–7
+142,God’s glory departs,Judgment on Israel,Ezekiel 8–24
+143,Prophecies to the nations,Egypt and Tyre,Ezekiel 25–32
+144,The watchman’s call,A new heart promised,Ezekiel 33–39
+145,The new temple,The glory returns,Ezekiel 40–48
+146,Daniel in Babylon,Faithful in exile,Daniel 1–6
+147,Visions of kingdoms,The Ancient of Days,Daniel 7–12
+148,Hosea’s marriage,God’s steadfast love,Hosea 1–14
+149,The day of the Lord,God roars from Zion,Joel 1–3
+150,Judgment on Edom,The kingdom is the Lord’s,Obadiah 1
+151,Jonah’s flight,God’s mercy on Nineveh,Jonah 1–4
+152,Do justly,Love mercy,Walk humbly,Micah 1–7
+153,Nahum’s vision,The fall of Nineveh,Nahum 1–3
+154,Habakkuk’s prayer,The just shall live by faith,Habakkuk 1–3
+155,Zephaniah’s warning,The Lord in your midst,Zephaniah 1–3
+156,Return and rebuild,The Lord remembers,Zechariah 1–8
+157,Visions of the Messiah,The coming King,Zechariah 9–14
+158,Malachi’s rebuke,The Sun of righteousness,Malachi 1–4
+159,The King has come,The birth of Jesus,Matthew 1–4
+160,Sermon on the Mount,Kingdom principles,Matthew 5–7
+161,Miracles of Jesus,Faith and authority,Matthew 8–10
+162,Parables of the kingdom,Rest for the weary,Matthew 11–13
+163,Confession and transfiguration,Who do you say I am?,Matthew 14–17
+164,Teachings on humility and forgiveness,Matthew 18–20
+165,The triumphal entry,Signs of the end,Matthew 21–25
+166,The cross and resurrection,The Great Commission,Matthew 26–28
+167,The beginning of the gospel,Authority of the Son of God,Mark 1–3
+168,Parables and miracles,Who is this man?,Mark 4–6
+169,Tradition vs truth,The way of the cross,Mark 7–10
+170,The temple cleansed,Watch therefore,Mark 11–13
+171,The passion of Christ,The risen Lord,Mark 14–16
+172,Good news of great joy,The Savior is born,Luke 1–3
+173,Teaching and miracles,The twelve sent,Luke 4–9
+174,The good Samaritan,The Lord’s prayer,Luke 10–13
+175,The prodigal son,Counting the cost,Luke 14–17
+176,The rich man and Lazarus,Coming of the kingdom,Luke 18–21
+177,The betrayal and crucifixion,On the road to Emmaus,Luke 22–24
+178,In the beginning was the Word,The Lamb of God,John 1–3
+179,Living water,The bread of life,John 4–6
+180,I am the light of the world,The Good Shepherd,John 7–10
+181,I am the resurrection and the life,Lazarus raised,John 11–12
+182,I am the way,The true vine,John 13–15
+183,The Comforter promised,Jesus’ prayer,John 16–17
+184,The cross and resurrection,That you may believe,John 18–21
+185,The Holy Ghost poured out,The church is born,Acts 1–4
+186,Persecution and boldness,Stephen’s testimony,Acts 5–7
+187,Philip in Samaria,Saul converted,Acts 8–9
+188,Peter’s vision,Gentiles included,Acts 10–12
+189,Paul’s first journey,The Jerusalem council,Acts 13–15
+190,Paul’s second journey,The gospel spreads,Acts 16–18
+191,Paul’s third journey,Farewell to elders,Acts 19–21
+192,Paul arrested,Testifies before rulers,Acts 22–26
+193,Paul sails to Rome,The gospel unhindered,Acts 27–28
+194,The righteousness of God,Justified by faith,Romans 1–4
+195,Dead to sin,Alive in Christ,Romans 5–8
+196,God’s plan for Israel,Living sacrifice,Romans 9–12
+197,Submit to authority,Love fulfills the law,Romans 13–16
+198,Christ the wisdom of God,The temple of the Spirit,1 Corinthians 1–6
+199,Marriage and Christian liberty,Run the race,1 Corinthians 7–10
+200,Spiritual gifts,The resurrection,1 Corinthians 11–16
+201,God of comfort,The ministry of reconciliation,2 Corinthians 1–7
+202,Generous giving,Paul’s defense,2 Corinthians 8–13
+203,Grace through faith,Freedom in Christ,Galatians 1–6
+204,Blessings in Christ,The armor of God,Ephesians 1–6
+205,Christ our life,Rejoice in the Lord,Philippians 1–4
+206,The supremacy of Christ,Complete in Him,Colossians 1–4
+207,Faith, hope, and love,The coming of the Lord,1 Thessalonians 1–5
+208,Stand firm,The man of lawlessness,2 Thessalonians 1–3
+209,Sound doctrine,Christ Jesus came to save,1 Timothy 1–6
+210,Preach the word,Finishing the race,2 Timothy 1–4
+211,Teach sound doctrine,The grace of God,Titus 1–3
+212,From slave to brother,Philemon 1
+213,The supremacy of Christ,The new covenant,Hebrews 1–8
+214,Faith and endurance,The great cloud of witnesses,Hebrews 9–13
+215,Be doers of the word,Faith and works,James 1–5
+216,Be holy,Christ the cornerstone,1 Peter 1–5
+217,False teachers,The day of the Lord,2 Peter 1–3
+218,Fellowship with God,God is love,1 John 1–5
+219,Truth and love,Walk in truth,2 John 1,3 John 1
+220,Contend for the faith,Keep yourselves in God’s love,Jude 1
+221,The revelation of Jesus Christ,The churches addressed,Revelation 1–3
+222,The throne room of heaven,The Lamb opens the seals,Revelation 4–7
+223,Trumpets of judgment,The little book,Revelation 8–11
+224,The dragon and the beasts,The Lamb on Mount Zion,Revelation 12–14
+225,The wrath of God,The fall of Babylon,Revelation 15–18
+226,The marriage supper of the Lamb,Christ returns,Revelation 19–20
+227,A new heaven and a new earth,The river of life,Revelation 21–22

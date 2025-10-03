@@ -2,7 +2,9 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import Verse from "@/components/Verse";
-import { supabase } from "@/lib/supabaseClient";
+import { createBrowserSupabase } from "@/lib/supabaseClient";
+
+
 
 // Safe ID generator that works in all environments
 function genId() {
@@ -178,6 +180,8 @@ export default function InteractiveChapter({
   chapter: number;
   verses: VerseDto[];
 }) {
+  const supabase = createBrowserSupabase();
+  const commentaryFetchesRef = useRef<Map<number, AbortController>>(new Map());
   const [hl, setHl] = useState<Record<number, boolean>>({});
 
   function addHl(v: number) {
@@ -239,48 +243,66 @@ export default function InteractiveChapter({
     setNotesFor(null);
     setNoteText('');
   }
-
-  const formatReference = useCallback(
-    (verse: number) => `${bookLabel} ${chapter}:${verse}`,
-    [bookLabel, chapter]
-  );
-
-  const fetchCommentary = useCallback(async (verse: number) => {
+const formatReference = useCallback(
+  (v: number) => `${bookLabel} ${chapter}:${v}`,
+  [bookLabel, chapter]
+);
+  const fetchCommentary = useCallback(
+  async (verse: number) => {
     const reference = formatReference(verse);
+
+    // cancel any in-flight fetch for this verse
+    const prev = commentaryFetchesRef.current.get(verse);
+    if (prev) prev.abort();
+
+    const ctrl = new AbortController();
+    commentaryFetchesRef.current.set(verse, ctrl);
 
     try {
       const { data, error } = await supabase
         .from("commentary")
         .select("content")
         .eq("reference", reference)
-        .maybeSingle();
+        .maybeSingle()
+        // @ts-expect-error: query builder supports abortSignal in supabase-js
+        .abortSignal?.(ctrl.signal);
 
-      if (error) {
-        throw error;
-      }
+      // if we navigated away / opened another verse, ignore this result
+      if (ctrl.signal.aborted) return;
+
+      if (error) throw error;
 
       setCommentaryTabs((prev) =>
         prev.map((tab) =>
           tab.verse === verse
-            ? { ...tab, loading: false, content: data?.content ?? null, error: null }
+            ? {
+                ...tab,
+                loading: false,
+                content: data?.content ?? null,
+                error: null,
+              }
             : tab
         )
       );
     } catch (err) {
+      if (ctrl.signal.aborted) return; // ignore cancelled calls
       console.error("[commentary] fetch failed", err);
       const message =
         err instanceof Error ? err.message : "Unable to load commentary.";
       setCommentaryTabs((prev) =>
         prev.map((tab) =>
-          tab.verse === verse
-            ? { ...tab, loading: false, error: message }
-            : tab
+          tab.verse === verse ? { ...tab, loading: false, error: message } : tab
         )
       );
+    } finally {
+      commentaryFetchesRef.current.delete(verse);
     }
-  }, [formatReference]);
-
-  const openCommentary = useCallback((verse: number) => {
+  },
+  [formatReference, supabase]
+);
+const openCommentary = useCallback(
+  (verse: number) => {
+    // show a loading tab for this verse (or reset the existing one)
     setCommentaryTabs((prev) => {
       const exists = prev.some((tab) => tab.verse === verse);
       if (exists) {
@@ -290,12 +312,19 @@ export default function InteractiveChapter({
       }
       return [...prev, { verse, content: null, loading: true, error: null }];
     });
+
+    // focus the verse + start the fetch
     setActiveCommentary(verse);
     setActiveVerse(verse);
     fetchCommentary(verse);
-  }, [fetchCommentary]);
+  },
+  [fetchCommentary]
+);
+
 
   const closeCommentary = useCallback((verse: number) => {
+    commentaryFetchesRef.current.get(verse)?.abort();
+  commentaryFetchesRef.current.delete(verse);
     setCommentaryTabs((prev) => {
       const idx = prev.findIndex((tab) => tab.verse === verse);
       if (idx === -1) return prev;

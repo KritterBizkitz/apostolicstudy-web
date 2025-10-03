@@ -118,7 +118,7 @@ export default function ReadingPlansToggle() {
               <div className="pointer-events-none absolute inset-y-0 right-0 w-10 bg-gradient-to-l from-black/70 to-transparent rounded-r-3xl" />
 
               {/* Scroll container */}
-              <div ref={bibleRef} className="mt-4 overflow-x-auto scroll-smooth">
+              <div ref={bibleRef} className="mt-4 overflow-x-auto scroll-smooth scrollbar-hide">
                 <ul className="flex flex-nowrap gap-4 min-w-full pr-8">
                   {biblePlans.map((p: Plan) => (
                     <li key={p.slug} className="w-[320px] shrink-0">
@@ -166,7 +166,7 @@ export default function ReadingPlansToggle() {
               <div className="pointer-events-none absolute inset-y-0 right-0 w-10 bg-gradient-to-l from-black/70 to-transparent rounded-r-3xl" />
 
               {/* Scroll container */}
-              <div ref={topicRef} className="mt-4 overflow-x-auto scroll-smooth">
+              <div ref={topicRef} className="mt-4 overflow-x-auto scroll-smooth scrollbar-hide">
                 <ul className="flex flex-nowrap gap-4 min-w-full pr-8">
                   {topicPlans.map((p: Plan) => (
                     <li key={p.slug} className="w-[320px] shrink-0">
