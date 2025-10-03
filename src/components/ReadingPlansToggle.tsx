@@ -40,6 +40,14 @@ export default function ReadingPlansToggle() {
   function scrollBibleRight() {
     bibleRef.current?.scrollBy({ left: 360, behavior: 'smooth' });
   }
+  // Scroll helpers for the Topic row
+  const topicRef = useRef<HTMLDivElement>(null);
+  function scrollTopicLeft() {
+    topicRef.current?.scrollBy({ left: -360, behavior: 'smooth' });
+  }
+  function scrollTopicRight() {
+    topicRef.current?.scrollBy({ left: 360, behavior: 'smooth' });
+  }
 
   return (
     <section>
@@ -128,14 +136,45 @@ export default function ReadingPlansToggle() {
               Topic plans
             </h2>
 
-            <div className="mt-4 overflow-x-auto">
-              <ul className="flex flex-nowrap gap-4 min-w-full pr-4">
-                {topicPlans.map((p: Plan) => (
-                  <li key={p.slug} className="w-[320px] shrink-0">
-                    <PlanCard plan={p} />
-                  </li>
-                ))}
-              </ul>
+            <div className="relative min-h-[220px]">
+              {/* Left arrow */}
+              <button
+                type="button"
+                aria-label="Scroll left"
+                onClick={scrollTopicLeft}
+                className="absolute left-0 top-1/2 -translate-y-1/2 z-20 m-1 inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/15 bg-black/40 backdrop-blur hover:bg-black/55"
+              >
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" className="text-white/80">
+                  <path d="M15 18l-6-6 6-6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </button>
+
+              {/* Right arrow */}
+              <button
+                type="button"
+                aria-label="Scroll right"
+                onClick={scrollTopicRight}
+                className="absolute right-0 top-1/2 -translate-y-1/2 z-20 m-1 inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/15 bg-black/40 backdrop-blur hover:bg-black/55"
+              >
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" className="text-white/80">
+                  <path d="M9 6l6 6-6 6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </button>
+
+              {/* Fades */}
+              <div className="pointer-events-none absolute inset-y-0 left-0 w-10 bg-gradient-to-r from-black/70 to-transparent rounded-l-3xl" />
+              <div className="pointer-events-none absolute inset-y-0 right-0 w-10 bg-gradient-to-l from-black/70 to-transparent rounded-r-3xl" />
+
+              {/* Scroll container */}
+              <div ref={topicRef} className="mt-4 overflow-x-auto scroll-smooth">
+                <ul className="flex flex-nowrap gap-4 min-w-full pr-8">
+                  {topicPlans.map((p: Plan) => (
+                    <li key={p.slug} className="w-[320px] shrink-0">
+                      <PlanCard plan={p} />
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
           </div>
         )}
