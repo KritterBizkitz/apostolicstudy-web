@@ -2,6 +2,8 @@
 import { getServerSupabase } from "@/lib/supabaseServer";
 import Link from "next/link";
 
+export const dynamic = 'force-dynamic';
+
 // Simple type for our query result
 type Note = {
   id: string;
@@ -15,7 +17,8 @@ type Note = {
 export const revalidate = 60; // ISR: re-fetch every 60s so new notes appear without redeploys
 
 export default async function StudyNotesPage() {
-  const supabase = getServerSupabase();
+  const supabase = await getServerSupabase();  // <-- await it
+
 
   const { data, error } = await supabase
     .from("notes")
