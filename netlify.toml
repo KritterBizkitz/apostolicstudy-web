@@ -8,7 +8,5 @@
 [[plugins]]
   package = "@netlify/plugin-nextjs"
 
-# make sure Prisma's native engine files get bundled with functions
-[functions]
-  node_bundler = "esbuild"
-  included_files = ["node_modules/.prisma/client/**", "node_modules/@prisma/**"]
+
+
