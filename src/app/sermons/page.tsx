@@ -1,6 +1,6 @@
 // app/sermons/page.tsx
 import { getServerSupabase } from "@/lib/supabaseServer";
-
+import { createServerSupabase } from "@/lib/supabaseServer";
 type Note = {
   id: string;
   title: string;
@@ -13,7 +13,7 @@ type Note = {
 export const revalidate = 60;
 
 export default async function SermonNotesPage() {
-  const supabase = getServerSupabase();
+  const supabase = await createServerSupabase();
 
   const { data, error } = await supabase
     .from("notes")
