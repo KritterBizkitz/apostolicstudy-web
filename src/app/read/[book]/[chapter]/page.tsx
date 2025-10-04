@@ -66,7 +66,7 @@ export default async function ReaderPage(
         {/* MAIN */}
         <main className="col-span-12 lg:col-span-8 xl:col-span-9">
           {/* sticky nav */}
-          <div className="sticky top-0 z-10 -mx-4 px-4 py-3 bg-black/70 backdrop-blur">
+          <div className="sticky top-0 z-10 -mx-4 px-4 py-3 border-b border-slate-900/10 dark:border-slate-50/10 bg-white/70 dark:bg-black/70 backdrop-blur">
             <div className="flex flex-wrap items-end gap-3">
               <PinCurrent bookId={bookId} chapter={ch} />
               <BookChapterPicker book={bookId} chapter={ch} />

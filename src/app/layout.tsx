@@ -87,7 +87,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           dangerouslySetInnerHTML={{ __html: JSON.stringify(orgLd) }}
         />
       </head>
-      <body className="min-h-screen bg-neutral-950 text-slate-100 antialiased">
+      <body className="min-h-screen antialiased">
         <AppHeader />
         {children}
       </body>
