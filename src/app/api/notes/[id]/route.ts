@@ -1,59 +1,55 @@
-﻿import { cookies } from "next/headers";
-import { NextRequest, NextResponse } from "next/server";
-import { createServerClient } from "@supabase/ssr";
+﻿import { cookies } from 'next/headers';
+import { NextRequest, NextResponse } from 'next/server';
+import { createServerClient } from '@supabase/ssr';
 
-async function createSupabase() {
+async function createSupabase(req: NextRequest) {
   const cookieStore = await cookies();
+  const authHeader = req.headers.get('authorization') ?? '';
+
   return createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
     {
+      // pass through the Bearer token so RLS identifies the user
+      global: { headers: { Authorization: authHeader } },
+
+      // minimal cookie adapter (we don't set cookies here)
       cookies: {
-        getAll() {
-          return cookieStore.getAll().map(({ name, value }) => ({ name, value }));
+        get(name: string) {
+          return cookieStore.get(name)?.value ?? null;
         },
-        setAll(cookies) {
-          cookies.forEach(({ name, value, options }) => {
-            cookieStore.set(name, value, options);
-          });
-        },
+        set() {},
+        remove() {},
       },
     }
   );
 }
 
 export async function DELETE(
-  _req: NextRequest,
+  req: NextRequest,
   { params }: { params: { id: string } }
 ) {
-  const supabase = await createSupabase();
-  const {
-    data: { user },
-    error,
-  } = await supabase.auth.getUser();
+  const supabase = await createSupabase(req);
 
-  if (error) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
-  }
+  const { data: { user }, error } = await supabase.auth.getUser();
+  if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+  if (!user) return NextResponse.json({ error: 'Not authenticated.' }, { status: 401 });
 
-  if (!user) {
-    return NextResponse.json({ error: "Not authenticated." }, { status: 401 });
-  }
-
-  const noteId = params.id;
+  const noteId = params?.id;
   if (!noteId) {
-    return NextResponse.json({ error: "Missing note id." }, { status: 400 });
+    return NextResponse.json({ error: 'Missing note id.' }, { status: 400 });
   }
 
-  const { error: deleteError } = await supabase
-    .from("notes")
+  // Delete from the correct table; RLS ensures only own rows can be deleted
+  const { error: delError } = await supabase
+    .from('user_notes')
     .delete()
-    .eq("id", noteId)
-    .eq("author_id", user.id);
+    .eq('id', noteId)
+    .eq('user_id', user.id);
 
-  if (deleteError) {
-    return NextResponse.json({ error: deleteError.message }, { status: 500 });
+  if (delError) {
+    return NextResponse.json({ error: delError.message }, { status: 500 });
   }
 
-  return NextResponse.json({ ok: true });
+  return new NextResponse(null, { status: 204 });
 }

@@ -3,6 +3,8 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { createBrowserSupabase } from '@/lib/supabaseClient';
+import SignOutButton from '@/components/SignOutButton';
+
 
 function initialsFromEmail(email?: string) {
   if (!email) return "U";
@@ -73,15 +75,7 @@ export default function UserMenu() {
           >
             My account
           </Link>
-          <button
-            onClick={async () => {
-              await supabase.auth.signOut();
-              setOpen(false);
-            }}
-            className="w-full text-left rounded-lg px-3 py-2 hover:bg-white/10"
-          >
-            Sign out
-          </button>
+          <SignOutButton className="px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20" />
         </div>
       )}
     </div>

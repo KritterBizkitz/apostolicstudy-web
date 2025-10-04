@@ -232,17 +232,53 @@ export default function InteractiveChapter({
   }, [notesFor]);
 
   async function saveNote() {
-    const text = noteText.trim();
-    if (!text) return;
+  const text = noteText.trim();
+  if (!text) return;
 
-    addNoteLocal(bookId, chapter, { text, verse: notesFor });
+  // Are we logged in?
+  const { data: { session } } = await createBrowserSupabase().auth.getSession();
 
-    // notify other components (e.g., NotesPanel) to reload
+  if (session) {
+    // Logged in → save to cloud via /api/notes with Bearer token
+    try {
+      const headers: Record<string, string> = { 'Content-Type': 'application/json' };
+      headers.Authorization = `Bearer ${session.access_token}`;
+
+      const res = await fetch('/api/notes', {
+        method: 'POST',
+        headers,
+        body: JSON.stringify({
+          bookId,
+          chapter,
+          verse: notesFor, // may be number | null
+          text,
+        }),
+      });
+
+      if (!res.ok) {
+        const payload = await res.json().catch(() => ({}));
+        throw new Error(payload?.error ?? 'Unable to save note.');
+      }
+
+      // notify the NotesPanel to reload from the server
+      window.dispatchEvent(new Event('as:notes:changed'));
+    } catch (err) {
+      console.error('[notes] save (cloud) failed', err);
+      // optional fallback: keep a local copy so the user doesn't lose text
+      addNoteLocal(bookId, chapter, { text, verse: notesFor ?? null });
+      window.dispatchEvent(new Event('as:notes:changed'));
+    }
+  } else {
+    // Guest → save locally
+    addNoteLocal(bookId, chapter, { text, verse: notesFor ?? null });
     window.dispatchEvent(new Event('as:notes:changed'));
-
-    setNotesFor(null);
-    setNoteText('');
   }
+
+  // close drawer + clear input either way
+  setNotesFor(null);
+  setNoteText('');
+}
+
 const formatReference = useCallback(
   (v: number) => `${bookLabel} ${chapter}:${v}`,
   [bookLabel, chapter]
@@ -383,7 +419,7 @@ const openCommentary = useCallback(
             isActive={activeVerse === v}
             onHighlight={(vv) => addHl(vv)}
             onRemoveHighlight={(vv) => removeHl(vv)}
-            onAddNote={handleAddNote}
+            onAddNote={handleComposeNote}
             onComposeNote={handleComposeNote}
             onOpenCommentary={openCommentary}
             onActivate={(vv) => setActiveVerse(vv)}

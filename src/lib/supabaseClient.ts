@@ -1,18 +1,13 @@
 ﻿// src/lib/supabaseClient.ts
-import { createClient } from '@supabase/supabase-js';
+// Keep the same exports you already use elsewhere,
+// but make them return the ONE shared browser client.
 
-const URL = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-const ANON = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
+import { getBrowserSupabase } from './supabaseBrowser';
 
-/**
- * New API — make a fresh client in client components when needed.
- */
 export function createBrowserSupabase() {
-  return createClient(URL, ANON);
+  // Old callers that used createBrowserSupabase() will now
+  // receive the singleton instead of creating a new client.
+  return getBrowserSupabase();
 }
 
-/**
- * Back-compat — some files still import { supabase } from '@/lib/supabaseClient'.
- * This singleton is fine for client-side usage (UserMenu, account page, etc.).
- */
-export const supabase = createBrowserSupabase();
+export const supabase = getBrowserSupabase(); // Back-compat singleton

@@ -1,7 +1,7 @@
 ﻿"use client";
 
 import { useCallback, useEffect, useMemo, useState } from "react";
-
+import { createBrowserSupabase } from '@/lib/supabaseClient';
 import { useSupabaseUser } from "@/hooks/useSupabaseUser";
 
 type GuestNote = {
@@ -77,7 +77,15 @@ export default function NotesPanel({ bookId, chapter }: Props) {
     try {
       if (isCloud) {
         const params = new URLSearchParams({ bookId, chapter: String(chapter) });
-        const res = await fetch(`/api/notes?${params.toString()}`);
+        const supabase = createBrowserSupabase();
+const { data: { session } } = await supabase.auth.getSession();
+const headers: Record<string, string> = {};
+if (session?.access_token) headers.Authorization = `Bearer ${session.access_token}`;
+        const res = await fetch(
+  `/api/notes?bookId=${encodeURIComponent(bookId)}${chapter ? `&chapter=${chapter}` : ''}`,
+  { headers, cache: 'no-store' }
+);
+
         if (!res.ok) {
           const payload = await res.json().catch(() => ({}));
           throw new Error(payload?.error ?? "Unable to load notes.");
@@ -114,6 +122,10 @@ export default function NotesPanel({ bookId, chapter }: Props) {
     window.addEventListener("as:notes:changed", onChanged);
     return () => window.removeEventListener("as:notes:changed", onChanged);
   }, [loadNotes]);
+// run once on mount (and whenever bookId/chapter/isCloud change)
+useEffect(() => {
+  loadNotes();
+}, [loadNotes]);
 
   const handleDelete = useCallback(
     async (note: NoteItem) => {
@@ -121,19 +133,28 @@ export default function NotesPanel({ bookId, chapter }: Props) {
       if (!ok) return;
 
       if (note.source === "cloud") {
-        try {
-          const res = await fetch(`/api/notes/${note.id}`, { method: "DELETE" });
-          if (!res.ok) {
-            const payload = await res.json().catch(() => ({}));
-            throw new Error(payload?.error ?? "Unable to delete note.");
-          }
-          await loadNotes();
-          window.dispatchEvent(new Event("as:notes:changed"));
-        } catch (err) {
-          console.error("[notes] delete", err);
-          setError(err instanceof Error ? err.message : "Unable to delete note.");
-        }
-      } else {
+  try {
+    // forward the user token
+    const supabase = createBrowserSupabase();
+    const { data: { session } } = await supabase.auth.getSession();
+    const headers: Record<string, string> = {};
+    if (session?.access_token) headers.Authorization = `Bearer ${session.access_token}`;
+
+    // DELETE now returns 204 No Content
+    const res = await fetch(`/api/notes/${note.id}`, { method: "DELETE", headers });
+    if (!res.ok && res.status !== 204) {
+      const payload = await res.json().catch(() => ({}));
+      throw new Error(payload?.error ?? "Unable to delete note.");
+    }
+
+    await loadNotes();
+    window.dispatchEvent(new Event("as:notes:changed"));
+  } catch (err) {
+    console.error("[notes] delete", err);
+    setError(err instanceof Error ? err.message : "Unable to delete note.");
+  }
+} else {
+  
         const next = deleteNoteLocal(bookId, chapter, note.id).map<NoteItem>((n) => ({
           id: n.id,
           verse: n.verse ?? null,

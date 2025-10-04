@@ -8,6 +8,11 @@ import StudyNotesButton from "@/components/StudyNotesButton";
 import { createServerSupabase } from "@/lib/supabaseServer";
 import MarkCompleteButton from "./MarkCompleteButton";
 import ProgressRing from "@/components/ProgressRing";
+import PlanProgressClient from '@/components/PlanProgressClient';
+
+
+export const dynamic = 'force-dynamic';
+export const runtime = 'nodejs';
 
 
 
@@ -74,12 +79,8 @@ const pct = totalDays ? completedCount / totalDays : 0;
 
     {/* Progress ring */}
     <div className="shrink-0 text-right">
-      <ProgressRing
-        value={pct}
-        size={64}
-        stroke={6}
-        caption={`${Math.round(pct * 100)}%`}
-      />
+      <PlanProgressClient planSlug={plan.slug} totalDays={7} className="ml-2" />
+
       <div className="mt-1 text-xs text-white/70">
         {completedCount}/{totalDays} days
       </div>

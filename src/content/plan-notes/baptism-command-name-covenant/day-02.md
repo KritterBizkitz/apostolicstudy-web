@@ -2,54 +2,88 @@
 
 **Summary:** Peter obeys the Lord’s command at Pentecost.
 
-## Scriptures:
-- **Acts 2:1–4** – Spirit poured out  
-- **Acts 2:14–36** – Jesus preached  
-- **Acts 2:37–41** – Repent and be baptized in Jesus’ name  
+## 📖 Scriptures
+- **Acts 2:1–4** – *Spirit poured out*  
+- **Acts 2:14–36** – *Jesus preached*  
+- **Acts 2:37–41** – *Repent and be baptized in Jesus’ name*
 
 ---
 
-## The Day Everything Changed
+## 🔥 The Day Everything Changed
 
-The book of Acts opens like a storm rolling in. One hundred and twenty believers are waiting in an upper room because Jesus told them to wait for the promise of the Father. Then it happens:
+Acts chapter 2 is not just a beautiful moment—it is the birthplace of the church. This is where prophecy becomes reality. Where promise becomes power. Where the words of Jesus in Luke 24 and Acts 1 finally explode onto the scene.
 
-> “And when the day of Pentecost was fully come… they were all filled with the Holy Ghost…” (Acts 2:1–4)
+> *“And when the day of Pentecost was fully come, they were all with one accord in one place…”*  
+> *“…And they were all filled with the Holy Ghost…”* (Acts 2:1, 4)
 
-This moment was not random. It was the fulfillment of centuries of prophecy. Joel had spoken of it. Jesus had promised it. Now it was being poured out. Tongues of fire. A rushing mighty wind. The Holy Ghost filling men and women alike. This was the birth of the church.
-
-## The First Sermon
-
-When the crowd gathered and began to question what they were seeing, Peter—who had once denied Jesus—stood up under the power of the Holy Ghost. The same Peter who had been afraid of a servant girl now preached boldly to thousands.
-
-His sermon was not about self-improvement. It was about Jesus. He declared His life, His death, His resurrection, and His exaltation. He quoted prophecy after prophecy proving that Jesus is both Lord and Christ.
-
-By the time Peter finished, conviction pierced their hearts:
-
-> “Now when they heard this, they were pricked in their heart, and said unto Peter and to the rest of the apostles, Men and brethren, what shall we do?” (Acts 2:37)
-
-## The Answer to the Question
-
-This is where the command of Jesus in Matthew 28:19 becomes action. Peter did not hesitate or reinterpret. He simply obeyed:
-
-> “Then Peter said unto them, Repent, and be baptized every one of you in the name of Jesus Christ for the remission of sins, and ye shall receive the gift of the Holy Ghost.” (Acts 2:38)
-
-Notice that Peter did not say, “Think about baptism.” He said, “Be baptized every one of you.” And he was very specific: “in the name of Jesus Christ for the remission of sins.”
-
-This was not a new doctrine. This was the fulfillment of everything Jesus had just told them to preach in Luke 24:47. Repentance and remission in His name. This is the pattern.
-
-## The Birth of the Church
-
-Three thousand souls were baptized that day. They went down into the water calling on the name of Jesus and came up new. This was not a mere symbol. This was entry into the covenant. This was the answer to their question, “What shall we do?”
-
-From this day forward, baptism in the name of Jesus Christ became the consistent practice of the apostles. They understood what Jesus meant when He said, “Go… baptizing them…” and they obeyed.
+Tongues of fire. A rushing mighty wind. A heavenly language they had never learned. This wasn’t emotionalism. This was fulfillment. This was power from on high.
 
 ---
 
-**Reflection Questions:**
-- How does Peter’s response in Acts 2:38 align with Jesus’ command in Matthew 28:19?
-- Why is the name of Jesus specifically invoked in baptism?
-- Do I see baptism as the direct response to the gospel?
+## 🗣️ Peter Stands to Preach
 
-**Prayer:**  
-Lord, let my heart be like those on the Day of Pentecost. Let me be pricked, convicted, and ready to obey. Baptize me not just in water but in Your Spirit. Let my life be a witness of the pattern You established that day.
+In the midst of this supernatural outpouring, Peter stands up—not in fear, but in boldness. The same man who once denied Jesus is now preaching Him with authority.
+
+Peter does not preach a general message about love or morality. He preaches **Jesus crucified**, **Jesus risen**, **Jesus exalted**.
+
+> *“God hath made that same Jesus, whom ye have crucified, both Lord and Christ.”* (Acts 2:36)
+
+He preached the gospel clearly and forcefully. He didn’t hold back the truth. And when the crowd heard it, something pierced their hearts.
+
+---
+
+## 💔 “What Shall We Do?”
+
+This is the cry of conviction. This is what every preacher longs to hear:
+
+> *“Men and brethren, what shall we do?”* (Acts 2:37)
+
+They weren’t asking for inspiration. They were asking for instruction. Peter didn’t tell them to repeat a prayer. He didn’t tell them to accept Jesus in their heart. He gave them a direct, Spirit-filled command:
+
+> *“Repent, and be baptized every one of you in the name of Jesus Christ for the remission of sins, and ye shall receive the gift of the Holy Ghost.”* (Acts 2:38)
+
+He said **repent**. He said **be baptized**. He said do it **in the name of Jesus Christ**. And he said it was **for the remission of sins**.
+
+That is the message that launched the church.
+
+---
+
+## 📈 3,000 Baptized in One Day
+
+This wasn’t just a good altar call. This was a total response. The Bible says:
+
+> *“Then they that gladly received his word were baptized…”*  
+> *“And the same day there were added unto them about three thousand souls.”* (Acts 2:41)
+
+Three thousand people went down into the water. Three thousand people called on the name of Jesus. Three thousand people stepped into covenant that day.
+
+This is not a side note in scripture. This is the main point. This is the beginning of the New Covenant church.
+
+---
+
+## 💡 The Pattern Is Set
+
+Acts 2 establishes the blueprint:
+
+- The gospel is preached  
+- People are convicted  
+- They ask, “What must we do?”  
+- The answer: **repent and be baptized in Jesus’ name**  
+- And they receive the Holy Ghost  
+
+This pattern repeats throughout the book of Acts. You’ll see it in Samaria. You’ll see it in Cornelius’ house. You’ll see it in Ephesus. It all starts right here.
+
+---
+
+## 🔍 Reflection Questions
+
+- What did Peter say baptism was **for**?
+- Have I obeyed Acts 2:38 in the same way?
+- If this is how the church began, is there any reason to change it now?
+
+---
+
+## 🙏 Prayer
+
+Lord, like those on the Day of Pentecost, I ask, “What must I do?” Let me receive Your word with gladness. Let me obey without hesitation. I want to be baptized in Your name. I want to be filled with Your Spirit. Let the same fire that fell then fall in my life today. Start something new in me, just like You did in Jerusalem.
 

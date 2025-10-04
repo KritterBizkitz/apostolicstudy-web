@@ -7,7 +7,6 @@ import { createBrowserSupabase } from '@/lib/supabaseClient';
 export default function AccountPage() {
   // ✅ create a browser client for this page
   const supabase = createBrowserSupabase();
-
   const [email, setEmail] = useState('');
   const [pw, setPw] = useState('');
   const [me, setMe] = useState<string | null>(null);

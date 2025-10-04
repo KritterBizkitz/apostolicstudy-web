@@ -15,12 +15,15 @@ import NotesDrawerClient from "@/components/NotesDrawerClient";
 import { bookLabelFromSlug, getBookById } from "@/lib/books";
 import { normalizeBibleJson, versesOf, chaptersIn } from "@/lib/normalize";
 
-type RouteParams = { book: string; chapter: string };
+type Params = { book: string; chapter: string };
 
-export default async function ReaderPage({ params }: { params: RouteParams }) {
-  // ---- route params ----
-  const bookId = params.book.toLowerCase();
-  const rawChapter = Number(params.chapter);
+export default async function ReaderPage(
+  { params }: { params: Promise<Params> }
+) {
+  // ---- route params (await once) ----
+  const { book, chapter } = await params;
+  const bookId = book;
+  const rawChapter = Number(chapter);
   const bookLabel = bookLabelFromSlug(bookId);
 
   if (!Number.isFinite(rawChapter) || rawChapter < 1) {
@@ -48,7 +51,9 @@ export default async function ReaderPage({ params }: { params: RouteParams }) {
   return (
     <div className="mx-auto max-w-7xl px-4">
       <div className="flex items-center justify-between mb-3">
-        <h1 className="text-2xl font-semibold">{bookLabel} {ch}</h1>
+        <h1 className="text-2xl font-semibold">
+          {bookLabel} {ch}
+        </h1>
         <Link href="/app" className="px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20">
           ← Back to Hub
         </Link>

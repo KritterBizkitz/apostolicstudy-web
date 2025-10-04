@@ -1,4 +1,4 @@
-import { createClient } from "@supabase/supabase-js";
+import { getBrowserSupabase } from '@/lib/supabaseBrowser';
 
 export async function getUserIdFromRequest(req: Request): Promise<string | null> {
   const auth = req.headers.get("authorization") || "";
@@ -19,9 +19,7 @@ export async function getUserIdFromRequest(req: Request): Promise<string | null>
   }
 
   // admin client; no persistence on the server
-  const supabase = createClient(url, service, {
-    auth: { autoRefreshToken: false, persistSession: false },
-  });
+  const supabase = getBrowserSupabase();
 
   const { data, error } = await supabase.auth.getUser(token);
   if (error) {
