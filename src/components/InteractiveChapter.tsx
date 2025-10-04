@@ -370,9 +370,11 @@ export default function InteractiveChapter({
       setActiveVerse(verseNumber);
   }
 
+  // src/components/InteractiveChapter.tsx
+
   return (
     <>
-      {/* ---- THIS IS THE MAIN CHANGE ---- */}
+      {/* Verse mapping and mobile menu (this part is correct and unchanged) */}
       <div className="mt-6 space-y-1 max-w-3xl mx-auto">
         {verses.map(({ v, t }) => (
           <div key={v} className="relative">
@@ -388,13 +390,12 @@ export default function InteractiveChapter({
               </p>
             </div>
 
-            {/* The Mobile-Friendly Pop-up Menu */}
             {mobileMenuVerse === v && (
               <div className="absolute left-8 top-full z-20 mt-2 flex flex-wrap gap-2 rounded-lg border border-slate-700 bg-slate-800 p-2 shadow-lg animate-in fade-in-50">
                 <button
                   onClick={() => {
                     handleComposeNote(v);
-                    setMobileMenuVerse(null); // Close menu after action
+                    setMobileMenuVerse(null);
                   }}
                   className="rounded-md bg-indigo-600 px-3 py-1 text-sm font-sans text-white hover:bg-indigo-500"
                 >
@@ -403,7 +404,7 @@ export default function InteractiveChapter({
                 <button
                   onClick={() => {
                     hl[v] ? removeHl(v) : addHl(v);
-                    setMobileMenuVerse(null); // Close menu
+                    setMobileMenuVerse(null);
                   }}
                   className="rounded-md bg-emerald-600 px-3 py-1 text-sm font-sans text-white hover:bg-emerald-500"
                 >
@@ -412,7 +413,7 @@ export default function InteractiveChapter({
                 <button
                   onClick={() => {
                     openCommentary(v);
-                    setMobileMenuVerse(null); // Close menu
+                    setMobileMenuVerse(null);
                   }}
                   className="rounded-md bg-sky-600 px-3 py-1 text-sm font-sans text-white hover:bg-sky-500"
                 >
@@ -424,40 +425,47 @@ export default function InteractiveChapter({
         ))}
       </div>
 
-      {/* ---- The rest of your JSX (Commentary Panel and Notes Drawer) is unchanged ---- */}
-      {commentaryHost
-        ? createPortal(
-            <CommentaryPanel
-              bookLabel={bookLabel}
-              chapter={chapter}
-              tabs={commentaryTabs}
-              activeVerse={activeVerse ?? activeCommentary}
-              onSelect={(verse) => {
-                setActiveCommentary(verse);
-                setActiveVerse(verse);
-              }}
-              onClose={closeCommentary}
-              verseMap={verseMap}
-            />,
-            commentaryHost
-          )
-        : (
-            <div className="mt-10 lg:hidden">
-              <CommentaryPanel
-                bookLabel={bookLabel}
-                chapter={chapter}
-                tabs={commentaryTabs}
-                activeVerse={activeVerse ?? activeCommentary}
-                onSelect={(verse) => {
-                  setActiveCommentary(verse);
-                  setActiveVerse(verse);
-                }}
-                onClose={closeCommentary}
-                verseMap={verseMap}
-              />
-            </div>
-          )}
+      {/* --- THIS IS THE CORRECTED SECTION --- */}
 
+      {/* Desktop Commentary (Portal to Sidebar) - Only renders on large screens */}
+      <div className="hidden lg:block">
+        {commentaryHost && createPortal(
+          <CommentaryPanel
+            bookLabel={bookLabel}
+            chapter={chapter}
+            tabs={commentaryTabs}
+            activeVerse={activeVerse ?? activeCommentary}
+            onSelect={(verse) => {
+              setActiveCommentary(verse);
+              setActiveVerse(verse);
+            }}
+            onClose={closeCommentary}
+            verseMap={verseMap}
+          />,
+          commentaryHost
+        )}
+      </div>
+
+      {/* Mobile Commentary (Inline) - Only renders on small screens */}
+      <div className="mt-10 lg:hidden">
+        <CommentaryPanel
+            bookLabel={bookLabel}
+            chapter={chapter}
+            tabs={commentaryTabs}
+            activeVerse={activeVerse ?? activeCommentary}
+            onSelect={(verse) => {
+              setActiveCommentary(verse);
+              setActiveVerse(verse);
+            }}
+            onClose={closeCommentary}
+            verseMap={verseMap}
+          />
+      </div>
+      
+      {/* --- END OF CORRECTED SECTION --- */}
+
+
+      {/* Notes drawer (this part is correct and unchanged) */}
       {notesFor !== null && (
         <div className="fixed inset-0 z-50">
           <div className="absolute inset-0 bg-black/50" onClick={() => setNotesFor(null)} />
@@ -489,5 +497,4 @@ export default function InteractiveChapter({
         </div>
       )}
     </>
-  );
-}
+  );}
