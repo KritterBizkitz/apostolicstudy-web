@@ -49,7 +49,7 @@ export default async function ReaderPage(
 
   // ---- render ----
   return (
-    <div className="mx-auto max-w-7xl px-4">
+    <div className="mx-auto max-w-7xl px-4 bg-slate-950 text-slate-100">
       <div className="flex items-center justify-between mb-3">
         <h1 className="text-2xl font-semibold">
           {bookLabel} {ch}

@@ -186,8 +186,12 @@ export default function InteractiveChapter({
   const supabase = createBrowserSupabase();
   const commentaryFetchesRef = useRef<Map<number, AbortController>>(new Map());
   const [hl, setHl] = useState<Record<number, boolean>>({});
+
+  // NEW: Create a ref to attach to our mobile commentary panel
+  const mobileCommentaryRef = useRef<HTMLDivElement | null>(null);
   
-  // ---- START: ALL YOUR EXISTING LOGIC IS PRESERVED ----
+  // All your existing state and functions (addHl, removeHl, verseMap, etc.) are correct and unchanged.
+  // ... (all the logic from your file)
   function addHl(v: number) {
     setHl((m) => ({ ...m, [v]: true }));
   }
@@ -265,7 +269,6 @@ export default function InteractiveChapter({
   const formatReference = useCallback((v: number) => `${bookLabel} ${chapter}:${v}`, [bookLabel, chapter]);
 
   const fetchCommentary = useCallback(async (verse: number) => {
-      // ... your existing fetchCommentary logic is unchanged
       const reference = formatReference(verse);
       const prev = commentaryFetchesRef.current.get(verse);
       if (prev) prev.abort();
@@ -303,7 +306,6 @@ export default function InteractiveChapter({
     }, [formatReference, supabase]);
 
   const openCommentary = useCallback((verse: number) => {
-      // ... your existing openCommentary logic is unchanged
       setCommentaryTabs((prev) => {
         const exists = prev.some((tab) => tab.verse === verse);
         if (exists) {
@@ -319,7 +321,6 @@ export default function InteractiveChapter({
     }, [fetchCommentary]);
 
   const closeCommentary = useCallback((verse: number) => {
-      // ... your existing closeCommentary logic is unchanged
       commentaryFetchesRef.current.get(verse)?.abort();
       commentaryFetchesRef.current.delete(verse);
       setCommentaryTabs((prev) => {
@@ -357,24 +358,29 @@ export default function InteractiveChapter({
     setActiveVerse(verse);
     setNotesFor(verse);
   }, []);
-  // ---- END: ALL YOUR EXISTING LOGIC IS PRESERVED ----
-
-
-  // ---- NEW: STATE FOR OUR MOBILE-FRIENDLY MENU ----
+  
   const [mobileMenuVerse, setMobileMenuVerse] = useState<number | null>(null);
   
   const handleVerseTap = (verseNumber: number) => {
-      // Tapping the same verse closes the menu, otherwise it opens for the new verse.
       setMobileMenuVerse(current => current === verseNumber ? null : verseNumber);
-      // We still want to set the verse as "active" for visual feedback
       setActiveVerse(verseNumber);
   }
 
-  // src/components/InteractiveChapter.tsx
+  // NEW: Add an effect that listens for changes to commentaryTabs
+  useEffect(() => {
+    // If the mobile commentary panel exists in the DOM, scroll to it.
+    if (mobileCommentaryRef.current) {
+      mobileCommentaryRef.current.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }
+  }, [commentaryTabs]); // This effect runs whenever the tabs change
+
 
   return (
     <>
-      {/* Verse mapping and mobile menu (this part is correct and unchanged) */}
+      {/* Verse mapping and mobile menu (unchanged) */}
       <div className="mt-6 space-y-1 max-w-3xl mx-auto">
         {verses.map(({ v, t }) => (
           <div key={v} className="relative">
@@ -393,28 +399,19 @@ export default function InteractiveChapter({
             {mobileMenuVerse === v && (
               <div className="absolute left-8 top-full z-20 mt-2 flex flex-wrap gap-2 rounded-lg border border-slate-700 bg-slate-800 p-2 shadow-lg animate-in fade-in-50">
                 <button
-                  onClick={() => {
-                    handleComposeNote(v);
-                    setMobileMenuVerse(null);
-                  }}
+                  onClick={() => { handleComposeNote(v); setMobileMenuVerse(null); }}
                   className="rounded-md bg-indigo-600 px-3 py-1 text-sm font-sans text-white hover:bg-indigo-500"
                 >
                   Add Note
                 </button>
                 <button
-                  onClick={() => {
-                    hl[v] ? removeHl(v) : addHl(v);
-                    setMobileMenuVerse(null);
-                  }}
+                  onClick={() => { hl[v] ? removeHl(v) : addHl(v); setMobileMenuVerse(null); }}
                   className="rounded-md bg-emerald-600 px-3 py-1 text-sm font-sans text-white hover:bg-emerald-500"
                 >
                   {hl[v] ? 'Remove Highlight' : 'Highlight'}
                 </button>
                 <button
-                  onClick={() => {
-                    openCommentary(v);
-                    setMobileMenuVerse(null);
-                  }}
+                  onClick={() => { openCommentary(v); setMobileMenuVerse(null); }}
                   className="rounded-md bg-sky-600 px-3 py-1 text-sm font-sans text-white hover:bg-sky-500"
                 >
                   Commentary
@@ -425,9 +422,7 @@ export default function InteractiveChapter({
         ))}
       </div>
 
-      {/* --- THIS IS THE CORRECTED SECTION --- */}
-
-      {/* Desktop Commentary (Portal to Sidebar) - Only renders on large screens */}
+      {/* Desktop Commentary (unchanged) */}
       <div className="hidden lg:block">
         {commentaryHost && createPortal(
           <CommentaryPanel
@@ -435,10 +430,7 @@ export default function InteractiveChapter({
             chapter={chapter}
             tabs={commentaryTabs}
             activeVerse={activeVerse ?? activeCommentary}
-            onSelect={(verse) => {
-              setActiveCommentary(verse);
-              setActiveVerse(verse);
-            }}
+            onSelect={(verse) => { setActiveCommentary(verse); setActiveVerse(verse); }}
             onClose={closeCommentary}
             verseMap={verseMap}
           />,
@@ -446,37 +438,30 @@ export default function InteractiveChapter({
         )}
       </div>
 
-      {/* Mobile Commentary (Inline) - Only renders on small screens */}
-      <div className="mt-10 lg:hidden">
-        <CommentaryPanel
+      {/* Mobile Commentary (MODIFIED) */}
+      {commentaryTabs.length > 0 && (
+        // Attach the ref here
+        <div ref={mobileCommentaryRef} className="mt-10 lg:hidden">
+          <CommentaryPanel
             bookLabel={bookLabel}
             chapter={chapter}
             tabs={commentaryTabs}
             activeVerse={activeVerse ?? activeCommentary}
-            onSelect={(verse) => {
-              setActiveCommentary(verse);
-              setActiveVerse(verse);
-            }}
+            onSelect={(verse) => { setActiveCommentary(verse); setActiveVerse(verse); }}
             onClose={closeCommentary}
             verseMap={verseMap}
           />
-      </div>
-      
-      {/* --- END OF CORRECTED SECTION --- */}
+        </div>
+      )}
 
-
-      {/* Notes drawer (this part is correct and unchanged) */}
+      {/* Notes drawer (unchanged) */}
       {notesFor !== null && (
         <div className="fixed inset-0 z-50">
           <div className="absolute inset-0 bg-black/50" onClick={() => setNotesFor(null)} />
           <div className="absolute right-0 top-0 h-full w-full max-w-md bg-black border-l border-white/10 p-4">
             <div className="flex items-center justify-between mb-3">
-              <h2 className="text-sm uppercase text-white/60">
-                Add Note ({bookLabel} {chapter}:{notesFor})
-              </h2>
-              <button className="text-white/60 hover:text-white" onClick={() => setNotesFor(null)}>
-                Close
-              </button>
+              <h2 className="text-sm uppercase text-white/60">Add Note ({bookLabel} {chapter}:{notesFor})</h2>
+              <button className="text-white/60 hover:text-white" onClick={() => setNotesFor(null)}>Close</button>
             </div>
             <textarea
               ref={noteInputRef}
@@ -486,15 +471,12 @@ export default function InteractiveChapter({
               placeholder="Write your note…"
             />
             <div className="mt-3 flex gap-2">
-              <button onClick={saveNote} className="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500">
-                Save
-              </button>
-              <button onClick={() => setNotesFor(null)} className="px-4 py-2 rounded-xl bg-white/10">
-                Cancel
-              </button>
+              <button onClick={saveNote} className="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500">Save</button>
+              <button onClick={() => setNotesFor(null)} className="px-4 py-2 rounded-xl bg-white/10">Cancel</button>
             </div>
           </div>
         </div>
       )}
     </>
-  );}
+  );
+}

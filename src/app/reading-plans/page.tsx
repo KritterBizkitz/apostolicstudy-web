@@ -64,7 +64,7 @@ function PlanCard({ plan }: { plan: Plan }) {
 
 export default function ReadingPlansPage() {
   return (
-    <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10">
+    <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 bg-slate-950 text-slate-100">
       <header className="mb-10">
         <h1 className="text-2xl font-semibold text-white/95">Reading Plans</h1>
         <p className="mt-2 text-white/80">

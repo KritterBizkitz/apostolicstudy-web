@@ -59,7 +59,7 @@ const pct = totalDays ? completedCount / totalDays : 0;
 
 
   return (
-    <main className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 py-10">
+    <main className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 py-10 bg-slate-950 text-slate-100">
       <nav className="mb-6 text-sm text-white/70">
         <Link href="/reading-plans" className="hover:underline">
           ← Reading Plans
