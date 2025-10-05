@@ -99,7 +99,8 @@ export default async function StudyNotesPage() {
 
               <div className="mt-4 flex items-center gap-2">
                 <Link
-                  href={`/read?url=${encodeURIComponent(n.file_url)}&title=${encodeURIComponent(n.title)}`}
+                  href={n.file_url}
+                  download
                   className="inline-flex items-center rounded-lg border border-white/15 px-3 py-1.5 text-sm
                              bg-gradient-to-r from-indigo-600/20 to-emerald-600/20
                              hover:from-indigo-600/30 hover:to-emerald-600/30"
