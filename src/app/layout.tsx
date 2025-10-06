@@ -19,7 +19,7 @@ const geistMono = Geist_Mono({
 
 
 // app/layout.tsx
-export const metadata = {
+export const metadata: Metadata = {
   metadataBase: new URL("https://apostolicstudy.org"),
   title: { default: "ApostolicStudy", template: "%s · ApostolicStudy" },
   description:
