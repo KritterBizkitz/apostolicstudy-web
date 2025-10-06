@@ -36,14 +36,14 @@ export const metadata: Metadata = {
       "Designed around Apostolic doctrine, tools that help you study, teach, and stay anchored to the Word. Rightly dividing the word of truth is paramount to our growth and stability as believers.",
     url: "https://apostolicstudy.org",
     siteName: "ApostolicStudy",
-    images: [{ url: "/og.jpg", width: 1200, height: 630 }],
+    images: [{ url: "/og.png", width: 1200, height: 630 }],
   },
   twitter: {
     card: "summary_large_image",
     title: "ApostolicStudy",
     description:
       "Designed around Apostolic doctrine, tools that help you study, teach, and stay anchored to the Word. Rightly dividing the word of truth is paramount to our growth and stability as believers.",
-    images: ["/og.jpg"],
+    images: ["/og.png"],
   },
   
 };
