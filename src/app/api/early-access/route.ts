@@ -19,7 +19,7 @@ export async function POST(request: Request) {
     );
   }
 
-  const supabase = getServerSupabase();
+  const supabase = await getServerSupabase();
   const { error } = await supabase.from("early_access_signups").insert({
     full_name: fullName,
     title,
